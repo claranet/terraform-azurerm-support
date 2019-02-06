@@ -1,21 +1,21 @@
 output "subnet_id" {
   description = "Ids of the created subnets"
-  value       = "${module.support-subnet.*.id}"
+  value       = "${module.support-subnet.subnet_id}"
 }
 
 output "subnet_cidr" {
   description = "CIDR list of the created subnets"
-  value       = "${module.support-subnet.*.address_prefix}"
+  value       = "${module.support-subnet.subnet_cidr}"
 }
 
 output "subnet_name" {
   description = "Names list of the created subnet"
-  value       = "${module.support-subnet.*.name}"
+  value       = "${module.support-subnet.subnet_name}"
 }
 
 output "subnet_ip_configurations" {
   description = "The collection of IP Configurations with IPs within this subnet"
-  value       = "${module.support-subnet.*.ip_configurations}"
+  value       = "${module.support-subnet.subnet_ip_configurations}"
 }
 
 output "network_security_group_id" {
@@ -30,30 +30,30 @@ output "network_security_group_name" {
 
 output "bastion_network_public_ip" {
   description = "Bastion public ip"
-  value       = "${module.bastion.ip_address}"
+  value       = "${module.bastion.bastion_network_public_ip}"
 }
 
 output "bastion_network_public_ip_id" {
   description = "Bastion public ip id"
-  value       = "${module.bastion.id}"
+  value       = "${module.bastion.bastion_network_public_ip_id}"
 }
 
 output "bastion_network_interface_id" {
   description = "Bastion network interface id"
-  value       = "${module.bastion.id}"
+  value       = "${module.bastion.bastion_network_interface_id}"
 }
 
 output "bastion_network_interface_private_ip" {
   description = "Bastion private ip"
-  value       = "${module.bastion.private_ip_address}"
+  value       = "${module.bastion.bastion_network_interface_private_ip}"
 }
 
 output "bastion_virtual_machine_id" {
   description = "Bastion virtual machine id"
-  value       = "${module.bastion_instance.id}"
+  value       = "${module.bastion.bastion_virtual_machine_id}"
 }
 
 output "bastion_record_dns_id" {
   description = "Bastion record dns id"
-  value       = "${module.record_bastion.id}"
+  value       = "${module.bastion.bastion_record_dns_id}"
 }

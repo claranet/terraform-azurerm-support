@@ -10,9 +10,9 @@ module "support-subnet" {
   virtual_network_name = "${var.virtual_network_name}"
   subnet_cidr          = "${var.subnet_cidr}"
 
-  route_table_id            = "${var.route_table_ids}"
-  service_endpoints         = "${var.service_endpoints}"
-  network_security_group_id = "${var.network_security_group_ids}"
+  route_table_ids            = "${var.route_table_ids}"
+  service_endpoints          = "${var.service_endpoints}"
+  network_security_group_ids = "${var.network_security_group_ids}"
 }
 
 module "support-network-security-group" {
@@ -22,7 +22,7 @@ module "support-network-security-group" {
   stack               = "${var.stack}"
   resource_group_name = "${var.resource_group_name}"
   location            = "${var.location}"
-  location_short      = "${var.location_short}"
+  location_short      = "${var.location-short}"
   name                = "${var.nsg-name}"
 
   custom_rules = [
@@ -34,7 +34,7 @@ module "support-network-security-group" {
       protocol                   = "tcp"
       destination_port_range     = "22"
       source_address_prefix      = "${var.admin_ssh_ips}"
-      destination_address_prefix = "${module.bastion.bastion_network_interface_private_ip}"
+      destination_address_prefix = "${var.private_ip_bastion}"
       description                = "Allow Admin Claranet SSH Bastion"
     },
   ]
@@ -46,7 +46,7 @@ resource "azurerm_subnet_network_security_group_association" "subnet-with-nsg-su
 }
 
 module "bastion" {
-  source = "git@git.fr.clara.net:claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-11-update-bastion-module"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-11-update-bastion-module"
 
   client_name         = "${var.client_name}"
   location            = "${var.location}"
@@ -59,10 +59,8 @@ module "bastion" {
   subnet_bastion_id         = "${module.support-subnet.subnet_id}"
   private_ip_bastion        = "${var.private_ip_bastion}"
 
-  vm_size = "${var.vm_size}"
-
-  # Put your SSK Public Key here
-  ssh_key_pub = "${file("./put_the_key_here.pub")}"
+  vm_size     = "${var.vm_size}"
+  ssh_key_pub = "${file(var.ssh_key_pub)}"
 
   support_dns_zone_name = "${var.support_dns_zone_name}"
 
