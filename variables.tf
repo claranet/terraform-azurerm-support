@@ -23,16 +23,42 @@ variable "client_name" {
   type        = "string"
 }
 
+variable "extra_tags" {
+  description = "Additional tags to associate with your network security group."
+  type        = "map"
+  default     = {}
+}
+
+# Module NSG
+variable "admin_ssh_ips" {
+  description = "Claranet IPs allowed to use SSH on bastion"
+  type        = "string"
+}
+
 variable "nsg-name" {
   description = "Name used for nsg naming"
   type        = "string"
   default     = "test"
 }
 
-variable "extra_tags" {
-  description = "Additional tags to associate with your network security group."
-  type        = "map"
-  default     = {}
+# Module Subnet 
+
+variable "route_table_ids" {
+  description = "The Route Table Ids list to associate with the subnet"
+  type        = "list"
+  default     = [""]
+}
+
+variable "network_security_group_ids" {
+  description = "The Network Security Group Ids list to associate with the subnet"
+  type        = "list"
+  default     = [""]
+}
+
+variable "service_endpoints" {
+  description = "The list of Service endpoints to associate with the subnet"
+  type        = "list"
+  default     = []
 }
 
 variable "virtual_network_name" {
@@ -45,7 +71,45 @@ variable "subnet_cidr" {
   type        = "list"
 }
 
-variable "admin_ssh_ips" {
-  description = "Claranet IPs allowed to use SSH on bastion"
+# Module Bastion
+
+variable "vm_size" {
+  description = "Bastion virtual machine size"
   type        = "string"
+}
+
+variable "custom_vm_name" {
+  description = "VM Name as displayed on the console"
+  type        = "string"
+  default     = ""
+}
+
+variable "custom_vm_hostname" {
+  description = "Bastion hostname"
+  type        = "string"
+  default     = ""
+}
+
+variable "custom_disk_name" {
+  description = "Bastion disk name as displayed in the console"
+  type        = "string"
+  default     = ""
+}
+
+variable "custom_username" {
+  description = "Default username to create on the bastion"
+  type        = "string"
+  default     = ""
+}
+
+variable "private_ip_bastion" {
+  description = "Allows to define the private ip to associate with the bastion"
+  type        = "string"
+  default     = ""
+}
+
+variable "extra_tags" {
+  description = "Custom map of tags to apply on every resources"
+  type        = "map"
+  default     = {}
 }
