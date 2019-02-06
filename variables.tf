@@ -44,3 +44,8 @@ variable "subnet_cidr" {
   description = "The address prefix list to use for the subnet"
   type        = "list"
 }
+
+variable "admin_ssh_ips" {
+  description = "Claranet IPs allowed to use SSH on bastion"
+  type        = "string"
+}

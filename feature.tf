@@ -1,4 +1,4 @@
-module "support-subnet" {
+module "bastion-subnet" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=AZ-5-az-subnet"
 
   environment    = "${var.environment}"
@@ -6,13 +6,13 @@ module "support-subnet" {
   client_name    = "${var.client_name}"
   stack          = "${var.stack}"
 
-  resource_group_name  = "${module.rg.resource_group_name}"
-  virtual_network_name = "${module.vnet.virtual_network_name}"
+  resource_group_name  = "${var.resource_group_name}"
+  virtual_network_name = "${var.virtual_network_name}"
   subnet_cidr          = "${var.subnet_cidr}"
 }
 
-module "support-network-security-group" {
-  source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=xxx"
+module "bastion-network-security-group" {
+  source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=AZ-5_Add_nsg_module"
   client_name         = "${var.client_name}"
   environment         = "${var.environment}"
   stack               = "${var.stack}"
@@ -21,13 +21,17 @@ module "support-network-security-group" {
   location_short      = "${var.location_short}"
   name                = "${var.nsg-name}"
 
-  # Must be completed with bastion rules
-  # https://git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion/blob/master/network/rules.tf
-  predefined_rules = [
+  custom_rules = [
     {
-      name                  = "SSH"
-      priority              = "500"
-      source_address_prefix = "10.0.3.0/24"
+      name                       = "SSH"
+      priority                   = "500"
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "tcp"
+      destination_port_range     = "22"
+      source_address_prefix      = "${var.admin_ssh_ips}"
+      destination_address_prefix = "${module.bastion}"
+      description                = "Allow Admin Claranet SSH Bastion"
     },
   ]
 }
