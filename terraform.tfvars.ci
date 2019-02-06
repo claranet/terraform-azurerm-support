@@ -1,0 +1,11 @@
+resource_group_name="test"
+location="fr-central"
+location-short="frc"
+client_name="test"
+environment="test"
+stack="test"
+ssh_key_pub="abc"
+support_dns_zone_name="test"
+vm_size="10"
+subnet_cidr=["10.10.0.0/24"]
+virtual_network_name="vnet-test"
