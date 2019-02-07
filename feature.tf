@@ -41,7 +41,7 @@ module "support-network-security-group" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet-with-nsg-support" {
-  subnet_id                 = "${module.support-subnet.subnet_id}"
+  subnet_id                 = "${join(",", module.support-subnet.subnet_id)}"
   network_security_group_id = "${module.support-network-security-group.network_security_group_id}"
 }
 
@@ -56,7 +56,7 @@ module "bastion" {
   resource_group_name = "${var.resource_group_name}"
 
   network_security_group_id = "${module.support-network-security-group.network_security_group_id}"
-  subnet_bastion_id         = "${module.support-subnet.subnet_id}"
+  subnet_bastion_id         = "${join(",", module.support-subnet.subnet_id)}"
   private_ip_bastion        = "${var.private_ip_bastion}"
 
   vm_size     = "${var.vm_size}"

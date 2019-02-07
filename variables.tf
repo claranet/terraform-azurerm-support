@@ -106,7 +106,7 @@ variable "custom_username" {
 variable "private_ip_bastion" {
   description = "Allows to define the private ip to associate with the bastion"
   type        = "string"
-  default     = "10.10.1.10/32"
+  default     = "10.10.1.10"
 }
 
 variable "support_dns_zone_name" {
