@@ -49,12 +49,6 @@ variable "route_table_ids" {
   default     = [""]
 }
 
-variable "network_security_group_ids" {
-  description = "The Network Security Group Ids list to associate with the subnet"
-  type        = "list"
-  default     = [""]
-}
-
 variable "service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet"
   type        = "list"
@@ -109,12 +103,13 @@ variable "private_ip_bastion" {
   default     = "10.10.1.10"
 }
 
-variable "support_dns_zone_name" {
-  description = "Support DNS zone name"
-  type        = "string"
-}
-
 variable "ssh_key_pub" {
   description = "Name of the SSH key pub to use"
   type        = "string"
+}
+
+variable "delete_os_disk_on_termination" {
+  description = "Enable delete disk on termination"
+  type        = "string"
+  default     = "true"
 }

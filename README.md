@@ -74,20 +74,19 @@ module "support" {
 | custom_username | Default username to create on the bastion | string | `` | no |
 | custom_vm_hostname | Bastion hostname | string | `` | no |
 | custom_vm_name | VM Name as displayed on the console | string | `` | no |
+| delete_os_disk_on_termination | Enable delete disk on termination | string | `true` | no |
 | environment | Project environment | string | - | yes |
 | extra_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | - | yes |
 | location-short | Short string for Azure location | string | - | yes |
-| network_security_group_ids | The Network Security Group Ids list to associate with the subnet | list | `<list>` | no |
 | nsg-name | Name used for nsg naming | string | `test` | no |
-| private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `10.10.1.10/32` | no |
+| private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `10.10.1.10` | no |
 | resource_group_name | Name of the resource group | string | - | yes |
 | route_table_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |
 | service_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
 | ssh_key_pub | Name of the SSH key pub to use | string | - | yes |
 | stack | Project stack name | string | - | yes |
-| subnet_cidr | The address prefix list to use for the subnet | list | `["10.10.1.0/24"]` | no |
-| support_dns_zone_name | Support DNS zone name | string | - | yes |
+| subnet_cidr | The address prefix list to use for the subnet | list | `10.10.1.0/24` | no |
 | virtual_network_name | Virtual network name | string | - | yes |
 | vm_size | Bastion virtual machine size | string | - | yes |
 
@@ -99,7 +98,6 @@ module "support" {
 | bastion_network_interface_private_ip | Bastion private ip |
 | bastion_network_public_ip | Bastion public ip |
 | bastion_network_public_ip_id | Bastion public ip id |
-| bastion_record_dns_id | Bastion record dns id |
 | bastion_virtual_machine_id | Bastion virtual machine id |
 | network_security_group_id | Network security group id |
 | network_security_group_name | Network security group name |

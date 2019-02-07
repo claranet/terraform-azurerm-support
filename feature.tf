@@ -12,7 +12,7 @@ module "support-subnet" {
 
   route_table_ids            = "${var.route_table_ids}"
   service_endpoints          = "${var.service_endpoints}"
-  network_security_group_ids = "${var.network_security_group_ids}"
+  network_security_group_ids = ["${module.support-network-security-group.network_security_group_id}"]
 }
 
 module "support-network-security-group" {
@@ -55,14 +55,13 @@ module "bastion" {
   stack               = "${var.stack}"
   resource_group_name = "${var.resource_group_name}"
 
-  network_security_group_id = "${module.support-network-security-group.network_security_group_id}"
-  subnet_bastion_id         = "${join(",", module.support-subnet.subnet_id)}"
-  private_ip_bastion        = "${var.private_ip_bastion}"
+  subnet_bastion_id  = "${join(",", module.support-subnet.subnet_id)}"
+  private_ip_bastion = "${var.private_ip_bastion}"
 
   vm_size     = "${var.vm_size}"
   ssh_key_pub = "${file(var.ssh_key_pub)}"
 
-  support_dns_zone_name = "${var.support_dns_zone_name}"
+  delete_os_disk_on_termination = "${var.delete_os_disk_on_termination}"
 
   custom_vm_name     = "${var.custom_vm_name}"
   custom_vm_hostname = "${var.custom_vm_hostname}"
