@@ -10,3 +10,4 @@ virtual_network_name="vnet-test"
 route_table_ids=["1"]
 service_endpoints=["Microsoft.AzureActiveDirectory","Microsoft.AzureCosmosDB"]
 admin_ssh_ips="10.10.10.10/24"
+storage_os_disk_disk_size_gb="10"

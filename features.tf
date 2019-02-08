@@ -61,7 +61,14 @@ module "bastion" {
   vm_size     = "${var.vm_size}"
   ssh_key_pub = "${file(var.ssh_key_pub)}"
 
-  delete_os_disk_on_termination = "${var.delete_os_disk_on_termination}"
+  delete_os_disk_on_termination     = "${var.delete_os_disk_on_termination}"
+  storage_image_publisher           = "${var.storage_image_publisher}"
+  storage_image_offer               = "${var.storage_image_offer}"
+  storage_image_sku                 = "${var.storage_image_sku}"
+  storage_os_disk_caching           = "${var.storage_os_disk_caching}"
+  storage_os_disk_create_option     = "${var.storage_os_disk_create_option}"
+  storage_os_disk_managed_disk_type = "${var.storage_os_disk_managed_disk_type}"
+  storage_os_disk_disk_size_gb      = "${var.storage_os_disk_disk_size_gb}"
 
   custom_vm_name     = "${var.custom_vm_name}"
   custom_vm_hostname = "${var.custom_vm_hostname}"

@@ -86,6 +86,13 @@ module "support" {
 | service_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
 | ssh_key_pub | Name of the SSH key pub to use | string | - | yes |
 | stack | Project stack name | string | - | yes |
+| storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
+| storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
+| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `16.04-LTS` | no |
+| storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
+| storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
+| storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
+| storage_os_disk_managed_disk_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `Standard_LRS` | no |
 | subnet_cidr | The address prefix list to use for the subnet | list | `10.10.1.0/24` | no |
 | virtual_network_name | Virtual network name | string | - | yes |
 | vm_size | Bastion virtual machine size | string | - | yes |
