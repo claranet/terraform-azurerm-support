@@ -46,7 +46,7 @@ resource "azurerm_subnet_network_security_group_association" "subnet-with-nsg-su
 }
 
 module "bastion" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-11-update-bastion-module"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-11-bump-salt-to-use-ansible"
 
   client_name         = "${var.client_name}"
   location            = "${var.location}"
