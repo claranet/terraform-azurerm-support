@@ -69,6 +69,7 @@ module "support" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | admin_ssh_ips | Claranet IPs allowed to use SSH on bastion | string | - | yes |
+| bastion-name | Name used for bastion naming | string | - | yes |
 | client_name | Client name/account used in naming | string | - | yes |
 | custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
 | custom_username | Default username to create on the bastion | string | `` | no |
@@ -79,7 +80,7 @@ module "support" {
 | extra_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | - | yes |
 | location-short | Short string for Azure location | string | - | yes |
-| nsg-name | Name used for nsg naming | string | `test` | no |
+| nsg-name | Name used for nsg naming | string | - | no |
 | private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `10.10.1.10` | no |
 | resource_group_name | Name of the resource group | string | - | yes |
 | route_table_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |

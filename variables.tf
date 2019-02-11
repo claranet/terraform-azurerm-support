@@ -38,7 +38,6 @@ variable "admin_ssh_ips" {
 variable "nsg-name" {
   description = "Name used for nsg naming"
   type        = "string"
-  default     = "test"
 }
 
 # Module Subnet 
@@ -70,6 +69,11 @@ variable "subnet_cidr" {
 
 variable "vm_size" {
   description = "Bastion virtual machine size"
+  type        = "string"
+}
+
+variable "bastion-name" {
+  description = "Name used for bastion naming"
   type        = "string"
 }
 
