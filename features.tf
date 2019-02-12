@@ -62,6 +62,8 @@ module "bastion" {
   vm_size     = "${var.vm_size}"
   ssh_key_pub = "${file(var.ssh_key_pub)}"
 
+  private_key_path = "${var.private_key_path}"
+
   delete_os_disk_on_termination     = "${var.delete_os_disk_on_termination}"
   storage_image_publisher           = "${var.storage_image_publisher}"
   storage_image_offer               = "${var.storage_image_offer}"

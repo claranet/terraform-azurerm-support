@@ -61,7 +61,8 @@ module "support" {
     private_ip_bastion      = "${var.private_ip_bastion}"
     support_dns_zone_name   = "${var.support_dns_zone_name}"
     
-    ssh_key_pub             = "~/.ssh/key/${var.client_name}_${var.environment}.pem"
+    ssh_key_pub             = "~/.ssh/keys/${var.client_name}_${var.environment}.pem.pub"
+    private_key_path	    = "~/.ssh/keys/${var.client_name}_${var.environment}.pem"
 }
 
 ## Inputs
@@ -82,6 +83,7 @@ module "support" {
 | location-short | Short string for Azure location | string | - | yes |
 | nsg-name | Name used for nsg naming | string | - | no |
 | private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `10.10.1.10` | no |
+| private_key_path | Path to the private SSH key to use | string | - | yes |
 | resource_group_name | Name of the resource group | string | - | yes |
 | route_table_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |
 | service_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
