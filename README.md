@@ -1,6 +1,6 @@
 # Azure - Claranet Support stack
 
-Claranet Azure feature support.
+Azure Support stack. It deploys subnet, NSG, and bastion instance.
 
 ## Prerequisites
 
