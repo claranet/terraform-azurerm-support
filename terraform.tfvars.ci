@@ -10,7 +10,6 @@ ssh_key_pub="~/.ssh/keys/test_test.pem.pub"
 private_key_path="~/.ssh/keys/test_test.pem"
 vm_size="10"
 virtual_network_name="vnet-test"
-route_table_ids=["1"]
 service_endpoints=["Microsoft.AzureActiveDirectory","Microsoft.AzureCosmosDB"]
 admin_ssh_ips="10.10.10.10/24"
 storage_os_disk_disk_size_gb="10"

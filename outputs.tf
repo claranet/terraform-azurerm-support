@@ -1,6 +1,6 @@
-output "subnet_id" {
+output "subnet_ids" {
   description = "Ids of the created subnets"
-  value       = "${module.support-subnet.subnet_id}"
+  value       = "${module.support-subnet.subnet_ids}"
 }
 
 output "subnet_cidr" {
@@ -8,9 +8,9 @@ output "subnet_cidr" {
   value       = "${module.support-subnet.subnet_cidr}"
 }
 
-output "subnet_name" {
+output "subnet_names" {
   description = "Names list of the created subnet"
-  value       = "${module.support-subnet.subnet_name}"
+  value       = "${module.support-subnet.subnet_names}"
 }
 
 output "subnet_ip_configurations" {

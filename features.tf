@@ -40,11 +40,6 @@ module "support-network-security-group" {
   ]
 }
 
-resource "azurerm_subnet_network_security_group_association" "subnet-with-nsg-support" {
-  subnet_id                 = "${join(",", module.support-subnet.subnet_id)}"
-  network_security_group_id = "${module.support-network-security-group.network_security_group_id}"
-}
-
 module "bastion" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-11-bump-salt-to-use-ansible"
 
@@ -56,7 +51,7 @@ module "bastion" {
   resource_group_name = "${var.resource_group_name}"
   name                = "${var.bastion-name}"
 
-  subnet_bastion_id  = "${join(",", module.support-subnet.subnet_id)}"
+  subnet_bastion_id  = "${join(",", module.support-subnet.subnet_ids)}"
   private_ip_bastion = "${var.private_ip_bastion}"
 
   vm_size     = "${var.vm_size}"
@@ -78,5 +73,7 @@ module "bastion" {
   custom_disk_name   = "${var.custom_disk_name}"
   custom_username    = "${var.custom_username}"
 
-  extra_tags = "${var.extra_tags}"
+  bastion_extra_tags = "${var.bastion_extra_tags}"
+  ani_extra_tags     = "${var.ani_extra_tags}"
+  pubip_extra_tags   = "${var.pubip_extra_tags}"
 }

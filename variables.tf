@@ -45,7 +45,7 @@ variable "nsg-name" {
 variable "route_table_ids" {
   description = "The Route Table Ids list to associate with the subnet"
   type        = "list"
-  default     = [""]
+  default     = []
 }
 
 variable "service_endpoints" {
@@ -162,4 +162,22 @@ variable "storage_os_disk_managed_disk_type" {
 variable "storage_os_disk_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = "string"
+}
+
+variable "bastion_extra_tags" {
+  description = "Additional tags to associate with your bastion instance."
+  type        = "map"
+  default     = {}
+}
+
+variable "ani_extra_tags" {
+  description = "Additional tags to associate with your network interface."
+  type        = "map"
+  default     = {}
+}
+
+variable "pubip_extra_tags" {
+  description = "Additional tags to associate with your public ip."
+  type        = "map"
+  default     = {}
 }

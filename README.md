@@ -69,36 +69,39 @@ module "support" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin_ssh_ips | Claranet IPs allowed to use SSH on bastion | string | - | yes |
-| bastion-name | Name used for bastion naming | string | - | yes |
-| client_name | Client name/account used in naming | string | - | yes |
-| custom_disk_name | Bastion disk name as displayed in the console | string | `` | no |
-| custom_username | Default username to create on the bastion | string | `` | no |
-| custom_vm_hostname | Bastion hostname | string | `` | no |
-| custom_vm_name | VM Name as displayed on the console | string | `` | no |
-| delete_os_disk_on_termination | Enable delete disk on termination | string | `true` | no |
-| environment | Project environment | string | - | yes |
-| extra_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
-| location | Azure region to use | string | - | yes |
-| location-short | Short string for Azure location | string | - | yes |
-| nsg-name | Name used for nsg naming | string | - | no |
-| private_ip_bastion | Allows to define the private ip to associate with the bastion | string | `10.10.1.10` | no |
-| private_key_path | Path to the private SSH key to use | string | - | yes |
-| resource_group_name | Name of the resource group | string | - | yes |
-| route_table_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |
-| service_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
-| ssh_key_pub | Name of the SSH key pub to use | string | - | yes |
-| stack | Project stack name | string | - | yes |
-| storage_image_offer | Specifies the offer of the image used to create the virtual machine | string | `UbuntuServer` | no |
-| storage_image_publisher | Specifies the publisher of the image used to create the virtual machine | string | `Canonical` | no |
-| storage_image_sku | Specifies the SKU of the image used to create the virtual machine | string | `18.04-LTS` | no |
-| storage_os_disk_caching | Specifies the caching requirements for the OS Disk | string | `ReadWrite` | no |
-| storage_os_disk_create_option | Specifies how the OS disk shoulb be created | string | `FromImage` | no |
-| storage_os_disk_disk_size_gb | Specifies the size of the OS Disk in gigabytes | string | - | yes |
-| storage_os_disk_managed_disk_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `Standard_LRS` | no |
-| subnet_cidr | The address prefix list to use for the subnet | list | `10.10.1.0/24` | no |
-| virtual_network_name | Virtual network name | string | - | yes |
-| vm_size | Bastion virtual machine size | string | - | yes |
+| admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | string | n/a | yes |
+| ani\_extra\_tags | Additional tags to associate with your network interface. | map | `<map>` | no |
+| bastion-name | Name used for bastion naming | string | n/a | yes |
+| bastion\_extra\_tags | Additional tags to associate with your bastion instance. | map | `<map>` | no |
+| client\_name | Client name/account used in naming | string | n/a | yes |
+| custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
+| custom\_username | Default username to create on the bastion | string | `""` | no |
+| custom\_vm\_hostname | Bastion hostname | string | `""` | no |
+| custom\_vm\_name | VM Name as displayed on the console | string | `""` | no |
+| delete\_os\_disk\_on\_termination | Enable delete disk on termination | string | `"true"` | no |
+| environment | Project environment | string | n/a | yes |
+| extra\_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
+| location | Azure region to use | string | n/a | yes |
+| location-short | Short string for Azure location | string | n/a | yes |
+| nsg-name | Name used for nsg naming | string | n/a | yes |
+| private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
+| private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
+| pubip\_extra\_tags | Additional tags to associate with your public ip. | map | `<map>` | no |
+| resource\_group\_name | Name of the resource group | string | n/a | yes |
+| route\_table\_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |
+| service\_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
+| ssh\_key\_pub | Name of the SSH key pub to use | string | n/a | yes |
+| stack | Project stack name | string | n/a | yes |
+| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | string | `"UbuntuServer"` | no |
+| storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | string | `"Canonical"` | no |
+| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
+| storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
+| storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
+| storage\_os\_disk\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
+| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
+| subnet\_cidr | The address prefix list to use for the subnet | list | `<list>` | no |
+| virtual\_network\_name | Virtual network name | string | n/a | yes |
+| vm\_size | Bastion virtual machine size | string | n/a | yes |
 
 ## Outputs
 
@@ -112,6 +115,6 @@ module "support" {
 | network_security_group_id | Network security group id |
 | network_security_group_name | Network security group name |
 | subnet_cidr | CIDR list of the created subnets |
-| subnet_id | Ids of the created subnets |
+| subnet_ids | Ids of the created subnets |
 | subnet_ip_configurations | The collection of IP Configurations with IPs within this subnet |
-| subnet_name | Names list of the created subnet |
+| subnet_names | Names list of the created subnet |
