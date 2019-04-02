@@ -35,7 +35,7 @@ variable "admin_ssh_ips" {
   type        = "string"
 }
 
-variable "nsg-name" {
+variable "nsg-prefix" {
   description = "Name used for nsg naming"
   type        = "string"
 }

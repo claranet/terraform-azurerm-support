@@ -50,7 +50,7 @@ module "support" {
     resource_group_name     = "${module.rg.resource_group_name}"
 
     admin_ssh_ips           = "${join(",",var.admin_ssh_ips_list)}"
-    nsg-name                = "${var.define-nsg-name}"
+    nsg-prefix              = "${var.define-nsg-name}"
 
     virtual_network_name    = ${module.vnet.virtual_network_name}
     # Define your subnet_cidr if you want to overide it
@@ -83,7 +83,7 @@ module "support" {
 | extra\_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | n/a | yes |
 | location-short | Short string for Azure location | string | n/a | yes |
-| nsg-name | Name used for nsg naming | string | n/a | yes |
+| nsg-prefix | Name used for nsg naming | string | n/a | yes |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
 | private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | map | `<map>` | no |

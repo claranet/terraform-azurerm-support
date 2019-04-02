@@ -16,14 +16,14 @@ module "support-subnet" {
 }
 
 module "support-network-security-group" {
-  source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=AZ-5_Add_nsg_module"
-  client_name         = "${var.client_name}"
-  environment         = "${var.environment}"
-  stack               = "${var.stack}"
-  resource_group_name = "${var.resource_group_name}"
-  location            = "${var.location}"
-  location_short      = "${var.location-short}"
-  name                = "${var.nsg-name}"
+  source                     = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=AZ-5_Add_nsg_module"
+  client_name                = "${var.client_name}"
+  environment                = "${var.environment}"
+  stack                      = "${var.stack}"
+  resource_group_name        = "${var.resource_group_name}"
+  location                   = "${var.location}"
+  location_short             = "${var.location-short}"
+  security_group_name_prefix = "${var.nsg-prefix}"
 
   custom_rules = [
     {
