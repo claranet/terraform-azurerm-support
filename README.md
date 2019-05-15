@@ -1,14 +1,14 @@
 # Azure - Claranet Support stack
 
-Azure Support stack. It deploys subnet, NSG, and bastion instance.
+Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion instance.
 
 ## Prerequisites
 
-- SSH Key file should be: ~/.ssh/keys/${var.client_name}_${var.environment}.pem
+* SSH Key file should be: ~/.ssh/keys/${var.client_name}_${var.environment}.pem
 
-## Mandatory Usage
+## Usage
 
-```shell
+```hcl
 module "azure-region" {
     source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
 
@@ -25,45 +25,46 @@ module "rg" {
 }
 
 module "vnet" {
-    source              = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=xxx"
+    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=vX.X.X"
     
-    environment         = "${var.environment}"
-    location            = "${module.azure-region.location}"
-    location-short      = "${module.azure-region.location-short}"
-    client_name         = "${var.client_name}"
-    stack               = "${var.stack}"
-    custom_vnet_name    = "${var.custom_vnet_name}"
+    environment      = "${var.environment}"
+    location         = "${module.azure-region.location}"
+    location_short   = "${module.azure-region.location_short}"
+    client_name      = "${var.client_name}"
+    stack            = "${var.stack}"
+    custom_vnet_name = "${var.custom_vnet_name}"
 
-    resource_group_name     = "${module.rg.resource_group_name}"
-    vnet_cidr               = ["${var.vnet_cidr}"]
+    resource_group_name = "${module.rg.resource_group_name}"
+    vnet_cidr           = "${var.vnet_cidr}"
 }
 
 
 module "support" {
     source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/features/support.git?ref=vX.X.X"
 
-    client_name             = "${var.client_name}"
-    location                = "${module.azure-region.location}"
-    location-short          = "${module.azure-region.location-short}"
-    environment             = "${var.environment}"
-    stack                   = "${var.stack}"
-    resource_group_name     = "${module.rg.resource_group_name}"
+    client_name         = "${var.client_name}"
+    location            = "${module.azure-region.location}"
+    location_short      = "${module.azure-region.location_short}"
+    environment         = "${var.environment}"
+    stack               = "${var.stack}"
+    resource_group_name = "${module.rg.resource_group_name}"
 
-    admin_ssh_ips           = "${join(",",var.admin_ssh_ips_list)}"
-    nsg-prefix              = "${var.define-nsg-name}"
+    admin_ssh_ips = "${var.admin_ssh_ips_list}"
+    name_prefix   = "${var.name_prefix}"
 
-    virtual_network_name    = ${module.vnet.virtual_network_name}
-    # Define your subnet_cidr if you want to overide it
-    subnet_cidr             = ["x.x.x.x/x"]
+    virtual_network_name = "${module.vnet.virtual_network_name}"
+    # Define your subnet_cidr if you want to override it
+    subnet_cidr          = ["10.0.0.0/24"]
 
-    vm_size                 = "${var.vm_size}"
-    # Define your private ip bastion if you want to overide it
-    private_ip_bastion      = "${var.private_ip_bastion}"
-    support_dns_zone_name   = "${var.support_dns_zone_name}"
+    vm_size               = "${var.vm_size}"
+    # Define your private ip bastion if you want to override it
+    private_ip_bastion    = "${var.private_ip_bastion}"
+    support_dns_zone_name = "${var.support_dns_zone_name}"
     
-    ssh_key_pub             = "~/.ssh/keys/${var.client_name}_${var.environment}.pem.pub"
-    private_key_path	    = "~/.ssh/keys/${var.client_name}_${var.environment}.pem"
+    ssh_key_pub      = "~/.ssh/keys/${var.client_name}_${var.environment}.pem.pub"
+    private_key_path = "~/.ssh/keys/${var.client_name}_${var.environment}.pem"
 }
+```
 
 ## Inputs
 
@@ -71,8 +72,8 @@ module "support" {
 |------|-------------|:----:|:-----:|:-----:|
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | string | n/a | yes |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | map | `<map>` | no |
-| bastion-name | Name used for bastion naming | string | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | map | `<map>` | no |
+| bastion\_name | Name used for bastion naming | string | n/a | yes |
 | client\_name | Client name/account used in naming | string | n/a | yes |
 | custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
 | custom\_username | Default username to create on the bastion | string | `""` | no |
@@ -82,8 +83,8 @@ module "support" {
 | environment | Project environment | string | n/a | yes |
 | extra\_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | n/a | yes |
-| location-short | Short string for Azure location | string | n/a | yes |
-| nsg-prefix | Name used for nsg naming | string | n/a | yes |
+| location\_short | Short string for Azure location | string | n/a | yes |
+| name\_prefix | Name used for nsg naming | string | n/a | yes |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
 | private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | map | `<map>` | no |
@@ -97,9 +98,9 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
 | storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
-| storage\_os\_disk\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
-| subnet\_cidr | The address prefix list to use for the subnet | list | `<list>` | no |
+| storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
+| subnet\_cidr | The address prefix to use for the subnet | string | `"10.10.1.0/24"` | no |
 | virtual\_network\_name | Virtual network name | string | n/a | yes |
 | vm\_size | Bastion virtual machine size | string | n/a | yes |
 
@@ -107,14 +108,14 @@ module "support" {
 
 | Name | Description |
 |------|-------------|
-| bastion_network_interface_id | Bastion network interface id |
-| bastion_network_interface_private_ip | Bastion private ip |
-| bastion_network_public_ip | Bastion public ip |
-| bastion_network_public_ip_id | Bastion public ip id |
-| bastion_virtual_machine_id | Bastion virtual machine id |
-| network_security_group_id | Network security group id |
-| network_security_group_name | Network security group name |
-| subnet_cidr | CIDR list of the created subnets |
-| subnet_ids | Ids of the created subnets |
-| subnet_ip_configurations | The collection of IP Configurations with IPs within this subnet |
-| subnet_names | Names list of the created subnet |
+| bastion\_network\_interface\_id | Bastion network interface id |
+| bastion\_network\_interface\_private\_ip | Bastion private ip |
+| bastion\_network\_public\_ip | Bastion public ip |
+| bastion\_network\_public\_ip\_id | Bastion public ip id |
+| bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| network\_security\_group\_id | Network security group id |
+| network\_security\_group\_name | Network security group name |
+| subnet\_cidr\_list | CIDR list of the created subnets |
+| subnet\_ids | Ids of the created subnets |
+| subnet\_ip\_configurations | The collection of IP Configurations with IPs within this subnet |
+| subnet\_names | Names list of the created subnet |

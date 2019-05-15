@@ -6,7 +6,7 @@ variable "location" {
   description = "Azure region to use"
 }
 
-variable "location-short" {
+variable "location_short" {
   description = "Short string for Azure location"
 }
 
@@ -32,15 +32,16 @@ variable "extra_tags" {
 # Module NSG
 variable "admin_ssh_ips" {
   description = "Claranet IPs allowed to use SSH on bastion"
-  type        = "string"
+  type        = "list"
 }
 
-variable "nsg-prefix" {
-  description = "Name used for nsg naming"
-  type        = "string"
-}
+# Module Subnet
 
-# Module Subnet 
+variable "route_table_count" {
+  description = "Count of Route Table to associate with the subnet"
+  type        = "string"
+  default     = "0"
+}
 
 variable "route_table_ids" {
   description = "The Route Table Ids list to associate with the subnet"
@@ -60,9 +61,9 @@ variable "virtual_network_name" {
 }
 
 variable "subnet_cidr" {
-  description = "The address prefix list to use for the subnet"
-  type        = "list"
-  default     = ["10.10.1.0/24"]
+  description = "The address prefix to use for the subnet"
+  type        = "string"
+  default     = "10.10.1.0/24"
 }
 
 # Module Bastion
@@ -72,7 +73,7 @@ variable "vm_size" {
   type        = "string"
 }
 
-variable "bastion-name" {
+variable "bastion_name" {
   description = "Name used for bastion naming"
   type        = "string"
 }
@@ -159,7 +160,7 @@ variable "storage_os_disk_managed_disk_type" {
   default     = "Standard_LRS"
 }
 
-variable "storage_os_disk_disk_size_gb" {
+variable "storage_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes"
   type        = "string"
 }

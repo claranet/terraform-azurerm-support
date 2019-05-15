@@ -3,9 +3,9 @@ output "subnet_ids" {
   value       = "${module.support-subnet.subnet_ids}"
 }
 
-output "subnet_cidr" {
+output "subnet_cidr_list" {
   description = "CIDR list of the created subnets"
-  value       = "${module.support-subnet.subnet_cidr}"
+  value       = "${module.support-subnet.subnet_cidr_list}"
 }
 
 output "subnet_names" {
