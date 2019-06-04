@@ -1,5 +1,5 @@
 module "support-subnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=az-95-fix-routes-and-nsg-count"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=v1.1.0"
 
   environment    = "${var.environment}"
   location_short = "${var.location_short}"
