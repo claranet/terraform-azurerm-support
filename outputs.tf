@@ -52,3 +52,8 @@ output "bastion_virtual_machine_id" {
   description = "Bastion virtual machine id"
   value       = "${module.bastion.bastion_virtual_machine_id}"
 }
+
+output "bastion_virtual_machine_name" {
+  description = "Bastion virtual machine name"
+  value       = "${module.bastion.bastion_virtual_machine_name}"
+}
