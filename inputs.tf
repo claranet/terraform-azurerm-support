@@ -73,11 +73,6 @@ variable "vm_size" {
   type        = "string"
 }
 
-variable "bastion_name" {
-  description = "Name used for bastion naming"
-  type        = "string"
-}
-
 variable "custom_vm_name" {
   description = "VM Name as displayed on the console"
   type        = "string"

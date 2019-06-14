@@ -70,10 +70,9 @@ module "support" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | string | n/a | yes |
+| admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | list | n/a | yes |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | map | `<map>` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | map | `<map>` | no |
-| bastion\_name | Name used for bastion naming | string | n/a | yes |
 | client\_name | Client name/account used in naming | string | n/a | yes |
 | custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
 | custom\_username | Default username to create on the bastion | string | `""` | no |
@@ -84,11 +83,11 @@ module "support" {
 | extra\_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | n/a | yes |
 | location\_short | Short string for Azure location | string | n/a | yes |
-| name\_prefix | Name used for nsg naming | string | n/a | yes |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
 | private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | map | `<map>` | no |
 | resource\_group\_name | Name of the resource group | string | n/a | yes |
+| route\_table\_count | Count of Route Table to associate with the subnet | string | `"0"` | no |
 | route\_table\_ids | The Route Table Ids list to associate with the subnet | list | `<list>` | no |
 | service\_endpoints | The list of Service endpoints to associate with the subnet | list | `<list>` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | string | n/a | yes |

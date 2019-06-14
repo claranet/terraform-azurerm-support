@@ -56,7 +56,6 @@ module "bastion" {
   environment         = "${var.environment}"
   stack               = "${var.stack}"
   resource_group_name = "${var.resource_group_name}"
-  name                = "${var.bastion_name}"
 
   subnet_bastion_id  = "${join(",", module.support-subnet.subnet_ids)}"
   private_ip_bastion = "${var.private_ip_bastion}"
