@@ -73,6 +73,12 @@ variable "vm_size" {
   type        = "string"
 }
 
+variable "name_prefix" {
+  description = "Prefix used for resources naming"
+  type        = "string"
+  default     = ""
+}
+
 variable "custom_vm_name" {
   description = "VM Name as displayed on the console"
   type        = "string"

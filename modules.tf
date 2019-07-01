@@ -48,7 +48,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=AZ-49-normalize"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion.git?ref=v0.2.0"
 
   client_name         = "${var.client_name}"
   location            = "${var.location}"
@@ -56,6 +56,7 @@ module "bastion" {
   environment         = "${var.environment}"
   stack               = "${var.stack}"
   resource_group_name = "${var.resource_group_name}"
+  name_prefix         = "${var.name_prefix}"
 
   subnet_bastion_id  = "${join(",", module.support-subnet.subnet_ids)}"
   private_ip_bastion = "${var.private_ip_bastion}"

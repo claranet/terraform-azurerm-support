@@ -83,6 +83,7 @@ module "support" {
 | extra\_tags | Additional tags to associate with your network security group. | map | `<map>` | no |
 | location | Azure region to use | string | n/a | yes |
 | location\_short | Short string for Azure location | string | n/a | yes |
+| name\_prefix | Prefix used for resources naming | string | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
 | private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | map | `<map>` | no |
@@ -112,6 +113,7 @@ module "support" {
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | network\_security\_group\_id | Network security group id |
 | network\_security\_group\_name | Network security group name |
 | subnet\_cidr\_list | CIDR list of the created subnets |
