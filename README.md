@@ -2,9 +2,12 @@
 
 Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion instance.
 
-# Requirements
-* Azure provider >= 1.31
-* Terraform >=0.12
+## Terraform version compatibility
+ 
+| Module version | Terraform version |
+|----------------|-------------------|
+| >= 2.x.x       | 0.12.x            |
+| < 2.x.x        | 0.11.x            |
 
 ## Prerequisites
 
