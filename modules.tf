@@ -1,5 +1,6 @@
 module "support-subnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/subnet.git?ref=v1.1.0"
+  source  = "claranet/subnet/azurerm"
+  version = "2.0.0"
 
   environment    = var.environment
   location_short = var.location_short
@@ -20,7 +21,8 @@ module "support-subnet" {
 }
 
 module "support-network-security-group" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/nsg.git?ref=v0.1.0"
+  source  = "claranet/nsg/azurerm"
+  version = "2.0.1"
 
   client_name         = var.client_name
   environment         = var.environment
