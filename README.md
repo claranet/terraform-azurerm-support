@@ -2,16 +2,17 @@
 
 Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion instance.
 
+## Requirements
+
+* SSH Key file should be: ~/.ssh/keys/${var.client_name}_${var.environment}.pem
+* [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.36
+
 ## Terraform version compatibility
  
 | Module version | Terraform version |
 |----------------|-------------------|
 | >= 2.x.x       | 0.12.x            |
 | < 2.x.x        | 0.11.x            |
-
-## Prerequisites
-
-* SSH Key file should be: ~/.ssh/keys/${var.client_name}_${var.environment}.pem
 
 ## Usage
 
@@ -23,7 +24,8 @@ module "azure-region" {
 }
 
 module "rg" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
+  source  = "claranet/rg/azurerm"
+  version = "x.x.x"
 
   location    = module.azure-region.location
   client_name = var.client_name
@@ -32,7 +34,8 @@ module "rg" {
 }
 
 module "azure-network-vnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=vX.X.X"
+  source  = "claranet/vnet/azurerm"
+  version = "x.x.x"
     
   environment      = var.environment
   location         = module.azure-region.location
@@ -77,8 +80,8 @@ module "support" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | list(string) | n/a | yes |
-| ani\_extra\_tags | Additional tags to associate with your network interface. | map(string) | `<map>` | no |
-| bastion\_extra\_tags | Additional tags to associate with your bastion instance. | map(string) | `<map>` | no |
+| ani\_extra\_tags | Additional tags to associate with your network interface. | map(string) | `{}` | no |
+| bastion\_extra\_tags | Additional tags to associate with your bastion instance. | map(string) | `{}` | no |
 | client\_name | Client name/account used in naming | string | n/a | yes |
 | custom\_disk\_name | Bastion disk name as displayed in the console | string | `""` | no |
 | custom\_username | Default username to create on the bastion | string | `""` | no |
@@ -86,17 +89,17 @@ module "support" {
 | custom\_vm\_name | VM Name as displayed on the console | string | `""` | no |
 | delete\_os\_disk\_on\_termination | Enable delete disk on termination | string | `"true"` | no |
 | environment | Project environment | string | n/a | yes |
-| extra\_tags | Additional tags to associate with your network security group. | map(string) | `<map>` | no |
-| location | Azure region to use | string | n/a | yes |
-| location\_short | Short string for Azure location | string | n/a | yes |
+| extra\_tags | Additional tags to associate with your network security group. | map(string) | `{}` | no |
+| location | Azure location. | string | n/a | yes |
+| location\_short | Short string for Azure location. | string | n/a | yes |
 | name\_prefix | Prefix used for resources naming | string | `""` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | string | `"10.10.1.10"` | no |
 | private\_key\_path | Path to the private SSH key to use | string | n/a | yes |
-| pubip\_extra\_tags | Additional tags to associate with your public ip. | map(string) | `<map>` | no |
-| resource\_group\_name | Name of the resource group | string | n/a | yes |
+| pubip\_extra\_tags | Additional tags to associate with your public ip. | map(string) | `{}` | no |
+| resource\_group\_name | Resource group name | string | n/a | yes |
 | route\_table\_count | Count of Route Table to associate with the subnet | string | `"0"` | no |
-| route\_table\_ids | The Route Table Ids list to associate with the subnet | list(string) | `<list>` | no |
-| service\_endpoints | The list of Service endpoints to associate with the subnet | list(string) | `<list>` | no |
+| route\_table\_ids | The Route Table Ids list to associate with the subnet | list(string) | `[]` | no |
+| service\_endpoints | The list of Service endpoints to associate with the subnet | list(string) | `[]` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | string | n/a | yes |
 | stack | Project stack name | string | n/a | yes |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | string | `"UbuntuServer"` | no |
@@ -104,7 +107,7 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | string | `"18.04-LTS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | string | `"ReadWrite"` | no |
 | storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | string | `"FromImage"` | no |
-| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS] | string | `"Standard_LRS"` | no |
+| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | string | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | string | n/a | yes |
 | subnet\_cidr | The address prefix to use for the subnet | string | `"10.10.1.0/24"` | no |
 | virtual\_network\_name | Virtual network name | string | n/a | yes |
