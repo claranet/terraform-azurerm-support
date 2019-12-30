@@ -18,7 +18,8 @@ Azure Support stack for Claranet. It creates a subnet, a Network Security Group 
 
 ```hcl
 module "azure-region" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
+  source  = "claranet/regions/azurerm"
+  version = "x.x.x"
 
   azure_region = var.azure_region
 }
