@@ -82,3 +82,8 @@ output "bastion_storage_os_disk" {
   description = "Bastion storage OS disk object"
   value       = module.bastion.bastion_storage_os_disk
 }
+
+output "bastion_public_domain_name_label" {
+  description = "Bastion public DNS"
+  value       = module.bastion.bastion_public_domain_name_label
+}
