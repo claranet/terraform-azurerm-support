@@ -58,3 +58,27 @@ output "bastion_virtual_machine_name" {
   value       = module.bastion.bastion_virtual_machine_name
 }
 
+output "bastion_username" {
+  description = "Username of the admin user"
+  value       = module.bastion.bastion_username
+}
+
+output "bastion_virtual_machine_size" {
+  description = "Bastion Virtual Machine size"
+  value       = module.bastion.bastion_virtual_machine_size
+}
+
+output "bastion_hostname" {
+  description = "Bastion hostname"
+  value       = module.bastion.bastion_hostname
+}
+
+output "bastion_storage_image_reference" {
+  description = "Bastion storage image reference object"
+  value       = module.bastion.bastion_storage_image_reference
+}
+
+output "bastion_storage_os_disk" {
+  description = "Bastion storage OS disk object"
+  value       = module.bastion.bastion_storage_os_disk
+}
