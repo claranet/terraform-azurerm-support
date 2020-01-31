@@ -50,7 +50,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-168-improvments"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=v2.1.0"
 
   client_name         = var.client_name
   location            = var.location
