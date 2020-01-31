@@ -1,4 +1,4 @@
-# Unreleased
+# v2.1.0 - 2020-01-31
 
 Changed
   * AZ-168: Bastion refactoring and fixes, also new outputs
