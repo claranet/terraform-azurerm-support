@@ -1,3 +1,8 @@
+# Unreleased
+
+Changed
+  * AZ-168: Bastion refactoring and fixes, also new outputs
+  
 # v2.0.0 - 2019-12-30
 
 Breaking

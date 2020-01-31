@@ -50,7 +50,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=v2.0.1"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=v2.1.0"
 
   client_name         = var.client_name
   location            = var.location
@@ -80,10 +80,9 @@ module "bastion" {
   custom_vm_name     = var.custom_vm_name
   custom_vm_hostname = var.custom_vm_hostname
   custom_disk_name   = var.custom_disk_name
-  custom_username    = var.custom_username
+  admin_username     = var.admin_username
 
   bastion_extra_tags = var.bastion_extra_tags
   ani_extra_tags     = var.ani_extra_tags
   pubip_extra_tags   = var.pubip_extra_tags
 }
-

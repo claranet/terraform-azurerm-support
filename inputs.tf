@@ -72,16 +72,23 @@ variable "subnet_cidr" {
 }
 
 # Module Bastion
+variable "name_prefix" {
+  description = "Optional prefix for resources naming"
+  type        = string
+  default     = "bastion-"
+}
 
+# Azure Network Interface
+variable "private_ip_bastion" {
+  description = "Allows to define the private ip to associate with the bastion"
+  type        = string
+  default     = "10.10.1.10"
+}
+
+# Azure Virtual Machine
 variable "vm_size" {
   description = "Bastion virtual machine size"
   type        = string
-}
-
-variable "name_prefix" {
-  description = "Prefix used for resources naming"
-  type        = string
-  default     = ""
 }
 
 variable "custom_vm_name" {
@@ -102,16 +109,10 @@ variable "custom_disk_name" {
   default     = ""
 }
 
-variable "custom_username" {
-  description = "Default username to create on the bastion"
+variable "admin_username" {
+  description = "Name of the admin user"
   type        = string
-  default     = ""
-}
-
-variable "private_ip_bastion" {
-  description = "Allows to define the private ip to associate with the bastion"
-  type        = string
-  default     = "10.10.1.10"
+  default     = "claranet"
 }
 
 variable "ssh_key_pub" {
@@ -120,14 +121,14 @@ variable "ssh_key_pub" {
 }
 
 variable "private_key_path" {
-  description = "Path to the private SSH key to use"
+  description = "Root SSH private key path"
   type        = string
 }
 
 variable "delete_os_disk_on_termination" {
   description = "Enable delete disk on termination"
-  type        = string
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "storage_image_publisher" {
@@ -146,6 +147,12 @@ variable "storage_image_sku" {
   description = "Specifies the SKU of the image used to create the virtual machine"
   type        = string
   default     = "18.04-LTS"
+}
+
+variable "storage_image_version" {
+  description = "Specifies the version of the image used to create the virtual machine"
+  type        = string
+  default     = "latest"
 }
 
 variable "storage_os_disk_caching" {
@@ -188,4 +195,3 @@ variable "pubip_extra_tags" {
   type        = map(string)
   default     = {}
 }
-
