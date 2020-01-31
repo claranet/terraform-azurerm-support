@@ -58,13 +58,13 @@ output "bastion_virtual_machine_name" {
   value       = module.bastion.bastion_virtual_machine_name
 }
 
-output "bastion_username" {
+output "bastion_admin_username" {
   description = "Username of the admin user"
-  value       = module.bastion.bastion_username
+  value       = module.bastion.bastion_admin_username
 }
 
 output "bastion_virtual_machine_size" {
-  description = "Bastion Virtual Machine size"
+  description = "Bastion virtual machine size"
   value       = module.bastion.bastion_virtual_machine_size
 }
 
