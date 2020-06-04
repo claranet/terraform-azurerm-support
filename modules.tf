@@ -30,6 +30,7 @@ module "support-network-security-group" {
   resource_group_name = var.resource_group_name
   location            = var.location
   location_short      = var.location_short
+  name_prefix         = var.name_prefix
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
