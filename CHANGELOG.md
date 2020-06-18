@@ -1,3 +1,8 @@
+# v3.0.0 - Unreleased
+
+Breaking
+  * AZ-198: Upgrade AzureRM version for compatibility with > 2.0
+
 # v2.2.0 - 2020-07-03
 
 Added

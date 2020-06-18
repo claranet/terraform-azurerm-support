@@ -42,16 +42,10 @@ variable "admin_ssh_ips" {
 
 # Module Subnet
 
-variable "route_table_count" {
-  description = "Count of Route Table to associate with the subnet"
-  type        = string
-  default     = "0"
-}
-
 variable "route_table_ids" {
   description = "The Route Table Ids list to associate with the subnet"
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
 }
 
 variable "service_endpoints" {

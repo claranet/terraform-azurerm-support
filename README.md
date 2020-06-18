@@ -2,16 +2,13 @@
 
 Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion instance.
 
-## Requirements
+## Version compatibility
 
-* [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.36
-
-## Terraform version compatibility
- 
-| Module version | Terraform version |
-|----------------|-------------------|
-| >= 2.x.x       | 0.12.x            |
-| < 2.x.x        | 0.11.x            |
+| Module version    | Terraform version | AzureRM version |
+|-------------------|-------------------|-----------------|
+| >= 3.x.x          | 0.12.x            | >= 2.0          |
+| >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
+| <  2.x.x          | 0.11.x            | <  2.0          |
 
 ## Usage
 
@@ -78,7 +75,7 @@ module "support" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | `list(string)` | n/a | yes |
 | admin\_username | Name of the admin user | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
@@ -97,8 +94,7 @@ module "support" {
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| route\_table\_count | Count of Route Table to associate with the subnet | `string` | `"0"` | no |
-| route\_table\_ids | The Route Table Ids list to associate with the subnet | `list(string)` | `[]` | no |
+| route\_table\_ids | The Route Table Ids list to associate with the subnet | `map(string)` | `{}` | no |
 | service\_endpoints | The list of Service endpoints to associate with the subnet | `list(string)` | `[]` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
@@ -134,5 +130,4 @@ module "support" {
 | network\_security\_group\_name | Network security group name |
 | subnet\_cidr\_list | CIDR list of the created subnets |
 | subnet\_ids | Ids of the created subnets |
-| subnet\_ip\_configurations | The collection of IP Configurations with IPs within this subnet |
 | subnet\_names | Names list of the created subnet |
