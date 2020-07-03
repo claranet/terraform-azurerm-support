@@ -1,4 +1,4 @@
-# v2.2.0 - Unreleased
+# v2.2.0 - 2020-07-03
 
 Added
   * AZ-231: Add name_prefix variable on nsg submodule
