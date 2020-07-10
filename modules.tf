@@ -1,3 +1,7 @@
+locals {
+  subnet_name = "bastion-${var.stack}-${var.client_name}-${var.location_short}-${var.environment}-subnet"
+}
+
 module "support-subnet" {
   source  = "claranet/subnet/azurerm"
   version = "3.0.0"
@@ -9,11 +13,14 @@ module "support-subnet" {
 
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
-  subnet_cidr_list     = [var.subnet_cidr]
+
+  custom_subnet_names = [local.subnet_name]
+  subnet_cidr_list    = [var.subnet_cidr]
 
   route_table_ids = var.route_table_ids
+
   network_security_group_ids = {
-    "${var.stack}-${var.client_name}-${var.location_short}-${var.environment}-subnet" = module.support-network-security-group.network_security_group_id
+    "${local.subnet_name}" = module.support-network-security-group.network_security_group_id[0]
   }
 
   service_endpoints = var.service_endpoints
@@ -21,7 +28,7 @@ module "support-subnet" {
 
 module "support-network-security-group" {
   source  = "claranet/nsg/azurerm"
-  version = "2.1.0"
+  version = "3.0.0"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -33,7 +40,7 @@ module "support-network-security-group" {
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
-  network_security_group_name = module.support-network-security-group.network_security_group_name
+  network_security_group_name = module.support-network-security-group.network_security_group_name[0]
   resource_group_name         = var.resource_group_name
 
   name        = "SSH"
@@ -60,7 +67,7 @@ module "bastion" {
   resource_group_name = var.resource_group_name
   name_prefix         = var.name_prefix
 
-  subnet_bastion_id  = join(",", module.support-subnet.subnet_ids)
+  subnet_bastion_id  = module.support-subnet.subnet_ids[0]
   private_ip_bastion = var.private_ip_bastion
 
   vm_size     = var.vm_size
@@ -68,12 +75,10 @@ module "bastion" {
 
   private_key_path = var.private_key_path
 
-  delete_os_disk_on_termination     = var.delete_os_disk_on_termination
   storage_image_publisher           = var.storage_image_publisher
   storage_image_offer               = var.storage_image_offer
   storage_image_sku                 = var.storage_image_sku
   storage_os_disk_caching           = var.storage_os_disk_caching
-  storage_os_disk_create_option     = var.storage_os_disk_create_option
   storage_os_disk_managed_disk_type = var.storage_os_disk_managed_disk_type
   storage_os_disk_size_gb           = var.storage_os_disk_size_gb
 
@@ -81,6 +86,9 @@ module "bastion" {
   custom_vm_hostname = var.custom_vm_hostname
   custom_disk_name   = var.custom_disk_name
   admin_username     = var.admin_username
+
+  diagnostics_storage_account_name      = var.diagnostics_storage_account_name
+  diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
 
   bastion_extra_tags = var.bastion_extra_tags
   ani_extra_tags     = var.ani_extra_tags

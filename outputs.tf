@@ -68,16 +68,6 @@ output "bastion_hostname" {
   value       = module.bastion.bastion_hostname
 }
 
-output "bastion_storage_image_reference" {
-  description = "Bastion storage image reference object"
-  value       = module.bastion.bastion_storage_image_reference
-}
-
-output "bastion_storage_os_disk" {
-  description = "Bastion storage OS disk object"
-  value       = module.bastion.bastion_storage_os_disk
-}
-
 output "bastion_public_domain_name_label" {
   description = "Bastion public DNS"
   value       = module.bastion.bastion_public_domain_name_label
