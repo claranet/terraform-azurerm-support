@@ -6,6 +6,9 @@ Breaking
 Changed
   * AZ-209: Update CI with Gitlab template
 
+Breaking
+  * AZ-236: Use `bastion` module reworked and based on `linux-vm`
+
 # v2.2.0 - 2020-07-03
 
 Added
