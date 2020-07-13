@@ -2,17 +2,15 @@
 
 Breaking
   * AZ-198: Upgrade AzureRM version for compatibility with > 2.0
+  * AZ-236: Use `bastion` module reworked and based on `linux-vm`
 
 Changed
   * AZ-209: Update CI with Gitlab template
 
-Breaking
-  * AZ-236: Use `bastion` module reworked and based on `linux-vm`
-
 # v2.2.0 - 2020-07-03
 
 Added
-  * AZ-231: Add name_prefix variable on nsg submodule
+  * AZ-231: `Add name_prefix` variable on nsg submodule
 
 # v2.1.0 - 2020-01-31
 
