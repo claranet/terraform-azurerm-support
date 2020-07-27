@@ -13,11 +13,6 @@ output "subnet_names" {
   value       = module.support-subnet.subnet_names
 }
 
-output "subnet_ip_configurations" {
-  description = "The collection of IP Configurations with IPs within this subnet"
-  value       = module.support-subnet.subnet_ip_configurations
-}
-
 output "network_security_group_id" {
   description = "Network security group id"
   value       = module.support-network-security-group.network_security_group_id

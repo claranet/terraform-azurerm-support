@@ -1,3 +1,11 @@
+# v3.0.0 - Unreleased
+
+Breaking
+  * AZ-198: Upgrade AzureRM version for compatibility with > 2.0
+
+Changed
+  * AZ-209: Update CI with Gitlab template
+
 # v2.2.0 - 2020-07-03
 
 Added

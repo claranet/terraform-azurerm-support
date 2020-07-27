@@ -1,6 +1,6 @@
 module "support-subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "2.0.3"
+  version = "3.0.0"
 
   environment    = var.environment
   location_short = var.location_short
@@ -11,11 +11,10 @@ module "support-subnet" {
   virtual_network_name = var.virtual_network_name
   subnet_cidr_list     = [var.subnet_cidr]
 
-  route_table_count = var.route_table_count
-  route_table_ids   = var.route_table_ids
-
-  network_security_group_count = "1"
-  network_security_group_ids   = [module.support-network-security-group.network_security_group_id]
+  route_table_ids = var.route_table_ids
+  network_security_group_ids = {
+    "${var.stack}-${var.client_name}-${var.location_short}-${var.environment}-subnet" = module.support-network-security-group.network_security_group_id
+  }
 
   service_endpoints = var.service_endpoints
 }
