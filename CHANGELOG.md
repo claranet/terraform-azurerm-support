@@ -10,7 +10,7 @@ Changed
 # v2.2.0 - 2020-07-03
 
 Added
-  * AZ-231: `Add name_prefix` variable on nsg submodule
+  * AZ-231: Add `name_prefix` variable on nsg submodule
 
 # v2.1.0 - 2020-01-31
 
