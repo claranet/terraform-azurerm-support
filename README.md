@@ -1,6 +1,6 @@
 # Azure - Claranet Support stack
 
-Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion instance.
+Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion VM instance.
 
 ## Version compatibility
 
@@ -44,31 +44,49 @@ module "azure-network-vnet" {
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
+locals {
+  subnet_cidr = "10.10.10.0/24"
+
+  public_ssh_key_path  = "~/.ssh/keys/${var.client_name}_${var.environment}_${var.stack}.pub"
+  private_ssh_key_path = "~/.ssh/keys/${var.client_name}_${var.environment}_${var.stack}.pem"
+
+  bastion_private_ip = "10.10.10.10"
+  bastion_disk_size  = "32"
+  bastion_vm_size    = "Standard_B1s"
+}
 
 module "support" {
-    source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/features/support.git?ref=vX.X.X"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/module/support.git?ref=vX.X.X"
 
-    client_name         = var.client_name
-    location            = module.azure-region.location
-    location_short      = module.azure-region.location_short
-    environment         = var.environment
-    stack               = var.stack
-    resource_group_name = module.rg.resource_group_name
+  client_name         = var.client_name
+  location            = module.azure-region.location
+  location_short      = module.azure-region.location_short
+  environment         = var.environment
+  stack               = var.stack
+  resource_group_name = module.rg.resource_group_name
 
-    admin_ssh_ips = var.admin_ssh_ips_list
-    name_prefix   = var.name_prefix
+  virtual_network_name = module.azure-network-vnet.virtual_network_name
 
-    virtual_network_name = module.vnet.virtual_network_name
-    # Define your subnet_cidr if you want to override it
-    subnet_cidr          = ["10.0.0.0/24"]
+  # bastion parameters
+  vm_size                 = local.bastion_vm_size
+  storage_os_disk_size_gb = local.bastion_disk_size
 
-    vm_size               = var.vm_size
-    # Define your private ip bastion if you want to override it
-    private_ip_bastion    = var.private_ip_bastion
-    support_dns_zone_name = var.support_dns_zone_name
-    
-    ssh_key_pub      = "~/.ssh/keys/${var.client_name}_${var.environment}.pem.pub"
-    private_key_path = "~/.ssh/keys/${var.client_name}_${var.environment}.pem"
+  admin_ssh_ips = concat(
+    data.terraform_remote_state.global_vars.outputs.admin_cidrs,
+    local.external_admin_ips
+  )
+
+  # Define your private ip bastion if you want to override it
+  private_ip_bastion = local.bastion_private_ip
+  ssh_key_pub        = local.public_ssh_key_path
+  private_key_path   = local.private_ssh_key_path
+
+  # Define your subnet_cidr if you want to override it
+  subnet_cidr = local.subnet_cidr
+  #  support_dns_zone_name = var.support_dns_zone_name
+
+  diagnostics_storage_account_name      = module.run-common.logs_storage_account_name
+  diagnostics_storage_account_sas_token = module.run-common.logs_storage_account_sas_token["sastoken"]
 }
 ```
 
@@ -84,7 +102,8 @@ module "support" {
 | custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
-| delete\_os\_disk\_on\_termination | Enable delete disk on termination | `bool` | `true` | no |
+| diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
+| diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
 | environment | Project environment | `string` | n/a | yes |
 | extra\_tags | Additional tags to associate with your network security group. | `map(string)` | `{}` | no |
 | location | Azure location. | `string` | n/a | yes |
@@ -103,7 +122,6 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
-| storage\_os\_disk\_create\_option | Specifies how the OS disk shoulb be created | `string` | `"FromImage"` | no |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_cidr | The address prefix to use for the subnet | `string` | `"10.10.1.0/24"` | no |
@@ -121,8 +139,6 @@ module "support" {
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
-| bastion\_storage\_image\_reference | Bastion storage image reference object |
-| bastion\_storage\_os\_disk | Bastion storage OS disk object |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
