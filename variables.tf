@@ -40,6 +40,11 @@ variable "admin_ssh_ips" {
   type        = list(string)
 }
 
+variable "custom_security_group_name" {
+  description = "Custom name for network security group"
+  type        = string
+  default     = null
+}
 # Module Subnet
 variable "route_table_ids" {
   description = "The Route Table Ids list to associate with the subnet"
@@ -62,6 +67,12 @@ variable "subnet_cidr" {
   description = "The address prefix to use for the subnet"
   type        = string
   default     = "10.10.1.0/24"
+}
+
+variable "custom_bastion_subnet_name" {
+  description = "Custom name for bastion subnet"
+  type        = string
+  default     = null
 }
 
 # Module Bastion
@@ -163,6 +174,24 @@ variable "bastion_extra_tags" {
   description = "Additional tags to associate with your bastion instance."
   type        = map(string)
   default     = {}
+}
+
+variable "custom_publicip_name" {
+  description = "Custom name for public IP"
+  type        = string
+  default     = null
+}
+
+variable "custom_ipconfig_name" {
+  description = "Custom name for IP Configuration"
+  type        = string
+  default     = null
+}
+
+variable "custom_nic_name" {
+  description = "Custom name fir NIC"
+  type        = string
+  default     = null
 }
 
 variable "ani_extra_tags" {

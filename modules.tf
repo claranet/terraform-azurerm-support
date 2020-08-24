@@ -1,7 +1,3 @@
-locals {
-  subnet_name = "bastion-${var.stack}-${var.client_name}-${var.location_short}-${var.environment}-subnet"
-}
-
 module "support-subnet" {
   source  = "claranet/subnet/azurerm"
   version = "3.0.0"
@@ -30,13 +26,14 @@ module "support-network-security-group" {
   source  = "claranet/nsg/azurerm"
   version = "3.0.0"
 
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  location_short      = var.location_short
-  name_prefix         = var.name_prefix
+  client_name                         = var.client_name
+  environment                         = var.environment
+  stack                               = var.stack
+  resource_group_name                 = var.resource_group_name
+  location                            = var.location
+  location_short                      = var.location_short
+  name_prefix                         = var.name_prefix
+  custom_network_security_group_names = [var.custom_security_group_name]
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
@@ -82,10 +79,13 @@ module "bastion" {
   storage_os_disk_managed_disk_type = var.storage_os_disk_managed_disk_type
   storage_os_disk_size_gb           = var.storage_os_disk_size_gb
 
-  custom_vm_name     = var.custom_vm_name
-  custom_vm_hostname = var.custom_vm_hostname
-  custom_disk_name   = var.custom_disk_name
-  admin_username     = var.admin_username
+  custom_vm_name       = var.custom_vm_name
+  custom_vm_hostname   = var.custom_vm_hostname
+  custom_disk_name     = var.custom_disk_name
+  admin_username       = var.admin_username
+  custom_publicip_name = var.custom_publicip_name
+  custom_ipconfig_name = var.custom_ipconfig_name
+  custom_nic_name      = var.custom_nic_name
 
   diagnostics_storage_account_name      = var.diagnostics_storage_account_name
   diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token

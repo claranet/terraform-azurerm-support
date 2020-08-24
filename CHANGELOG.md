@@ -1,3 +1,8 @@
+# v3.0.1 - unreleased
+
+Added
+  * AZ-255: Allow to customize subnet and nsg, ipconfig, nic names
+
 # v3.0.0 - 2020-07-30
 
 Breaking
