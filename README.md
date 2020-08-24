@@ -99,7 +99,12 @@ module "support" {
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
+| custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
 | custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
+| custom\_ipconfig\_name | Custom name for IP Configuration | `string` | `null` | no |
+| custom\_nic\_name | Custom name fir NIC | `string` | `null` | no |
+| custom\_publicip\_name | Custom name for public IP | `string` | `null` | no |
+| custom\_security\_group\_name | Custom name for network security group | `string` | `null` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
@@ -147,3 +152,4 @@ module "support" {
 | subnet\_cidr\_list | CIDR list of the created subnets |
 | subnet\_ids | Ids of the created subnets |
 | subnet\_names | Names list of the created subnet |
+
