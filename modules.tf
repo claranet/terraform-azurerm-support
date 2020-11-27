@@ -1,43 +1,43 @@
 module "support-subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "3.0.0"
+  version = "4.0.0"
 
   environment    = var.environment
   location_short = var.location_short
   client_name    = var.client_name
   stack          = var.stack
+  name_prefix    = var.name_prefix
 
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
 
-  custom_subnet_names = [local.subnet_name]
-  subnet_cidr_list    = [var.subnet_cidr]
+  custom_subnet_name = var.custom_bastion_subnet_name
+  subnet_cidr_list   = var.subnet_cidr_list
 
-  route_table_ids = var.route_table_ids
-
-  network_security_group_ids = {
-    "${local.subnet_name}" = module.support-network-security-group.network_security_group_id[0]
-  }
-
-  service_endpoints = var.service_endpoints
+  route_table_id            = var.route_table_id
+  network_security_group_id = module.support-network-security-group.network_security_group_id
+  service_endpoints         = var.service_endpoints
 }
 
 module "support-network-security-group" {
   source  = "claranet/nsg/azurerm"
-  version = "3.0.0"
+  version = "4.0.0"
 
-  client_name                         = var.client_name
-  environment                         = var.environment
-  stack                               = var.stack
-  resource_group_name                 = var.resource_group_name
-  location                            = var.location
-  location_short                      = var.location_short
-  name_prefix                         = var.name_prefix
-  custom_network_security_group_names = [var.custom_security_group_name]
+  client_name         = var.client_name
+  environment         = var.environment
+  stack               = var.stack
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  location_short      = var.location_short
+  name_prefix         = var.name_prefix
+
+  custom_network_security_group_name = var.custom_security_group_name
+
+  extra_tags = var.nsg_extra_tags
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
-  network_security_group_name = module.support-network-security-group.network_security_group_name[0]
+  network_security_group_name = module.support-network-security-group.network_security_group_name
   resource_group_name         = var.resource_group_name
 
   name        = "SSH"
@@ -54,7 +54,8 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v3.1.0"
+  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.0.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-273_tf013"
 
   client_name         = var.client_name
   location            = var.location
@@ -64,32 +65,41 @@ module "bastion" {
   resource_group_name = var.resource_group_name
   name_prefix         = var.name_prefix
 
-  subnet_bastion_id  = module.support-subnet.subnet_ids[0]
+  # Custom bastion VM
+  custom_vm_name     = var.custom_vm_name
+  custom_vm_hostname = var.custom_vm_hostname
+
+  # VM Network
+  subnet_bastion_id  = module.support-subnet.subnet_id
   private_ip_bastion = var.private_ip_bastion
 
-  vm_size     = var.vm_size
-  ssh_key_pub = file(var.ssh_key_pub)
-
+  # VM Params & identity
+  vm_size          = var.vm_size
+  admin_username   = var.admin_username
+  ssh_key_pub      = file(var.ssh_key_pub)
   private_key_path = var.private_key_path
 
-  storage_image_publisher           = var.storage_image_publisher
-  storage_image_offer               = var.storage_image_offer
-  storage_image_sku                 = var.storage_image_sku
+  # VM OS Image ref
+  storage_image_publisher = var.storage_image_publisher
+  storage_image_offer     = var.storage_image_offer
+  storage_image_sku       = var.storage_image_sku
+
+  # VM OS Disk params
+  storage_os_disk_custom_name       = var.storage_os_disk_custom_name
   storage_os_disk_caching           = var.storage_os_disk_caching
   storage_os_disk_managed_disk_type = var.storage_os_disk_managed_disk_type
   storage_os_disk_size_gb           = var.storage_os_disk_size_gb
 
-  custom_vm_name       = var.custom_vm_name
-  custom_vm_hostname   = var.custom_vm_hostname
-  custom_disk_name     = var.custom_disk_name
-  admin_username       = var.admin_username
+  # VM Public IP params
   custom_publicip_name = var.custom_publicip_name
   custom_ipconfig_name = var.custom_ipconfig_name
   custom_nic_name      = var.custom_nic_name
 
+  # vM Diagnostics/logs
   diagnostics_storage_account_name      = var.diagnostics_storage_account_name
   diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
 
+  # Tags
   bastion_extra_tags = var.bastion_extra_tags
   ani_extra_tags     = var.ani_extra_tags
   pubip_extra_tags   = var.pubip_extra_tags

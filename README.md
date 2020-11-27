@@ -1,6 +1,11 @@
 # Azure - Claranet Support stack
 
 Azure Support stack for Claranet. It creates a subnet, a Network Security Group and a bastion VM instance.
+Included module documentation:
+  * [Subnet](https://registry.terraform.io/modules/claranet/subnet/azurerm/latest)
+  * [NSG](https://registry.terraform.io/modules/claranet/nsg/azurerm/latest)
+  * [bastion-vm](https://github.com/claranet/terraform-azurerm-bastion-vm/blob/master/README.md)
+    * [linux-vm](https://registry.terraform.io/modules/claranet/linux-vm/azurerm/latest)
 
 ## Version compatibility
 
@@ -101,7 +106,6 @@ module "support" {
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
-| custom\_disk\_name | Bastion disk name as displayed in the console | `string` | `""` | no |
 | custom\_ipconfig\_name | Custom name for IP Configuration | `string` | `null` | no |
 | custom\_nic\_name | Custom name fir NIC | `string` | `null` | no |
 | custom\_publicip\_name | Custom name for public IP | `string` | `null` | no |
@@ -111,16 +115,16 @@ module "support" {
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
 | environment | Project environment | `string` | n/a | yes |
-| extra\_tags | Additional tags to associate with your network security group. | `map(string)` | `{}` | no |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
+| nsg\_extra\_tags | Additional tags to associate with your Network Security Group. | `map(string)` | `{}` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | `"10.10.1.10"` | no |
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| route\_table\_ids | The Route Table Ids list to associate with the subnet | `map(string)` | `{}` | no |
-| service\_endpoints | The list of Service endpoints to associate with the subnet | `list(string)` | `[]` | no |
+| route\_table\_id | The Route Table ID to associate with the support subnet | `string` | `null` | no |
+| service\_endpoints | The list of Service endpoints to associate with the support subnet | `list(string)` | `[]` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
@@ -128,9 +132,10 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
 | storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
+| storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
-| subnet\_cidr | The address prefix to use for the subnet | `string` | `"10.10.1.0/24"` | no |
+| subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
 | virtual\_network\_name | Virtual network name | `string` | n/a | yes |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
 
@@ -146,11 +151,11 @@ module "support" {
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
+| bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 | network\_security\_group\_id | Network security group id |
 | network\_security\_group\_name | Network security group name |
-| subnet\_cidr\_list | CIDR list of the created subnets |
-| subnet\_ids | Ids of the created subnets |
-| subnet\_names | Names list of the created subnet |
-
+| subnet\_cidr\_list | CIDR list of the created subnet |
+| subnet\_id | ID of the created subnet |
+| subnet\_name | Name of the created subnet |

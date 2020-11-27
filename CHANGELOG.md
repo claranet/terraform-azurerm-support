@@ -3,6 +3,9 @@
 Updated
   * AZ-273: Module now compatible terraform `v0.13+`
 
+Breaking
+  * AZ-273: Upgrade sub-modules version to `v4.0.0` (ref: changelog for subnet, nsg, bastion-vm, linux-vm).
+
 # v3.1.0 - 2020-08-24
 
 Added
