@@ -51,7 +51,7 @@ module "azure-network-vnet" {
 }
 
 locals {
-  subnet_cidr = "10.10.10.0/24"
+  subnet_cidr_list = ["10.10.10.0/24"]
 
   public_ssh_key_path  = "~/.ssh/keys/${var.client_name}_${var.environment}_${var.stack}.pub"
   private_ssh_key_path = "~/.ssh/keys/${var.client_name}_${var.environment}_${var.stack}.pem"
@@ -87,8 +87,8 @@ module "support" {
   ssh_key_pub        = local.public_ssh_key_path
   private_key_path   = local.private_ssh_key_path
 
-  # Define your subnet_cidr if you want to override it
-  subnet_cidr = local.subnet_cidr
+  # Define your subnets if you want to override it
+  subnet_cidr_list = local.subnet_cidr_list
   #  support_dns_zone_name = var.support_dns_zone_name
 
   diagnostics_storage_account_name      = module.run-common.logs_storage_account_name

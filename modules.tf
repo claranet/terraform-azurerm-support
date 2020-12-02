@@ -2,6 +2,8 @@ module "support-subnet" {
   source  = "claranet/subnet/azurerm"
   version = "4.0.0"
 
+  depends_on = [module.support-network-security-group]
+
   environment    = var.environment
   location_short = var.location_short
   client_name    = var.client_name
