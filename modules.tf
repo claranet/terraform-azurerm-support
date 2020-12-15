@@ -2,8 +2,6 @@ module "support-subnet" {
   source  = "claranet/subnet/azurerm"
   version = "4.0.0"
 
-  depends_on = [module.support-network-security-group]
-
   environment    = var.environment
   location_short = var.location_short
   client_name    = var.client_name
@@ -56,8 +54,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.0.0"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-273_tf013"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.1.0"
 
   client_name         = var.client_name
   location            = var.location
