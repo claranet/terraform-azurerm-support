@@ -57,7 +57,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   source_port_range          = "*"
   destination_port_range     = "22"
   source_address_prefixes    = var.admin_ssh_ips
-  destination_address_prefix = var.private_ip_bastion
+  destination_address_prefix = coalesce(var.private_ip_bastion, module.bastion.bastion_network_interface_private_ip)
 }
 
 module "bastion" {
