@@ -28,12 +28,6 @@ variable "client_name" {
   type        = string
 }
 
-variable "extra_tags" {
-  description = "Additional tags to associate with your network security group."
-  type        = map(string)
-  default     = {}
-}
-
 # Module NSG
 variable "admin_ssh_ips" {
   description = "Claranet IPs allowed to use SSH on bastion"
@@ -45,15 +39,22 @@ variable "custom_security_group_name" {
   type        = string
   default     = null
 }
-# Module Subnet
-variable "route_table_ids" {
-  description = "The Route Table Ids list to associate with the subnet"
+
+variable "nsg_extra_tags" {
+  description = "Additional tags to associate with your Network Security Group."
   type        = map(string)
   default     = {}
 }
 
+# Module Subnet
+variable "route_table_id" {
+  description = "The Route Table ID to associate with the support subnet"
+  type        = string
+  default     = null
+}
+
 variable "service_endpoints" {
-  description = "The list of Service endpoints to associate with the subnet"
+  description = "The list of Service endpoints to associate with the support subnet"
   type        = list(string)
   default     = []
 }
@@ -63,10 +64,10 @@ variable "virtual_network_name" {
   type        = string
 }
 
-variable "subnet_cidr" {
-  description = "The address prefix to use for the subnet"
-  type        = string
-  default     = "10.10.1.0/24"
+variable "subnet_cidr_list" {
+  description = "The address prefixes to use for the subnet"
+  type        = list(string)
+  default     = ["10.10.1.0/24"]
 }
 
 variable "custom_bastion_subnet_name" {
@@ -75,21 +76,13 @@ variable "custom_bastion_subnet_name" {
   default     = null
 }
 
-# Module Bastion
+# Module Bastion / VM
 variable "name_prefix" {
   description = "Optional prefix for resources naming"
   type        = string
   default     = "bastion-"
 }
 
-# Azure Network Interface
-variable "private_ip_bastion" {
-  description = "Allows to define the private ip to associate with the bastion"
-  type        = string
-  default     = "10.10.1.10"
-}
-
-# Azure Virtual Machine
 variable "vm_size" {
   description = "Bastion virtual machine size"
   type        = string
@@ -103,12 +96,6 @@ variable "custom_vm_name" {
 
 variable "custom_vm_hostname" {
   description = "Bastion hostname"
-  type        = string
-  default     = ""
-}
-
-variable "custom_disk_name" {
-  description = "Bastion disk name as displayed in the console"
   type        = string
   default     = ""
 }
@@ -153,6 +140,12 @@ variable "storage_image_version" {
   default     = "latest"
 }
 
+variable "storage_os_disk_custom_name" {
+  description = "Bastion OS disk name as displayed in the console"
+  type        = string
+  default     = ""
+}
+
 variable "storage_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk"
   type        = string
@@ -174,6 +167,13 @@ variable "bastion_extra_tags" {
   description = "Additional tags to associate with your bastion instance."
   type        = map(string)
   default     = {}
+}
+
+# Azure Network Interface
+variable "private_ip_bastion" {
+  description = "Allows to define the private ip to associate with the bastion"
+  type        = string
+  default     = "10.10.1.10"
 }
 
 variable "custom_publicip_name" {

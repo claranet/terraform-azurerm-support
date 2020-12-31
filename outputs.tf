@@ -1,15 +1,15 @@
-output "subnet_ids" {
-  description = "Ids of the created subnets"
-  value       = module.support-subnet.subnet_ids
+output "subnet_id" {
+  description = "ID of the created subnet"
+  value       = module.support-subnet.subnet_id
 }
 
 output "subnet_cidr_list" {
-  description = "CIDR list of the created subnets"
+  description = "CIDR list of the created subnet"
   value       = module.support-subnet.subnet_cidr_list
 }
 
-output "subnet_names" {
-  description = "Names list of the created subnet"
+output "subnet_name" {
+  description = "Name of the created subnet"
   value       = module.support-subnet.subnet_names
 }
 
@@ -71,4 +71,9 @@ output "bastion_hostname" {
 output "bastion_public_domain_name_label" {
   description = "Bastion public DNS"
   value       = module.bastion.bastion_public_domain_name_label
+}
+
+output "bastion_virtual_machine_identity" {
+  description = "System Identity assigned to Bastion virtual machine"
+  value       = module.bastion.bastion_virtual_machine_identity
 }
