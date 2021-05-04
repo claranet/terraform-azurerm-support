@@ -59,7 +59,8 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.2.0"
+  #source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.2.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-492-ssh-private-key-value"
 
   client_name         = var.client_name
   location            = var.location
@@ -78,10 +79,10 @@ module "bastion" {
   private_ip_bastion = var.private_ip_bastion
 
   # VM Params & identity
-  vm_size          = var.vm_size
-  admin_username   = var.admin_username
-  ssh_key_pub      = file(var.ssh_key_pub)
-  private_key_path = var.private_key_path
+  vm_size         = var.vm_size
+  admin_username  = var.admin_username
+  ssh_public_key  = var.ssh_public_key
+  ssh_private_key = var.ssh_private_key
 
   # VM OS Image ref
   storage_image_publisher = var.storage_image_publisher

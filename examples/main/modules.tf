@@ -41,6 +41,10 @@ module "azure_network_vnet" {
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
+resource "tls_private_key" "bastion" {
+  algorithm = "RSA"
+}
+
 module "support" {
   source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/module/support.git?ref=vX.X.X"
 
@@ -61,8 +65,10 @@ module "support" {
 
   # Define your private ip bastion if you want to override it
   private_ip_bastion = "10.10.10.10"
-  ssh_key_pub        = var.public_ssh_key_path
-  private_key_path   = var.private_ssh_key_path
+
+  # Optional: Put your SSH key here
+  ssh_public_key  = tls_private_key.bastion.public_key_openssh
+  ssh_private_key = tls_private_key.bastion.private_key_pem
 
   # Define your subnets if you want to override it
   subnet_cidr_list = ["10.10.10.0/24"]

@@ -68,6 +68,10 @@ module "azure_network_vnet" {
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
+resource "tls_private_key" "bastion" {
+  algorithm = "RSA"
+}
+
 module "support" {
   source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/module/support.git?ref=vX.X.X"
 
@@ -88,8 +92,10 @@ module "support" {
 
   # Define your private ip bastion if you want to override it
   private_ip_bastion = "10.10.10.10"
-  ssh_key_pub        = var.public_ssh_key_path
-  private_key_path   = var.private_ssh_key_path
+
+  # Optional: Put your SSH key here
+  ssh_public_key  = tls_private_key.bastion.public_key_openssh
+  ssh_private_key = tls_private_key.bastion.private_key_pem
 
   # Define your subnets if you want to override it
   subnet_cidr_list = ["10.10.10.0/24"]
@@ -111,7 +117,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.2.0 |
+| bastion | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-492-ssh-private-key-value |
 | support\_nsg | claranet/nsg/azurerm | 4.1.1 |
 | support\_subnet | claranet/subnet/azurerm | 4.2.1 |
 
@@ -146,13 +152,13 @@ module "support" {
 | name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group. | `map(string)` | `{}` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | `"10.10.1.10"` | no |
-| private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
 | route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
 | service\_endpoints | The list of Service endpoints to associate with the support subnet | `list(string)` | `[]` | no |
-| ssh\_key\_pub | Name of the SSH key pub to use | `string` | n/a | yes |
+| ssh\_private\_key | SSH private key, generated if empty | `string` | `""` | no |
+| ssh\_public\_key | SSH public key, generated if empty | `string` | `""` | no |
 | stack | Project stack name | `string` | n/a | yes |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
@@ -176,6 +182,8 @@ module "support" {
 | bastion\_network\_public\_ip | Bastion public ip |
 | bastion\_network\_public\_ip\_id | Bastion public ip id |
 | bastion\_public\_domain\_name\_label | Bastion public DNS |
+| bastion\_ssh\_private\_key | Bastion SSH private key |
+| bastion\_ssh\_public\_key | Bastion SSH public key |
 | bastion\_virtual\_machine\_id | Bastion virtual machine id |
 | bastion\_virtual\_machine\_identity | System Identity assigned to Bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |

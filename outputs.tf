@@ -77,3 +77,14 @@ output "bastion_virtual_machine_identity" {
   description = "System Identity assigned to Bastion virtual machine"
   value       = module.bastion.bastion_virtual_machine_identity
 }
+
+output "bastion_ssh_public_key" {
+  description = "Bastion SSH public key"
+  value       = module.bastion.ssh_public_key
+}
+
+output "bastion_ssh_private_key" {
+  description = "Bastion SSH private key"
+  value       = module.bastion.ssh_private_key
+  sensitive   = true
+}

@@ -18,16 +18,6 @@ variable "stack" {
   type        = string
 }
 
-variable "private_ssh_key_path" {
-  description = "Private SSH key path"
-  type        = string
-}
-
-variable "public_ssh_key_path" {
-  description = "Public SSH key path"
-  type        = string
-}
-
 variable "admin_ssh_ips" {
   description = "Admin SSH IPs"
   type        = list(string)

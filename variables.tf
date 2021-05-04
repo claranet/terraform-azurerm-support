@@ -118,14 +118,16 @@ variable "admin_username" {
   default     = "claranet"
 }
 
-variable "ssh_key_pub" {
-  description = "Name of the SSH key pub to use"
+variable "ssh_public_key" {
+  description = "SSH public key, generated if empty"
   type        = string
+  default     = ""
 }
 
-variable "private_key_path" {
-  description = "Root SSH private key path"
+variable "ssh_private_key" {
+  description = "SSH private key, generated if empty"
   type        = string
+  default     = ""
 }
 
 variable "storage_image_publisher" {
