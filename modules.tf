@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "4.1.0"
+  version = "4.2.0"
 
   environment    = var.environment
   location_short = var.location_short
@@ -14,11 +14,9 @@ module "support_subnet" {
   custom_subnet_name = var.custom_bastion_subnet_name
   subnet_cidr_list   = var.subnet_cidr_list
 
-  route_table_id    = var.route_table_id
+  route_table_rg    = var.route_table_rg
+  route_table_name  = var.route_table_name
   service_endpoints = var.service_endpoints
-
-  # Because of the Terraform error about resolving dependencies with count, cannot use this attribute.
-  # network_security_group_id = module.support-network-security-group.network_security_group_id
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {

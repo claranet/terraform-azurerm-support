@@ -110,7 +110,7 @@ module "support" {
 |------|--------|---------|
 | bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.1.0 |
 | support\_nsg | claranet/nsg/azurerm | 4.1.0 |
-| support\_subnet | claranet/subnet/azurerm | 4.1.0 |
+| support\_subnet | claranet/subnet/azurerm | 4.2.0 |
 
 ## Resources
 
@@ -146,7 +146,8 @@ module "support" {
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| route\_table\_id | The Route Table ID to associate with the support subnet | `string` | `null` | no |
+| route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
+| route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
 | service\_endpoints | The list of Service endpoints to associate with the support subnet | `list(string)` | `[]` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |

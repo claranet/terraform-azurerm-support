@@ -47,8 +47,14 @@ variable "nsg_extra_tags" {
 }
 
 # Module Subnet
-variable "route_table_id" {
-  description = "The Route Table ID to associate with the support subnet"
+variable "route_table_name" {
+  description = "The Route Table name to associate with the subnet"
+  type        = string
+  default     = null
+}
+
+variable "route_table_rg" {
+  description = "The Route Table RG to associate with the subnet. Default is the same RG than the subnet."
   type        = string
   default     = null
 }
