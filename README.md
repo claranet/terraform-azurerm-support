@@ -11,6 +11,7 @@ Included module documentation:
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
+| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.0          |
 | >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
@@ -101,7 +102,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | >= 2.0 |
+| azurerm | >= 2.8 |
 
 ## Modules
 
