@@ -10,7 +10,7 @@ Included module documentation:
 ## Version compatibility
 
 | Module version | Terraform version | AzureRM version |
-|----------------|-------------------| --------------- |
+| -------------- | ----------------- | --------------- |
 | >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
@@ -96,6 +96,28 @@ module "support" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.0 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.1.0 |
+| support-network-security-group | claranet/nsg/azurerm | 4.1.0 |
+| support-subnet | claranet/subnet/azurerm | 4.1.0 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_network_security_rule.ssh_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
+| [azurerm_subnet_network_security_group_association.subnet_bastion_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -159,3 +181,4 @@ module "support" {
 | subnet\_cidr\_list | CIDR list of the created subnet |
 | subnet\_id | ID of the created subnet |
 | subnet\_name | Name of the created subnet |
+<!-- END_TF_DOCS -->
