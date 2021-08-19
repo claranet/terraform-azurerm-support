@@ -1,26 +1,26 @@
 output "subnet_id" {
   description = "ID of the created subnet"
-  value       = module.support-subnet.subnet_id
+  value       = module.support_subnet.subnet_id
 }
 
 output "subnet_cidr_list" {
   description = "CIDR list of the created subnet"
-  value       = module.support-subnet.subnet_cidr_list
+  value       = module.support_subnet.subnet_cidr_list
 }
 
 output "subnet_name" {
   description = "Name of the created subnet"
-  value       = module.support-subnet.subnet_names
+  value       = module.support_subnet.subnet_names
 }
 
 output "network_security_group_id" {
   description = "Network security group id"
-  value       = module.support-network-security-group.network_security_group_id
+  value       = module.support_nsg.network_security_group_id
 }
 
 output "network_security_group_name" {
   description = "Network security group name"
-  value       = module.support-network-security-group.network_security_group_name
+  value       = module.support_nsg.network_security_group_name
 }
 
 output "bastion_network_public_ip" {

@@ -134,12 +134,6 @@ variable "storage_image_sku" {
   default     = "18.04-LTS"
 }
 
-variable "storage_image_version" {
-  description = "Specifies the version of the image used to create the virtual machine"
-  type        = string
-  default     = "latest"
-}
-
 variable "storage_os_disk_custom_name" {
   description = "Bastion OS disk name as displayed in the console"
   type        = string
@@ -176,7 +170,7 @@ variable "private_ip_bastion" {
   default     = "10.10.1.10"
 }
 
-variable "custom_publicip_name" {
+variable "custom_public_ip_name" {
   description = "Custom name for public IP"
   type        = string
   default     = null

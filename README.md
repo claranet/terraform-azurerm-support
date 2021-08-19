@@ -108,8 +108,8 @@ module "support" {
 | Name | Source | Version |
 |------|--------|---------|
 | bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.1.0 |
-| support-network-security-group | claranet/nsg/azurerm | 4.1.0 |
-| support-subnet | claranet/subnet/azurerm | 4.1.0 |
+| support\_nsg | claranet/nsg/azurerm | 4.1.0 |
+| support\_subnet | claranet/subnet/azurerm | 4.1.0 |
 
 ## Resources
 
@@ -130,7 +130,7 @@ module "support" {
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
 | custom\_ipconfig\_name | Custom name for IP Configuration | `string` | `null` | no |
 | custom\_nic\_name | Custom name fir NIC | `string` | `null` | no |
-| custom\_publicip\_name | Custom name for public IP | `string` | `null` | no |
+| custom\_public\_ip\_name | Custom name for public IP | `string` | `null` | no |
 | custom\_security\_group\_name | Custom name for network security group | `string` | `null` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
@@ -152,7 +152,6 @@ module "support" {
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
-| storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |

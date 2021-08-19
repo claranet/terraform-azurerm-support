@@ -1,4 +1,4 @@
-module "support-subnet" {
+module "support_subnet" {
   source  = "claranet/subnet/azurerm"
   version = "4.1.0"
 
@@ -22,11 +22,11 @@ module "support-subnet" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
-  subnet_id                 = module.support-subnet.subnet_id
-  network_security_group_id = module.support-network-security-group.network_security_group_id
+  subnet_id                 = module.support_subnet.subnet_id
+  network_security_group_id = module.support_nsg.network_security_group_id
 }
 
-module "support-network-security-group" {
+module "support_nsg" {
   source  = "claranet/nsg/azurerm"
   version = "4.1.0"
 
@@ -44,7 +44,7 @@ module "support-network-security-group" {
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
-  network_security_group_name = module.support-network-security-group.network_security_group_name
+  network_security_group_name = module.support_nsg.network_security_group_name
   resource_group_name         = var.resource_group_name
 
   name        = "SSH"
@@ -53,7 +53,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   priority                   = "500"
   direction                  = "Inbound"
   access                     = "Allow"
-  protocol                   = "tcp"
+  protocol                   = "Tcp"
   source_port_range          = "*"
   destination_port_range     = "22"
   source_address_prefixes    = var.admin_ssh_ips
@@ -76,7 +76,7 @@ module "bastion" {
   custom_vm_hostname = var.custom_vm_hostname
 
   # VM Network
-  subnet_bastion_id  = module.support-subnet.subnet_id
+  subnet_bastion_id  = module.support_subnet.subnet_id
   private_ip_bastion = var.private_ip_bastion
 
   # VM Params & identity
@@ -97,7 +97,7 @@ module "bastion" {
   storage_os_disk_size_gb           = var.storage_os_disk_size_gb
 
   # VM Public IP params
-  custom_publicip_name = var.custom_publicip_name
+  custom_publicip_name = var.custom_public_ip_name
   custom_ipconfig_name = var.custom_ipconfig_name
   custom_nic_name      = var.custom_nic_name
 
