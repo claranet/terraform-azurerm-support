@@ -47,8 +47,14 @@ variable "nsg_extra_tags" {
 }
 
 # Module Subnet
-variable "route_table_id" {
-  description = "The Route Table ID to associate with the support subnet"
+variable "route_table_name" {
+  description = "The Route Table name to associate with the subnet"
+  type        = string
+  default     = null
+}
+
+variable "route_table_rg" {
+  description = "The Route Table RG to associate with the subnet. Default is the same RG than the subnet."
   type        = string
   default     = null
 }
@@ -134,12 +140,6 @@ variable "storage_image_sku" {
   default     = "18.04-LTS"
 }
 
-variable "storage_image_version" {
-  description = "Specifies the version of the image used to create the virtual machine"
-  type        = string
-  default     = "latest"
-}
-
 variable "storage_os_disk_custom_name" {
   description = "Bastion OS disk name as displayed in the console"
   type        = string
@@ -150,12 +150,6 @@ variable "storage_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk"
   type        = string
   default     = "ReadWrite"
-}
-
-variable "storage_os_disk_managed_disk_type" {
-  description = "Specifies the type of Managed Disk which should be created [Standard_LRS, StandardSSD_LRS, Premium_LRS]"
-  type        = string
-  default     = "Standard_LRS"
 }
 
 variable "storage_os_disk_size_gb" {
@@ -176,7 +170,7 @@ variable "private_ip_bastion" {
   default     = "10.10.1.10"
 }
 
-variable "custom_publicip_name" {
+variable "custom_public_ip_name" {
   description = "Custom name for public IP"
   type        = string
   default     = null

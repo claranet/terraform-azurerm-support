@@ -1,6 +1,6 @@
-module "support-subnet" {
+module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "4.1.0"
+  version = "4.2.1"
 
   environment    = var.environment
   location_short = var.location_short
@@ -14,21 +14,19 @@ module "support-subnet" {
   custom_subnet_name = var.custom_bastion_subnet_name
   subnet_cidr_list   = var.subnet_cidr_list
 
-  route_table_id    = var.route_table_id
+  route_table_rg    = var.route_table_rg
+  route_table_name  = var.route_table_name
   service_endpoints = var.service_endpoints
-
-  # Because of the Terraform error about resolving dependencies with count, cannot use this attribute.
-  # network_security_group_id = module.support-network-security-group.network_security_group_id
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
-  subnet_id                 = module.support-subnet.subnet_id
-  network_security_group_id = module.support-network-security-group.network_security_group_id
+  subnet_id                 = module.support_subnet.subnet_id
+  network_security_group_id = module.support_nsg.network_security_group_id
 }
 
-module "support-network-security-group" {
+module "support_nsg" {
   source  = "claranet/nsg/azurerm"
-  version = "4.1.0"
+  version = "4.1.1"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -44,7 +42,7 @@ module "support-network-security-group" {
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
-  network_security_group_name = module.support-network-security-group.network_security_group_name
+  network_security_group_name = module.support_nsg.network_security_group_name
   resource_group_name         = var.resource_group_name
 
   name        = "SSH"
@@ -53,7 +51,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   priority                   = "500"
   direction                  = "Inbound"
   access                     = "Allow"
-  protocol                   = "tcp"
+  protocol                   = "Tcp"
   source_port_range          = "*"
   destination_port_range     = "22"
   source_address_prefixes    = var.admin_ssh_ips
@@ -61,7 +59,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.1.0"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.2.0"
 
   client_name         = var.client_name
   location            = var.location
@@ -76,7 +74,7 @@ module "bastion" {
   custom_vm_hostname = var.custom_vm_hostname
 
   # VM Network
-  subnet_bastion_id  = module.support-subnet.subnet_id
+  subnet_bastion_id  = module.support_subnet.subnet_id
   private_ip_bastion = var.private_ip_bastion
 
   # VM Params & identity
@@ -91,15 +89,14 @@ module "bastion" {
   storage_image_sku       = var.storage_image_sku
 
   # VM OS Disk params
-  storage_os_disk_custom_name       = var.storage_os_disk_custom_name
-  storage_os_disk_caching           = var.storage_os_disk_caching
-  storage_os_disk_managed_disk_type = var.storage_os_disk_managed_disk_type
-  storage_os_disk_size_gb           = var.storage_os_disk_size_gb
+  storage_os_disk_custom_name = var.storage_os_disk_custom_name
+  storage_os_disk_caching     = var.storage_os_disk_caching
+  storage_os_disk_size_gb     = var.storage_os_disk_size_gb
 
   # VM Public IP params
-  custom_publicip_name = var.custom_publicip_name
-  custom_ipconfig_name = var.custom_ipconfig_name
-  custom_nic_name      = var.custom_nic_name
+  custom_public_ip_name = var.custom_public_ip_name
+  custom_ipconfig_name  = var.custom_ipconfig_name
+  custom_nic_name       = var.custom_nic_name
 
   # vM Diagnostics/logs
   diagnostics_storage_account_name      = var.diagnostics_storage_account_name

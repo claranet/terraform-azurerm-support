@@ -10,7 +10,8 @@ Included module documentation:
 ## Version compatibility
 
 | Module version | Terraform version | AzureRM version |
-|----------------|-------------------| --------------- |
+| -------------- | ----------------- | --------------- |
+| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.0          |
 | >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
@@ -96,6 +97,28 @@ module "support" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.8 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.2.0 |
+| support\_nsg | claranet/nsg/azurerm | 4.1.1 |
+| support\_subnet | claranet/subnet/azurerm | 4.2.1 |
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_network_security_rule.ssh_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
+| [azurerm_subnet_network_security_group_association.subnet_bastion_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -108,7 +131,7 @@ module "support" {
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
 | custom\_ipconfig\_name | Custom name for IP Configuration | `string` | `null` | no |
 | custom\_nic\_name | Custom name fir NIC | `string` | `null` | no |
-| custom\_publicip\_name | Custom name for public IP | `string` | `null` | no |
+| custom\_public\_ip\_name | Custom name for public IP | `string` | `null` | no |
 | custom\_security\_group\_name | Custom name for network security group | `string` | `null` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
@@ -123,17 +146,16 @@ module "support" {
 | private\_key\_path | Root SSH private key path | `string` | n/a | yes |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| route\_table\_id | The Route Table ID to associate with the support subnet | `string` | `null` | no |
+| route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
+| route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
 | service\_endpoints | The list of Service endpoints to associate with the support subnet | `list(string)` | `[]` | no |
 | ssh\_key\_pub | Name of the SSH key pub to use | `string` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
-| storage\_image\_version | Specifies the version of the image used to create the virtual machine | `string` | `"latest"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
-| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
 | virtual\_network\_name | Virtual network name | `string` | n/a | yes |
@@ -159,3 +181,4 @@ module "support" {
 | subnet\_cidr\_list | CIDR list of the created subnet |
 | subnet\_id | ID of the created subnet |
 | subnet\_name | Name of the created subnet |
+<!-- END_TF_DOCS -->
