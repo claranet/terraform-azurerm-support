@@ -108,9 +108,9 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.1.0 |
-| support\_nsg | claranet/nsg/azurerm | 4.1.0 |
-| support\_subnet | claranet/subnet/azurerm | 4.2.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.2.0 |
+| support\_nsg | claranet/nsg/azurerm | 4.1.1 |
+| support\_subnet | claranet/subnet/azurerm | 4.2.1 |
 
 ## Resources
 
@@ -156,7 +156,6 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
-| storage\_os\_disk\_managed\_disk\_type | Specifies the type of Managed Disk which should be created [Standard\_LRS, StandardSSD\_LRS, Premium\_LRS] | `string` | `"Standard_LRS"` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
 | virtual\_network\_name | Virtual network name | `string` | n/a | yes |
