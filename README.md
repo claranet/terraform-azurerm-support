@@ -117,7 +117,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-492-ssh-private-key-value |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.3.0 |
 | support\_nsg | claranet/nsg/azurerm | 4.1.1 |
 | support\_subnet | claranet/subnet/azurerm | 4.2.1 |
 
