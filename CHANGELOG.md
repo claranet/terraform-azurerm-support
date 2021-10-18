@@ -5,6 +5,7 @@ Breaking
 
 Added
   * AZ-573: Allow Vnet in separate resource group
+  * AZ-561: Allow to deploy Bastion VM without public IP
 
 Changed
   * AZ-572: Revamp examples and improve CI
