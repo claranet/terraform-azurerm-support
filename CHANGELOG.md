@@ -1,5 +1,8 @@
 # Unreleased
 
+Breaking
+  * AZ-492: Refactor SSH keys management
+
 Added
   * AZ-573: Allow Vnet in separate resource group
 
