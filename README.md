@@ -162,6 +162,7 @@ module "support" {
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
 | virtual\_network\_name | Virtual network name | `string` | n/a | yes |
+| virtual\_network\_resource\_group\_name | Virtual network resource group name, default to `resource_group_name` if empty | `string` | `""` | no |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
 
 ## Outputs

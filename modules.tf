@@ -8,7 +8,7 @@ module "support_subnet" {
   stack          = var.stack
   name_prefix    = var.name_prefix
 
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   virtual_network_name = var.virtual_network_name
 
   custom_subnet_name = var.custom_bastion_subnet_name
@@ -31,7 +31,7 @@ module "support_nsg" {
   client_name         = var.client_name
   environment         = var.environment
   stack               = var.stack
-  resource_group_name = var.resource_group_name
+  resource_group_name = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   location            = var.location
   location_short      = var.location_short
   name_prefix         = var.name_prefix
@@ -43,7 +43,7 @@ module "support_nsg" {
 
 resource "azurerm_network_security_rule" "ssh_rule" {
   network_security_group_name = module.support_nsg.network_security_group_name
-  resource_group_name         = var.resource_group_name
+  resource_group_name         = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
 
   name        = "SSH"
   description = "Allow Admin Claranet SSH Bastion"

@@ -70,6 +70,12 @@ variable "virtual_network_name" {
   type        = string
 }
 
+variable "virtual_network_resource_group_name" {
+  description = "Virtual network resource group name, default to `resource_group_name` if empty"
+  type        = string
+  default     = ""
+}
+
 variable "subnet_cidr_list" {
   description = "The address prefixes to use for the subnet"
   type        = list(string)
