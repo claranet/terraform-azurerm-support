@@ -97,6 +97,7 @@ module "bastion" {
   custom_public_ip_name = var.custom_public_ip_name
   custom_ipconfig_name  = var.custom_ipconfig_name
   custom_nic_name       = var.custom_nic_name
+  public_ip_sku         = var.public_ip_sku
 
   # vM Diagnostics/logs
   diagnostics_storage_account_name      = var.diagnostics_storage_account_name
