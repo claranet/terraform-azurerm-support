@@ -25,8 +25,9 @@ resource "azurerm_subnet_network_security_group_association" "subnet_bastion_ass
 }
 
 module "support_nsg" {
-  source  = "claranet/nsg/azurerm"
-  version = "4.1.1"
+  # source  = "claranet/nsg/azurerm"
+  # version = "4.1.1"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/nsg.git?ref=AZ-515_caf_naming"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -34,7 +35,11 @@ module "support_nsg" {
   resource_group_name = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   location            = var.location
   location_short      = var.location_short
-  name_prefix         = var.name_prefix
+
+  # Naming
+  name_prefix    = local.name_prefix
+  name_suffix    = local.name_suffix
+  use_caf_naming = var.use_caf_naming
 
   custom_network_security_group_name = var.custom_security_group_name
 
@@ -59,7 +64,8 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.3.0"
+  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.3.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-515_caf_naming"
 
   client_name         = var.client_name
   location            = var.location
@@ -67,7 +73,11 @@ module "bastion" {
   environment         = var.environment
   stack               = var.stack
   resource_group_name = var.resource_group_name
-  name_prefix         = var.name_prefix
+
+  # Naming
+  name_prefix    = local.name_prefix
+  name_suffix    = local.name_suffix
+  use_caf_naming = var.use_caf_naming
 
   # Custom bastion VM
   custom_vm_name     = var.custom_vm_name
@@ -99,9 +109,17 @@ module "bastion" {
   custom_nic_name       = var.custom_nic_name
   public_ip_sku         = var.public_ip_sku
 
-  # vM Diagnostics/logs
-  diagnostics_storage_account_name      = var.diagnostics_storage_account_name
-  diagnostics_storage_account_sas_token = var.diagnostics_storage_account_sas_token
+  # VM Diagnostics/logs
+  diagnostics_storage_account_name         = var.diagnostics_storage_account_name
+  diagnostics_storage_account_sas_token    = var.diagnostics_storage_account_sas_token
+  use_legacy_monitoring_agent              = var.use_legacy_monitoring_agent
+  azure_monitor_data_collection_rule_id    = var.azure_monitor_data_collection_rule_id
+  azure_monitor_agent_version              = var.azure_monitor_agent_version
+  azure_monitor_agent_auto_upgrade_enabled = var.azure_monitor_agent_auto_upgrade_enabled
+  log_analytics_workspace_guid             = var.log_analytics_workspace_guid
+  log_analytics_workspace_key              = var.log_analytics_workspace_key
+  log_analytics_agent_enabled              = var.log_analytics_agent_enabled
+  log_analytics_agent_version              = var.log_analytics_agent_version
 
   # Tags
   bastion_extra_tags = var.bastion_extra_tags

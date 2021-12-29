@@ -111,14 +111,14 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | >= 2.8 |
+| azurerm | >= 2.83 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v4.3.0 |
-| support\_nsg | claranet/nsg/azurerm | 4.1.1 |
+| bastion | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-515_caf_naming |
+| support\_nsg | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/nsg.git | AZ-515_caf_naming |
 | support\_subnet | claranet/subnet/azurerm | 4.2.1 |
 
 ## Resources
@@ -135,6 +135,9 @@ module "support" {
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | `list(string)` | n/a | yes |
 | admin\_username | Name of the admin user | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
+| azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
+| azure\_monitor\_agent\_version | Azure Monitor Agent extension version | `string` | `"1.12"` | no |
+| azure\_monitor\_data\_collection\_rule\_id | Data Collection Rule ID from Azure Monitor for metrics and logs collection. Used with new monitoring agent, set to `null` if legacy agent is used. | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
@@ -145,11 +148,16 @@ module "support" {
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
-| diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
+| diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
 | location | Azure location. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
-| name\_prefix | Optional prefix for resources naming | `string` | `"bastion-"` | no |
+| log\_analytics\_agent\_enabled | Deploy Log Analytics VM extension - depending of OS (cf. https://docs.microsoft.com/fr-fr/azure/azure-monitor/agents/agents-overview#linux) | `bool` | `true` | no |
+| log\_analytics\_agent\_version | Azure Log Analytics extension version | `string` | `"1.13"` | no |
+| log\_analytics\_workspace\_guid | GUID of the Log Analytics Workspace to link with | `string` | `null` | no |
+| log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with | `string` | `null` | no |
+| name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
+| name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group. | `map(string)` | `{}` | no |
 | private\_ip\_bastion | Allows to define the private ip to associate with the bastion | `string` | `"10.10.1.10"` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public ip. | `map(string)` | `{}` | no |
@@ -168,6 +176,8 @@ module "support" {
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
 | subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
+| use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
+| use\_legacy\_monitoring\_agent | True to use the legacy monitoring agent instead of Azure Monitor Agent | `bool` | `false` | no |
 | virtual\_network\_name | Virtual network name | `string` | n/a | yes |
 | virtual\_network\_resource\_group\_name | Virtual network resource group name, default to `resource_group_name` if empty | `string` | `""` | no |
 | vm\_size | Bastion virtual machine size | `string` | n/a | yes |
