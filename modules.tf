@@ -25,9 +25,8 @@ resource "azurerm_subnet_network_security_group_association" "subnet_bastion_ass
 }
 
 module "support_nsg" {
-  # source  = "claranet/nsg/azurerm"
-  # version = "4.1.1"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/nsg.git?ref=AZ-515_caf_naming"
+  source  = "claranet/nsg/azurerm"
+  version = "5.0.0"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -64,8 +63,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v4.3.0"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-515_caf_naming"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.0.0"
 
   client_name         = var.client_name
   location            = var.location

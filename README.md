@@ -139,8 +139,8 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-515_caf_naming |
-| support\_nsg | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/nsg.git | AZ-515_caf_naming |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.0.0 |
+| support\_nsg | claranet/nsg/azurerm | 5.0.0 |
 | support\_subnet | claranet/subnet/azurerm | 4.2.1 |
 
 ## Resources
