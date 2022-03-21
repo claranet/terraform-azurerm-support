@@ -139,7 +139,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.2.0 |
+| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-711_storage_image_id |
 | support\_nsg | claranet/nsg/azurerm | 5.1.0 |
 | support\_subnet | claranet/subnet/azurerm | 5.0.0 |
 
@@ -192,6 +192,7 @@ module "support" {
 | ssh\_private\_key | SSH private key, generated if empty | `string` | `""` | no |
 | ssh\_public\_key | SSH public key, generated if empty | `string` | `""` | no |
 | stack | Project stack name | `string` | n/a | yes |
+| storage\_image\_id | Specifies the image ID used to create the virtual machine | `string` | `null` | no |
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |

@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-711: Add `storage_image_id` to prov custom image
+
 # v5.1.0 - 2022-04-29
 
 Added
@@ -27,7 +32,7 @@ Changed
 # v4.1.0 - 2021-08-20
 
 Updated
-  * AZ-532: Revamp README with latest `terraform-docs` tool 
+  * AZ-532: Revamp README with latest `terraform-docs` tool
   * AZ-530: Cleanup module, fix linter errors
 
 # v3.2.0/v4.0.0 - 2020-12-31
@@ -61,7 +66,7 @@ Added
 
 Changed
   * AZ-168: Bastion refactoring and fixes, also new outputs
-  
+
 # v2.0.0 - 2019-12-30
 
 Breaking

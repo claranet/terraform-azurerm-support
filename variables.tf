@@ -112,6 +112,12 @@ variable "storage_image_sku" {
   default     = "18.04-LTS"
 }
 
+variable "storage_image_id" {
+  description = "Specifies the image ID used to create the virtual machine"
+  type        = string
+  default     = null
+}
+
 variable "storage_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk"
   type        = string

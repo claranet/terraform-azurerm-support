@@ -65,7 +65,9 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.2.0"
+  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.2.0"
+  # ToDo
+  source = "git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-711_storage_image_id"
 
   client_name         = var.client_name
   location            = var.location
@@ -97,6 +99,7 @@ module "bastion" {
   storage_image_publisher = var.storage_image_publisher
   storage_image_offer     = var.storage_image_offer
   storage_image_sku       = var.storage_image_sku
+  storage_image_id        = var.storage_image_id
 
   # VM OS Disk params
   storage_os_disk_custom_name = var.storage_os_disk_custom_name
