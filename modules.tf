@@ -65,7 +65,8 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.3.0"
+  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.3.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-717_provider_azure_v3"
 
   client_name         = var.client_name
   location            = var.location
@@ -109,6 +110,7 @@ module "bastion" {
   custom_ipconfig_name  = var.custom_ipconfig_name
   custom_nic_name       = var.custom_nic_name
   public_ip_sku         = var.public_ip_sku
+  public_ip_zones       = var.public_ip_zones
 
   # VM Diagnostics/logs
   diagnostics_storage_account_name         = var.diagnostics_storage_account_name
