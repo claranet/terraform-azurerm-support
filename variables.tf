@@ -34,12 +34,6 @@ variable "admin_ssh_ips" {
   type        = list(string)
 }
 
-variable "nsg_extra_tags" {
-  description = "Additional tags to associate with your Network Security Group."
-  type        = map(string)
-  default     = {}
-}
-
 # Module Subnet
 variable "route_table_name" {
   description = "The Route Table name to associate with the subnet"
@@ -129,12 +123,6 @@ variable "storage_os_disk_size_gb" {
   type        = string
 }
 
-variable "bastion_extra_tags" {
-  description = "Additional tags to associate with your bastion instance."
-  type        = map(string)
-  default     = {}
-}
-
 # Azure Network Interface
 variable "private_ip_bastion" {
   description = "Allows to define the private ip to associate with the bastion"
@@ -150,16 +138,4 @@ Thus, the bootstrap's ansible playbook will use the bastion private IP for inven
 EOD
   type        = string
   default     = "Standard"
-}
-
-variable "ani_extra_tags" {
-  description = "Additional tags to associate with your network interface."
-  type        = map(string)
-  default     = {}
-}
-
-variable "pubip_extra_tags" {
-  description = "Additional tags to associate with your public ip."
-  type        = map(string)
-  default     = {}
 }

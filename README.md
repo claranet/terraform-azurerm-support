@@ -139,9 +139,9 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.0.0 |
-| support\_nsg | claranet/nsg/azurerm | 5.0.0 |
-| support\_subnet | claranet/subnet/azurerm | 4.2.1 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.2.0 |
+| support\_nsg | claranet/nsg/azurerm | 5.1.0 |
+| support\_subnet | claranet/subnet/azurerm | 5.0.0 |
 
 ## Resources
 
@@ -169,6 +169,7 @@ module "support" {
 | custom\_security\_group\_name | Custom name for network security group | `string` | `null` | no |
 | custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
 | custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
+| default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store vm diagnostics | `string` | n/a | yes |
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store vm diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
