@@ -122,8 +122,10 @@ module "bastion" {
   log_analytics_agent_version              = var.log_analytics_agent_version
 
   # Tags
-  default_tags_enabled = var.default_tags_enabled
-  bastion_extra_tags   = var.bastion_extra_tags
-  ani_extra_tags       = var.ani_extra_tags
-  pubip_extra_tags     = var.pubip_extra_tags
+  default_tags_enabled            = var.default_tags_enabled
+  bastion_extra_tags              = var.bastion_extra_tags
+  ani_extra_tags                  = var.ani_extra_tags
+  pubip_extra_tags                = var.pubip_extra_tags
+  storage_os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled
+  storage_os_disk_extra_tags      = var.storage_os_disk_extra_tags
 }
