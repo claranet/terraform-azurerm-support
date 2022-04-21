@@ -1,10 +1,10 @@
 variable "location" {
-  description = "Azure location."
+  description = "Azure location"
   type        = string
 }
 
 variable "location_short" {
-  description = "Short string for Azure location."
+  description = "Short string for Azure location"
   type        = string
 }
 
@@ -125,7 +125,7 @@ variable "storage_os_disk_size_gb" {
 
 # Azure Network Interface
 variable "private_ip_bastion" {
-  description = "Allows to define the private ip to associate with the bastion"
+  description = "Allows to define the private IP to associate with the bastion"
   type        = string
   default     = "10.10.1.10"
 }
@@ -133,7 +133,7 @@ variable "private_ip_bastion" {
 variable "public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. 
+If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. 
 Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
 EOD
   type        = string

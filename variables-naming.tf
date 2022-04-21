@@ -61,7 +61,7 @@ variable "custom_ipconfig_name" {
 }
 
 variable "custom_nic_name" {
-  description = "Custom name fir NIC"
+  description = "Custom name for NIC"
   type        = string
   default     = null
 }
