@@ -14,7 +14,7 @@ output "subnet_name" {
 }
 
 output "network_security_group_id" {
-  description = "Network security group id"
+  description = "Network security group ID"
   value       = module.support_nsg.network_security_group_id
 }
 
@@ -24,27 +24,27 @@ output "network_security_group_name" {
 }
 
 output "bastion_network_public_ip" {
-  description = "Bastion public ip"
+  description = "Bastion public IP"
   value       = module.bastion.bastion_network_public_ip
 }
 
 output "bastion_network_public_ip_id" {
-  description = "Bastion public ip id"
+  description = "Bastion public IP ID"
   value       = module.bastion.bastion_network_public_ip_id
 }
 
 output "bastion_network_interface_id" {
-  description = "Bastion network interface id"
+  description = "Bastion network interface ID"
   value       = module.bastion.bastion_network_interface_id
 }
 
 output "bastion_network_interface_private_ip" {
-  description = "Bastion private ip"
+  description = "Bastion private IP"
   value       = module.bastion.bastion_network_interface_private_ip
 }
 
 output "bastion_virtual_machine_id" {
-  description = "Bastion virtual machine id"
+  description = "Bastion virtual machine ID"
   value       = module.bastion.bastion_virtual_machine_id
 }
 
@@ -74,7 +74,7 @@ output "bastion_public_domain_name_label" {
 }
 
 output "bastion_virtual_machine_identity" {
-  description = "System Identity assigned to Bastion virtual machine"
+  description = "System Identity assigned to the bastion virtual machine"
   value       = module.bastion.bastion_virtual_machine_identity
 }
 

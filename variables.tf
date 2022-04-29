@@ -1,10 +1,10 @@
 variable "location" {
-  description = "Azure location."
+  description = "Azure location"
   type        = string
 }
 
 variable "location_short" {
-  description = "Short string for Azure location."
+  description = "Short string for Azure location"
   type        = string
 }
 
@@ -32,12 +32,6 @@ variable "client_name" {
 variable "admin_ssh_ips" {
   description = "Claranet IPs allowed to use SSH on bastion"
   type        = list(string)
-}
-
-variable "nsg_extra_tags" {
-  description = "Additional tags to associate with your Network Security Group."
-  type        = map(string)
-  default     = {}
 }
 
 # Module Subnet
@@ -129,15 +123,9 @@ variable "storage_os_disk_size_gb" {
   type        = string
 }
 
-variable "bastion_extra_tags" {
-  description = "Additional tags to associate with your bastion instance."
-  type        = map(string)
-  default     = {}
-}
-
 # Azure Network Interface
 variable "private_ip_bastion" {
-  description = "Allows to define the private ip to associate with the bastion"
+  description = "Allows to define the private IP to associate with the bastion"
   type        = string
   default     = "10.10.1.10"
 }
@@ -145,21 +133,9 @@ variable "private_ip_bastion" {
 variable "public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private ip. 
+If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. 
 Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
 EOD
   type        = string
   default     = "Standard"
-}
-
-variable "ani_extra_tags" {
-  description = "Additional tags to associate with your network interface."
-  type        = map(string)
-  default     = {}
-}
-
-variable "pubip_extra_tags" {
-  description = "Additional tags to associate with your public ip."
-  type        = map(string)
-  default     = {}
 }

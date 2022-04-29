@@ -1,10 +1,10 @@
 variable "diagnostics_storage_account_name" {
-  description = "Name of the Storage Account in which store vm diagnostics"
+  description = "Name of the Storage Account in which store VM diagnostics"
   type        = string
 }
 
 variable "diagnostics_storage_account_sas_token" {
-  description = "SAS token of the Storage Account in which store vm diagnostics. Used only with legacy monitoring agent, set to `null` if not needed."
+  description = "SAS token of the Storage Account in which store VM diagnostics. Used only with legacy monitoring agent, set to `null` if not needed."
   type        = string
   default     = null
 }

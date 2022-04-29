@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "4.2.1"
+  version = "5.0.0"
 
   environment    = var.environment
   location_short = var.location_short
@@ -26,7 +26,7 @@ resource "azurerm_subnet_network_security_group_association" "subnet_bastion_ass
 
 module "support_nsg" {
   source  = "claranet/nsg/azurerm"
-  version = "5.0.0"
+  version = "5.1.0"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -42,7 +42,9 @@ module "support_nsg" {
 
   custom_network_security_group_name = var.custom_security_group_name
 
-  extra_tags = var.nsg_extra_tags
+  # Tags
+  default_tags_enabled = var.default_tags_enabled
+  extra_tags           = var.nsg_extra_tags
 }
 
 resource "azurerm_network_security_rule" "ssh_rule" {
@@ -63,7 +65,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.0.0"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.2.0"
 
   client_name         = var.client_name
   location            = var.location
@@ -120,7 +122,10 @@ module "bastion" {
   log_analytics_agent_version              = var.log_analytics_agent_version
 
   # Tags
-  bastion_extra_tags = var.bastion_extra_tags
-  ani_extra_tags     = var.ani_extra_tags
-  pubip_extra_tags   = var.pubip_extra_tags
+  default_tags_enabled            = var.default_tags_enabled
+  bastion_extra_tags              = var.bastion_extra_tags
+  ani_extra_tags                  = var.ani_extra_tags
+  pubip_extra_tags                = var.pubip_extra_tags
+  storage_os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled
+  storage_os_disk_extra_tags      = var.storage_os_disk_extra_tags
 }
