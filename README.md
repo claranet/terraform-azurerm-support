@@ -139,7 +139,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-711_storage_image_id |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.3.0 |
 | support\_nsg | claranet/nsg/azurerm | 5.1.0 |
 | support\_subnet | claranet/subnet/azurerm | 5.0.0 |
 

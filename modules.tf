@@ -65,9 +65,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  # source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.2.0"
-  # ToDo
-  source = "git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git?ref=AZ-711_storage_image_id"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v5.3.0"
 
   client_name         = var.client_name
   location            = var.location
