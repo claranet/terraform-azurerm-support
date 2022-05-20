@@ -139,7 +139,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-717_provider_azure_v3 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v6.0.0 |
 | support\_nsg | claranet/nsg/azurerm | 5.1.0 |
 | support\_subnet | claranet/subnet/azurerm | 5.0.0 |
 
