@@ -133,13 +133,13 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | >= 2.83 |
+| azurerm | ~> 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v5.3.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v6.0.0 |
 | support\_nsg | claranet/nsg/azurerm | 5.1.0 |
 | support\_subnet | claranet/subnet/azurerm | 5.0.0 |
 
@@ -185,6 +185,7 @@ module "support" {
 | private\_ip\_bastion | Allows to define the private IP to associate with the bastion | `string` | `"10.10.1.10"` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public IP | `map(string)` | `{}` | no |
 | public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
+| public\_ip\_zones | Zones for public IP attached to the VM. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br>  1,<br>  2,<br>  3<br>]</pre> | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
 | route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
