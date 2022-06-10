@@ -231,4 +231,5 @@ module "support" {
 | subnet\_cidr\_list | CIDR list of the created subnet |
 | subnet\_id | ID of the created subnet |
 | subnet\_name | Name of the created subnet |
+| terraform\_module | Information about this Terraform module |
 <!-- END_TF_DOCS -->
