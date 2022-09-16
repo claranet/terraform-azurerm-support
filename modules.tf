@@ -14,9 +14,14 @@ module "support_subnet" {
   custom_subnet_name = var.custom_bastion_subnet_name
   subnet_cidr_list   = var.subnet_cidr_list
 
-  route_table_rg    = var.route_table_rg
-  route_table_name  = var.route_table_name
-  service_endpoints = var.service_endpoints
+  route_table_rg   = var.route_table_rg
+  route_table_name = var.route_table_name
+
+  service_endpoints           = var.service_endpoints
+  service_endpoint_policy_ids = var.service_endpoint_policy_ids
+
+  private_link_endpoint_enabled = var.private_link_endpoint_enabled
+  private_link_service_enabled  = var.private_link_service_enabled
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
@@ -41,6 +46,24 @@ module "support_nsg" {
   use_caf_naming = var.use_caf_naming
 
   custom_network_security_group_name = var.custom_security_group_name
+
+  # Custom
+  additional_rules = var.additional_rules
+
+  # Flow Logs
+  flow_log_enabled                               = var.flow_log_enabled
+  flow_log_logging_enabled                       = var.flow_log_logging_enabled
+  network_watcher_name                           = var.network_watcher_name
+  network_watcher_resource_group_name            = var.network_watcher_resource_group_name
+  flow_log_storage_account_id                    = var.flow_log_storage_account_id
+  flow_log_retention_policy_enabled              = var.flow_log_retention_policy_enabled
+  flow_log_retention_policy_days                 = var.flow_log_retention_policy_days
+  flow_log_traffic_analytics_enabled             = var.flow_log_traffic_analytics_enabled
+  log_analytics_workspace_guid                   = var.log_analytics_workspace_guid
+  log_analytics_workspace_location               = var.log_analytics_workspace_location
+  log_analytics_workspace_id                     = var.log_analytics_workspace_id
+  flow_log_traffic_analytics_interval_in_minutes = var.flow_log_traffic_analytics_interval_in_minutes
+  flow_log_location                              = var.flow_log_location
 
   # Tags
   default_tags_enabled = var.default_tags_enabled

@@ -176,6 +176,7 @@ module "support" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| additional\_rules | Additional network security group rules to add. For arguements please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference | <pre>list(object({<br>    priority  = number<br>    name      = string<br>    direction = optional(string)<br>    access    = optional(string)<br>    protocol  = optional(string)<br><br>    source_port_range  = optional(string)<br>    source_port_ranges = optional(list(string))<br><br>    destination_port_range  = optional(string)<br>    destination_port_ranges = optional(list(string))<br><br>    source_address_prefix   = optional(string)<br>    source_address_prefixes = optional(list(string))<br><br>    destination_address_prefix   = optional(string)<br>    destination_address_prefixes = optional(list(string))<br>  }))</pre> | `[]` | no |
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | `list(string)` | n/a | yes |
 | admin\_username | Name of the admin user | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface | `map(string)` | `{}` | no |
@@ -197,24 +198,39 @@ module "support" {
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store VM diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
 | extensions\_extra\_tags | Extra tags to set on the VM extensions. | `map(string)` | `{}` | no |
+| flow\_log\_enabled | Provision network watcher flow logs | `bool` | `false` | no |
+| flow\_log\_location | The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the `location` of the Network Watcher. | `string` | `null` | no |
+| flow\_log\_logging\_enabled | Enable Network Flow Logging | `bool` | `true` | no |
+| flow\_log\_retention\_policy\_days | The number of days to retain flow log records | `number` | `91` | no |
+| flow\_log\_retention\_policy\_enabled | Boolean flag to enable/disable retention | `bool` | `true` | no |
+| flow\_log\_storage\_account\_id | Network watcher flow log storage account id | `string` | `null` | no |
+| flow\_log\_traffic\_analytics\_enabled | Boolean flag to enable/disable traffic analytics | `bool` | `true` | no |
+| flow\_log\_traffic\_analytics\_interval\_in\_minutes | How frequently service should do flow analytics in minutes. | `number` | `10` | no |
 | identity | Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity. | <pre>object({<br>    type         = string<br>    identity_ids = list(string)<br>  })</pre> | <pre>{<br>  "identity_ids": [],<br>  "type": "SystemAssigned"<br>}</pre> | no |
 | location | Azure location | `string` | n/a | yes |
 | location\_short | Short string for Azure location | `string` | n/a | yes |
 | log\_analytics\_agent\_enabled | Deploy Log Analytics VM extension - depending of OS (cf. https://docs.microsoft.com/fr-fr/azure/azure-monitor/agents/agents-overview#linux) | `bool` | `true` | no |
 | log\_analytics\_agent\_version | Azure Log Analytics extension version | `string` | `"1.13"` | no |
-| log\_analytics\_workspace\_guid | GUID of the Log Analytics Workspace to link with | `string` | `null` | no |
+| log\_analytics\_workspace\_guid | The resource GUID of the attached workspace. | `string` | `null` | no |
+| log\_analytics\_workspace\_id | The resource ID of the attached workspace. | `string` | `null` | no |
 | log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with | `string` | `null` | no |
+| log\_analytics\_workspace\_location | The location of the attached workspace. | `string` | `null` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
+| network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
+| network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group | `map(string)` | `{}` | no |
 | private\_ip\_bastion | Allows to define the private IP to associate with the bastion | `string` | `"10.10.1.10"` | no |
+| private\_link\_endpoint\_enabled | Enable or disable network policies for the Private Endpoint on the subnet. | `bool` | `null` | no |
+| private\_link\_service\_enabled | Enable or disable network policies for the Private Link Service on the subnet. | `bool` | `null` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public IP | `map(string)` | `{}` | no |
 | public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
 | public\_ip\_zones | Zones for public IP attached to the VM. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br>  1,<br>  2,<br>  3<br>]</pre> | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
 | route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
-| service\_endpoints | The list of Service endpoints to associate with the support subnet | `list(string)` | `[]` | no |
+| service\_endpoint\_policy\_ids | The list of IDs of Service Endpoint Policies to associate with the subnet. | `list(string)` | `null` | no |
+| service\_endpoints | The list of Service endpoints to associate with the subnet. | `list(string)` | `[]` | no |
 | ssh\_private\_key | SSH private key, generated if empty | `string` | `""` | no |
 | ssh\_public\_key | SSH public key, generated if empty | `string` | `""` | no |
 | stack | Project stack name | `string` | n/a | yes |
