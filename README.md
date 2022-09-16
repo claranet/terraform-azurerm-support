@@ -134,15 +134,15 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 3.0 |
+| azurerm | ~> 3.22 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v6.0.0 |
-| support\_nsg | claranet/nsg/azurerm | 5.1.0 |
-| support\_subnet | claranet/subnet/azurerm | 5.0.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v6.3.0 |
+| support\_nsg | claranet/nsg/azurerm | 6.0.0 |
+| support\_subnet | claranet/subnet/azurerm | 6.0.0 |
 
 ## Resources
 
