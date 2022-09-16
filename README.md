@@ -88,6 +88,24 @@ module "az_monitor" {
   }
 }
 
+module "az_vm_backup" {
+  source  = "claranet/run-iaas/azurerm//modules/backup"
+  version = "x.x.x"
+
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
+  client_name    = var.client_name
+  environment    = var.environment
+  stack          = var.stack
+
+  resource_group_name = module.rg.resource_group_name
+
+  logs_destinations_ids = [
+    module.logs.logs_storage_account_id,
+    module.logs.log_analytics_workspace_id
+  ]
+}
+
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -112,6 +130,9 @@ module "support" {
 
   # Define your private ip bastion if you want to override it
   private_ip_bastion = "10.10.10.10"
+
+  # Set to null to deactivate backup
+  backup_policy_id = module.az_vm_backup.vm_backup_policy_id
 
   # Optional: Put your SSH key here
   ssh_public_key  = tls_private_key.bastion.public_key_openssh
@@ -161,6 +182,7 @@ module "support" {
 | azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
 | azure\_monitor\_agent\_version | Azure Monitor Agent extension version | `string` | `"1.12"` | no |
 | azure\_monitor\_data\_collection\_rule\_id | Data Collection Rule ID from Azure Monitor for metrics and logs collection. Used with new monitoring agent, set to `null` if legacy agent is used. | `string` | n/a | yes |
+| backup\_policy\_id | Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup). | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
@@ -174,6 +196,8 @@ module "support" {
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics | `string` | n/a | yes |
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store VM diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
+| extensions\_extra\_tags | Extra tags to set on the VM extensions. | `map(string)` | `{}` | no |
+| identity | Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity. | <pre>object({<br>    type         = string<br>    identity_ids = list(string)<br>  })</pre> | <pre>{<br>  "identity_ids": [],<br>  "type": "SystemAssigned"<br>}</pre> | no |
 | location | Azure location | `string` | n/a | yes |
 | location\_short | Short string for Azure location | `string` | n/a | yes |
 | log\_analytics\_agent\_enabled | Deploy Log Analytics VM extension - depending of OS (cf. https://docs.microsoft.com/fr-fr/azure/azure-monitor/agents/agents-overview#linux) | `bool` | `true` | no |

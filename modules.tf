@@ -82,6 +82,8 @@ module "bastion" {
   # Custom bastion VM
   custom_vm_name     = var.custom_vm_name
   custom_vm_hostname = var.custom_vm_hostname
+  backup_policy_id   = var.backup_policy_id
+  identity           = var.identity
 
   # VM Network
   subnet_bastion_id  = module.support_subnet.subnet_id
@@ -130,4 +132,5 @@ module "bastion" {
   pubip_extra_tags                = var.pubip_extra_tags
   storage_os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled
   storage_os_disk_extra_tags      = var.storage_os_disk_extra_tags
+  extensions_extra_tags           = var.extensions_extra_tags
 }

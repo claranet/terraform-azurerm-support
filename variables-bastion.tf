@@ -79,3 +79,22 @@ variable "public_ip_zones" {
   type        = list(number)
   default     = [1, 2, 3]
 }
+
+## Identity variables
+variable "identity" {
+  description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
+  type = object({
+    type         = string
+    identity_ids = list(string)
+  })
+  default = {
+    type         = "SystemAssigned"
+    identity_ids = []
+  }
+}
+
+## Backup variable
+variable "backup_policy_id" {
+  description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)."
+  type        = string
+}
