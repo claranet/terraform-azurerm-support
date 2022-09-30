@@ -161,8 +161,8 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v6.3.0 |
-| support\_nsg | claranet/nsg/azurerm | 6.0.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.0.0 |
+| support\_nsg | claranet/nsg/azurerm | 7.0.0 |
 | support\_subnet | claranet/subnet/azurerm | 6.0.0 |
 
 ## Resources
@@ -198,13 +198,13 @@ module "support" {
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store VM diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
 | environment | Project environment | `string` | n/a | yes |
 | extensions\_extra\_tags | Extra tags to set on the VM extensions. | `map(string)` | `{}` | no |
-| flow\_log\_enabled | Provision network watcher flow logs | `bool` | `false` | no |
+| flow\_log\_enabled | Provision network watcher flow logs. | `bool` | `false` | no |
 | flow\_log\_location | The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the `location` of the Network Watcher. | `string` | `null` | no |
-| flow\_log\_logging\_enabled | Enable Network Flow Logging | `bool` | `true` | no |
-| flow\_log\_retention\_policy\_days | The number of days to retain flow log records | `number` | `91` | no |
-| flow\_log\_retention\_policy\_enabled | Boolean flag to enable/disable retention | `bool` | `true` | no |
-| flow\_log\_storage\_account\_id | Network watcher flow log storage account id | `string` | `null` | no |
-| flow\_log\_traffic\_analytics\_enabled | Boolean flag to enable/disable traffic analytics | `bool` | `true` | no |
+| flow\_log\_logging\_enabled | Enable Network Flow Logging. | `bool` | `true` | no |
+| flow\_log\_retention\_policy\_days | The number of days to retain flow log records. | `number` | `31` | no |
+| flow\_log\_retention\_policy\_enabled | Boolean flag to enable/disable retention. | `bool` | `true` | no |
+| flow\_log\_storage\_account\_id | Network watcher flow log storage account ID. | `string` | `null` | no |
+| flow\_log\_traffic\_analytics\_enabled | Boolean flag to enable/disable traffic analytics. | `bool` | `true` | no |
 | flow\_log\_traffic\_analytics\_interval\_in\_minutes | How frequently service should do flow analytics in minutes. | `number` | `10` | no |
 | identity | Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity. | <pre>object({<br>    type         = string<br>    identity_ids = list(string)<br>  })</pre> | <pre>{<br>  "identity_ids": [],<br>  "type": "SystemAssigned"<br>}</pre> | no |
 | location | Azure location | `string` | n/a | yes |
@@ -238,6 +238,7 @@ module "support" {
 | storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
 | storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
+| storage\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS` | `string` | `"Premium_ZRS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_extra\_tags | Additional tags to set on the OS disk | `map(string)` | `{}` | no |
