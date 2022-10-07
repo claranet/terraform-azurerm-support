@@ -1,4 +1,4 @@
-# Unreleased
+# v7.0.0 - 2022-10-07
 
 Breaking
   * AZ-840: Update to Terraform `v1.3`
