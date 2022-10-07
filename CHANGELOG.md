@@ -7,6 +7,9 @@ Added
   * AZ-825 AZ-814 AZ-818: Bump `linux-vm/bastion-vm` modules and include all its new features
   * AZ-825 AZ-814 AZ-818: Bump `subnet/nsg` modules and include all their new features
 
+Changed
+  * AZ-825 AZ-814 AZ-818: No more default private IP & subnet CIDR, variables must be set
+
 # v6.0.1 - 2022-06-10
 
 Added

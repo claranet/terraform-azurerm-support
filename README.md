@@ -220,7 +220,7 @@ module "support" {
 | network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
 | network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group | `map(string)` | `{}` | no |
-| private\_ip\_bastion | Allows to define the private IP to associate with the bastion. | `string` | `"10.10.1.10"` | no |
+| private\_ip\_bastion | Allows to define the private IP to associate with the bastion. | `string` | `null` | no |
 | private\_link\_endpoint\_enabled | Enable or disable network policies for the Private Endpoint on the subnet. | `bool` | `null` | no |
 | private\_link\_service\_enabled | Enable or disable network policies for the Private Link Service on the subnet. | `bool` | `null` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public IP | `map(string)` | `{}` | no |
@@ -244,7 +244,7 @@ module "support" {
 | storage\_os\_disk\_extra\_tags | Additional tags to set on the OS disk | `map(string)` | `{}` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes. | `string` | n/a | yes |
 | storage\_os\_disk\_tagging\_enabled | Should OS disk tagging be enabled? Defaults to `true` | `bool` | `true` | no |
-| subnet\_cidr\_list | The address prefixes to use for the subnet. | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
+| subnet\_cidr\_list | The address prefixes to use for the subnet. | `list(string)` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_legacy\_monitoring\_agent | True to use the legacy monitoring agent instead of Azure Monitor Agent | `bool` | `false` | no |
 | virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |

@@ -79,6 +79,4 @@ variable "virtual_network_resource_group_name" {
 variable "subnet_cidr_list" {
   description = "The address prefixes to use for the subnet."
   type        = list(string)
-  default     = ["10.10.1.0/24"]
 }
-

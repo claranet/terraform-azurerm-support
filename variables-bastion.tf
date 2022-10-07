@@ -67,7 +67,7 @@ variable "storage_os_disk_account_type" {
 variable "private_ip_bastion" {
   description = "Allows to define the private IP to associate with the bastion."
   type        = string
-  default     = "10.10.1.10"
+  default     = null
 }
 
 variable "public_ip_sku" {
