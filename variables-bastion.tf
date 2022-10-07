@@ -1,71 +1,71 @@
 # Module Bastion / VM
 variable "vm_size" {
-  description = "Bastion virtual machine size"
+  description = "Bastion virtual machine size."
   type        = string
 }
 
 variable "admin_username" {
-  description = "Name of the admin user"
+  description = "Name of the administrator user."
   type        = string
   default     = "claranet"
 }
 
 variable "ssh_public_key" {
-  description = "SSH public key, generated if empty"
+  description = "SSH public key, generated if empty."
   type        = string
   default     = ""
 }
 
 variable "ssh_private_key" {
-  description = "SSH private key, generated if empty"
+  description = "SSH private key, generated if empty."
   type        = string
   default     = ""
 }
 
 variable "storage_image_publisher" {
-  description = "Specifies the publisher of the image used to create the virtual machine"
+  description = "Specifies the publisher of the image used to create the virtual machine."
   type        = string
   default     = "Canonical"
 }
 
 variable "storage_image_offer" {
-  description = "Specifies the offer of the image used to create the virtual machine"
+  description = "Specifies the offer of the image used to create the virtual machine."
   type        = string
   default     = "UbuntuServer"
 }
 
 variable "storage_image_sku" {
-  description = "Specifies the SKU of the image used to create the virtual machine"
+  description = "Specifies the SKU of the image used to create the virtual machine."
   type        = string
-  default     = "18.04-LTS"
+  default     = "20_04-LTS"
 }
 
 variable "storage_image_id" {
-  description = "Specifies the image ID used to create the virtual machine"
+  description = "Specifies the image ID used to create the virtual machine."
   type        = string
   default     = null
 }
 
 variable "storage_os_disk_caching" {
-  description = "Specifies the caching requirements for the OS Disk"
+  description = "Specifies the caching requirements for the OS Disk."
   type        = string
   default     = "ReadWrite"
 }
 
 variable "storage_os_disk_size_gb" {
-  description = "Specifies the size of the OS Disk in gigabytes"
+  description = "Specifies the size of the OS Disk in gigabytes."
   type        = string
 }
 
 variable "storage_os_disk_account_type" {
-  description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`"
+  description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`."
   type        = string
   default     = "Premium_ZRS"
 }
 
 # Azure Network Interface
 variable "private_ip_bastion" {
-  description = "Allows to define the private IP to associate with the bastion"
+  description = "Allows to define the private IP to associate with the bastion."
   type        = string
   default     = "10.10.1.10"
 }

@@ -176,9 +176,9 @@ module "support" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| additional\_rules | Additional network security group rules to add. For arguements please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference | <pre>list(object({<br>    priority  = number<br>    name      = string<br>    direction = optional(string)<br>    access    = optional(string)<br>    protocol  = optional(string)<br><br>    source_port_range  = optional(string)<br>    source_port_ranges = optional(list(string))<br><br>    destination_port_range  = optional(string)<br>    destination_port_ranges = optional(list(string))<br><br>    source_address_prefix   = optional(string)<br>    source_address_prefixes = optional(list(string))<br><br>    destination_address_prefix   = optional(string)<br>    destination_address_prefixes = optional(list(string))<br>  }))</pre> | `[]` | no |
-| admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion | `list(string)` | n/a | yes |
-| admin\_username | Name of the admin user | `string` | `"claranet"` | no |
+| additional\_rules | Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference | <pre>list(object({<br>    priority  = number<br>    name      = string<br>    direction = optional(string)<br>    access    = optional(string)<br>    protocol  = optional(string)<br><br>    source_port_range  = optional(string)<br>    source_port_ranges = optional(list(string))<br><br>    destination_port_range  = optional(string)<br>    destination_port_ranges = optional(list(string))<br><br>    source_address_prefix   = optional(string)<br>    source_address_prefixes = optional(list(string))<br><br>    destination_address_prefix   = optional(string)<br>    destination_address_prefixes = optional(list(string))<br>  }))</pre> | `[]` | no |
+| admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion. | `list(string)` | n/a | yes |
+| admin\_username | Name of the administrator user. | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface | `map(string)` | `{}` | no |
 | azure\_monitor\_agent\_auto\_upgrade\_enabled | Automatically update agent when publisher releases a new version of the agent | `bool` | `false` | no |
 | azure\_monitor\_agent\_version | Azure Monitor Agent extension version | `string` | `"1.12"` | no |
@@ -220,36 +220,36 @@ module "support" {
 | network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
 | network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group | `map(string)` | `{}` | no |
-| private\_ip\_bastion | Allows to define the private IP to associate with the bastion | `string` | `"10.10.1.10"` | no |
+| private\_ip\_bastion | Allows to define the private IP to associate with the bastion. | `string` | `"10.10.1.10"` | no |
 | private\_link\_endpoint\_enabled | Enable or disable network policies for the Private Endpoint on the subnet. | `bool` | `null` | no |
 | private\_link\_service\_enabled | Enable or disable network policies for the Private Link Service on the subnet. | `bool` | `null` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public IP | `map(string)` | `{}` | no |
 | public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
 | public\_ip\_zones | Zones for public IP attached to the VM. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br>  1,<br>  2,<br>  3<br>]</pre> | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
-| route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
+| route\_table\_name | The Route Table name to associate with the subnet. | `string` | `null` | no |
 | route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
 | service\_endpoint\_policy\_ids | The list of IDs of Service Endpoint Policies to associate with the subnet. | `list(string)` | `null` | no |
 | service\_endpoints | The list of Service endpoints to associate with the subnet. | `list(string)` | `[]` | no |
-| ssh\_private\_key | SSH private key, generated if empty | `string` | `""` | no |
-| ssh\_public\_key | SSH public key, generated if empty | `string` | `""` | no |
+| ssh\_private\_key | SSH private key, generated if empty. | `string` | `""` | no |
+| ssh\_public\_key | SSH public key, generated if empty. | `string` | `""` | no |
 | stack | Project stack name | `string` | n/a | yes |
-| storage\_image\_id | Specifies the image ID used to create the virtual machine | `string` | `null` | no |
-| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine | `string` | `"UbuntuServer"` | no |
-| storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine | `string` | `"Canonical"` | no |
-| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine | `string` | `"18.04-LTS"` | no |
-| storage\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS` | `string` | `"Premium_ZRS"` | no |
-| storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk | `string` | `"ReadWrite"` | no |
+| storage\_image\_id | Specifies the image ID used to create the virtual machine. | `string` | `null` | no |
+| storage\_image\_offer | Specifies the offer of the image used to create the virtual machine. | `string` | `"UbuntuServer"` | no |
+| storage\_image\_publisher | Specifies the publisher of the image used to create the virtual machine. | `string` | `"Canonical"` | no |
+| storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine. | `string` | `"20_04-LTS"` | no |
+| storage\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`. | `string` | `"Premium_ZRS"` | no |
+| storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk. | `string` | `"ReadWrite"` | no |
 | storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
 | storage\_os\_disk\_extra\_tags | Additional tags to set on the OS disk | `map(string)` | `{}` | no |
-| storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes | `string` | n/a | yes |
+| storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes. | `string` | n/a | yes |
 | storage\_os\_disk\_tagging\_enabled | Should OS disk tagging be enabled? Defaults to `true` | `bool` | `true` | no |
-| subnet\_cidr\_list | The address prefixes to use for the subnet | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
+| subnet\_cidr\_list | The address prefixes to use for the subnet. | `list(string)` | <pre>[<br>  "10.10.1.0/24"<br>]</pre> | no |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
 | use\_legacy\_monitoring\_agent | True to use the legacy monitoring agent instead of Azure Monitor Agent | `bool` | `false` | no |
-| virtual\_network\_name | Virtual network name | `string` | n/a | yes |
-| virtual\_network\_resource\_group\_name | Virtual network resource group name, default to `resource_group_name` if empty | `string` | `""` | no |
-| vm\_size | Bastion virtual machine size | `string` | n/a | yes |
+| virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |
+| virtual\_network\_resource\_group\_name | Bastion VM virtual network resource group name, default to `resource_group_name` if empty. | `string` | `""` | no |
+| vm\_size | Bastion virtual machine size. | `string` | n/a | yes |
 
 ## Outputs
 

@@ -4,7 +4,7 @@ Breaking
   * AZ-840: Update to Terraform `v1.3`
 
 Added
-  * AZ-825 AZ-814 AZ-818: Bump `linux-vm/bastion-vm` module and include all its new features
+  * AZ-825 AZ-814 AZ-818: Bump `linux-vm/bastion-vm` modules and include all its new features
   * AZ-825 AZ-814 AZ-818: Bump `subnet/nsg` modules and include all their new features
 
 # v6.0.1 - 2022-06-10

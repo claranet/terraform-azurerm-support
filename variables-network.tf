@@ -1,11 +1,11 @@
 # Module NSG
 variable "admin_ssh_ips" {
-  description = "Claranet IPs allowed to use SSH on bastion"
+  description = "Claranet IPs allowed to use SSH on bastion."
   type        = list(string)
 }
 
 variable "additional_rules" {
-  description = "Additional network security group rules to add. For arguements please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference"
+  description = "Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference"
   type = list(object({
     priority  = number
     name      = string
@@ -30,7 +30,7 @@ variable "additional_rules" {
 
 # Module Subnet
 variable "route_table_name" {
-  description = "The Route Table name to associate with the subnet"
+  description = "The Route Table name to associate with the subnet."
   type        = string
   default     = null
 }
@@ -66,18 +66,18 @@ variable "private_link_service_enabled" {
 }
 
 variable "virtual_network_name" {
-  description = "Virtual network name"
+  description = "Bastion VM virtual network name."
   type        = string
 }
 
 variable "virtual_network_resource_group_name" {
-  description = "Virtual network resource group name, default to `resource_group_name` if empty"
+  description = "Bastion VM virtual network resource group name, default to `resource_group_name` if empty."
   type        = string
   default     = ""
 }
 
 variable "subnet_cidr_list" {
-  description = "The address prefixes to use for the subnet"
+  description = "The address prefixes to use for the subnet."
   type        = list(string)
   default     = ["10.10.1.0/24"]
 }
