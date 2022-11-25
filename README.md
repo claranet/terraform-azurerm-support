@@ -161,9 +161,9 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.0.0 |
-| support\_nsg | claranet/nsg/azurerm | 7.0.0 |
-| support\_subnet | claranet/subnet/azurerm | 6.0.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.2.0 |
+| support\_nsg | claranet/nsg/azurerm | 7.3.0 |
+| support\_subnet | claranet/subnet/azurerm | 6.1.0 |
 
 ## Resources
 
