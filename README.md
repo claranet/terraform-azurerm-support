@@ -155,7 +155,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 3.22 |
+| azurerm | ~> 3.24 |
 
 ## Modules
 
