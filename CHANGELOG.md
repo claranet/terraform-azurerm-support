@@ -1,3 +1,9 @@
+# Unreleased
+
+Changed
+  * AZ-908: Use the new data source for CAF naming (instead of resource)
+  * AZ-908: Bump submodules `subnet`, `nsg` and `bastion-vm`
+
 # v7.0.0 - 2022-10-07
 
 Breaking
