@@ -1,4 +1,4 @@
-# Unreleased
+# v7.1.1 - 2022-12-23
 
 Fix
   * AZ-962: Fix wrong offer in default bastion vm variable
