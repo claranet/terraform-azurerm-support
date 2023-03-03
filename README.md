@@ -162,7 +162,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 3.24 |
+| azurerm | ~> 3.39 |
 
 ## Modules
 
