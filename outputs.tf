@@ -88,3 +88,13 @@ output "bastion_ssh_private_key" {
   value       = module.bastion.ssh_private_key
   sensitive   = true
 }
+
+output "bastion_virtual_machine_os_disk" {
+  description = "Bastion virtual Machine OS disk"
+  value       = module.bastion.bastion_virtual_machine_os_disk
+}
+
+output "bastion_maintenance_configurations_assignments" {
+  description = "Maintenance configurations assignments configurations."
+  value       = module.bastion.bastion_maintenance_configurations_assignments
+}

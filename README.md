@@ -168,7 +168,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.5.0 |
+| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm | AZ-1026_bump_os_sku |
 | support\_nsg | claranet/nsg/azurerm | 7.3.0 |
 | support\_subnet | claranet/subnet/azurerm | 6.1.0 |
 
@@ -222,16 +222,18 @@ module "support" {
 | log\_analytics\_workspace\_id | The resource ID of the attached workspace. | `string` | `null` | no |
 | log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with | `string` | `null` | no |
 | log\_analytics\_workspace\_location | The location of the attached workspace. | `string` | `null` | no |
+| maintenance\_configuration\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
 | network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group | `map(string)` | `{}` | no |
+| patch\_mode | Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault` | `string` | `"ImageDefault"` | no |
 | private\_ip\_bastion | Allows to define the private IP to associate with the bastion. | `string` | `null` | no |
 | private\_link\_endpoint\_enabled | Enable or disable network policies for the Private Endpoint on the subnet. | `bool` | `null` | no |
 | private\_link\_service\_enabled | Enable or disable network policies for the Private Link Service on the subnet. | `bool` | `null` | no |
 | pubip\_extra\_tags | Additional tags to associate with your public IP | `map(string)` | `{}` | no |
-| public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. <br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
+| public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.<br>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
 | public\_ip\_zones | Zones for public IP attached to the VM. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br>  1,<br>  2,<br>  3<br>]</pre> | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | route\_table\_name | The Route Table name to associate with the subnet. | `string` | `null` | no |
@@ -264,6 +266,7 @@ module "support" {
 |------|-------------|
 | bastion\_admin\_username | Username of the admin user |
 | bastion\_hostname | Bastion hostname |
+| bastion\_maintenance\_configurations\_assignments | Maintenance configurations assignments configurations. |
 | bastion\_network\_interface\_id | Bastion network interface ID |
 | bastion\_network\_interface\_private\_ip | Bastion private IP |
 | bastion\_network\_public\_ip | Bastion public IP |
@@ -274,6 +277,7 @@ module "support" {
 | bastion\_virtual\_machine\_id | Bastion virtual machine ID |
 | bastion\_virtual\_machine\_identity | System Identity assigned to the bastion virtual machine |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name |
+| bastion\_virtual\_machine\_os\_disk | Bastion virtual Machine OS disk |
 | bastion\_virtual\_machine\_size | Bastion virtual machine size |
 | network\_security\_group\_id | Network security group ID |
 | network\_security\_group\_name | Network security group name |
