@@ -4,6 +4,12 @@ variable "vm_size" {
   type        = string
 }
 
+variable "vm_zone" {
+  description = "Bastion virtual machine Availability Zone."
+  type        = number
+  default     = 1
+}
+
 variable "admin_username" {
   description = "Name of the administrator user."
   type        = string
@@ -73,7 +79,7 @@ variable "private_ip_bastion" {
 variable "public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP. 
+If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.
 Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
 EOD
   type        = string
@@ -103,4 +109,17 @@ variable "identity" {
 variable "backup_policy_id" {
   description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)."
   type        = string
+}
+
+# Update Management
+variable "patch_mode" {
+  description = "Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`"
+  type        = string
+  default     = "ImageDefault"
+}
+
+variable "maintenance_configuration_ids" {
+  description = "List of maintenance configurations to attach to this VM."
+  type        = list(string)
+  default     = []
 }

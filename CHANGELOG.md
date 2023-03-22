@@ -1,3 +1,8 @@
+# Unreleased
+
+Changed
+  * AZ-1019: Bump `bastion-vm` module
+
 # v7.1.1 - 2022-12-23
 
 Fix
