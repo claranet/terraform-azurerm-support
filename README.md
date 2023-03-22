@@ -193,13 +193,13 @@ module "support" {
 | backup\_policy\_id | Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup). | `string` | n/a | yes |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
-| custom\_bastion\_subnet\_name | Custom name for bastion subnet | `string` | `null` | no |
-| custom\_ipconfig\_name | Custom name for IP Configuration | `string` | `null` | no |
-| custom\_nic\_name | Custom name for NIC | `string` | `null` | no |
-| custom\_public\_ip\_name | Custom name for public IP | `string` | `null` | no |
-| custom\_security\_group\_name | Custom name for network security group | `string` | `null` | no |
-| custom\_vm\_hostname | Bastion hostname | `string` | `""` | no |
-| custom\_vm\_name | VM Name as displayed on the console | `string` | `""` | no |
+| custom\_bastion\_subnet\_name | Custom name for bastion subnet. | `string` | `null` | no |
+| custom\_ipconfig\_name | Custom name for IP Configuration. | `string` | `null` | no |
+| custom\_nic\_name | Custom name for NIC. | `string` | `null` | no |
+| custom\_public\_ip\_name | Custom name for public IP. | `string` | `null` | no |
+| custom\_security\_group\_name | Custom name for network security group. | `string` | `null` | no |
+| custom\_vm\_hostname | Bastion hostname. | `string` | `""` | no |
+| custom\_vm\_name | VM Name as displayed on the console. | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics. | `string` | n/a | yes |
 | diagnostics\_storage\_account\_sas\_token | SAS token of the Storage Account in which store VM diagnostics. Used only with legacy monitoring agent, set to `null` if not needed. | `string` | `null` | no |
@@ -223,8 +223,8 @@ module "support" {
 | log\_analytics\_workspace\_key | Access key of the Log Analytics Workspace to link with. | `string` | `null` | no |
 | log\_analytics\_workspace\_location | The location of the attached workspace. | `string` | `null` | no |
 | maintenance\_configuration\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
-| name\_prefix | Optional prefix for the generated name | `string` | `"bastion"` | no |
-| name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
+| name\_prefix | Optional prefix for the generated name. | `string` | `"bastion"` | no |
+| name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
 | network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
 | network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group. | `map(string)` | `{}` | no |
@@ -249,7 +249,7 @@ module "support" {
 | storage\_image\_sku | Specifies the SKU of the image used to create the virtual machine. | `string` | `"20_04-LTS"` | no |
 | storage\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`. | `string` | `"Premium_ZRS"` | no |
 | storage\_os\_disk\_caching | Specifies the caching requirements for the OS Disk. | `string` | `"ReadWrite"` | no |
-| storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console | `string` | `""` | no |
+| storage\_os\_disk\_custom\_name | Bastion OS disk name as displayed in the console. | `string` | `""` | no |
 | storage\_os\_disk\_extra\_tags | Additional tags to set on the OS disk. | `map(string)` | `{}` | no |
 | storage\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes. | `string` | n/a | yes |
 | storage\_os\_disk\_tagging\_enabled | Should OS disk tagging be enabled? Defaults to `true`. | `bool` | `true` | no |
