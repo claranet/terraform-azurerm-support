@@ -5,7 +5,7 @@ variable "vm_size" {
 }
 
 variable "vm_zone" {
-  description = "Bastion virtual machine zone."
+  description = "Bastion virtual machine Availability Zone."
   type        = number
   default     = 1
 }
