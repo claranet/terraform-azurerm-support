@@ -168,7 +168,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm | AZ-1026_bump_os_sku |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.6.0 |
 | support\_nsg | claranet/nsg/azurerm | 7.3.0 |
 | support\_subnet | claranet/subnet/azurerm | 6.1.0 |
 
