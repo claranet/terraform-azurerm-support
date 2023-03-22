@@ -259,6 +259,7 @@ module "support" {
 | virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |
 | virtual\_network\_resource\_group\_name | Bastion VM virtual network resource group name, default to `resource_group_name` if empty. | `string` | `""` | no |
 | vm\_size | Bastion virtual machine size. | `string` | n/a | yes |
+| vm\_zone | Bastion virtual machine zone. | `number` | `1` | no |
 
 ## Outputs
 

@@ -4,6 +4,12 @@ variable "vm_size" {
   type        = string
 }
 
+variable "vm_zone" {
+  description = "Bastion virtual machine zone."
+  type        = number
+  default     = 1
+}
+
 variable "admin_username" {
   description = "Name of the administrator user."
   type        = string

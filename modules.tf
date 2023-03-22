@@ -117,6 +117,7 @@ module "bastion" {
 
   # VM Params & identity
   vm_size         = var.vm_size
+  vm_zone         = var.vm_zone
   admin_username  = var.admin_username
   ssh_public_key  = var.ssh_public_key
   ssh_private_key = var.ssh_private_key
