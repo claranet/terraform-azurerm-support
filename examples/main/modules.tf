@@ -15,18 +15,6 @@ module "rg" {
   stack       = var.stack
 }
 
-module "logs" {
-  source  = "claranet/run/azurerm//modules/logs"
-  version = "x.x.x"
-
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  location            = module.azure_region.location
-  location_short      = module.azure_region.location_short
-  resource_group_name = module.rg.resource_group_name
-}
-
 module "azure_network_vnet" {
   source  = "claranet/vnet/azurerm"
   version = "x.x.x"
@@ -41,40 +29,24 @@ module "azure_network_vnet" {
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
-module "az_monitor" {
-  source  = "claranet/run-iaas/azurerm//modules/vm-monitoring"
+module "run" {
+  source  = "claranet/run/azurerm"
   version = "x.x.x"
 
-  client_name    = var.client_name
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  environment    = var.environment
-  stack          = var.stack
-
-  resource_group_name        = module.rg.resource_group_name
-  log_analytics_workspace_id = module.logs.log_analytics_workspace_id
-
-  extra_tags = {
-    foo = "bar"
-  }
-}
-
-module "az_vm_backup" {
-  source  = "claranet/run-iaas/azurerm//modules/backup"
-  version = "x.x.x"
-
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  client_name    = var.client_name
-  environment    = var.environment
-  stack          = var.stack
-
+  client_name         = var.client_name
+  environment         = var.environment
+  stack               = var.stack
+  location            = module.azure_region.location
+  location_short      = module.azure_region.location_short
   resource_group_name = module.rg.resource_group_name
 
-  logs_destinations_ids = [
-    module.logs.logs_storage_account_id,
-    module.logs.log_analytics_workspace_id
-  ]
+  monitoring_function_enabled = false
+  vm_monitoring_enabled       = true
+  backup_vm_enabled           = true
+  update_center_enabled       = false
+
+  recovery_vault_cross_region_restore_enabled = true
+  vm_backup_daily_policy_retention            = 31
 }
 
 resource "tls_private_key" "bastion" {
@@ -103,7 +75,7 @@ module "support" {
   private_ip_bastion = "10.10.10.10"
 
   # Set to null to deactivate backup
-  backup_policy_id = module.az_vm_backup.vm_backup_policy_id
+  backup_policy_id = module.run.vm_backup_policy_id
 
   # Optional: Put your SSH key here
   ssh_public_key  = tls_private_key.bastion.public_key_openssh
@@ -114,9 +86,9 @@ module "support" {
   #  support_dns_zone_name = var.support_dns_zone_name
 
   # Diag/logs
-  diagnostics_storage_account_name      = module.logs.logs_storage_account_name
+  diagnostics_storage_account_name      = module.run.logs_storage_account_name
   diagnostics_storage_account_sas_token = null # used by legacy agent only
-  azure_monitor_data_collection_rule_id = module.az_monitor.data_collection_rule_id
-  log_analytics_workspace_guid          = module.logs.log_analytics_workspace_guid
-  log_analytics_workspace_key           = module.logs.log_analytics_workspace_primary_key
+  azure_monitor_data_collection_rule_id = module.run.data_collection_rule_id
+  log_analytics_workspace_guid          = module.run.log_analytics_workspace_guid
+  log_analytics_workspace_key           = module.run.log_analytics_workspace_primary_key
 }
