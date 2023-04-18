@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1064: Add `custom_facing_ip_address` parameter to `bastion-vm` module
+
 # v7.2.0 - 2023-03-22
 
 Changed
