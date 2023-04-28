@@ -140,7 +140,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.6.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.6.1 |
 | support\_nsg | claranet/nsg/azurerm | 7.3.0 |
 | support\_subnet | claranet/subnet/azurerm | 6.1.0 |
 
@@ -166,6 +166,7 @@ module "support" {
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | custom\_bastion\_subnet\_name | Custom name for bastion subnet. | `string` | `null` | no |
+| custom\_facing\_ip\_address | Custom IP address to use (for Ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM. | `string` | `null` | no |
 | custom\_ipconfig\_name | Custom name for IP Configuration. | `string` | `null` | no |
 | custom\_nic\_name | Custom name for NIC. | `string` | `null` | no |
 | custom\_public\_ip\_name | Custom name for public IP. | `string` | `null` | no |

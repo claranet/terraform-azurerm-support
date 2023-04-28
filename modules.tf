@@ -88,7 +88,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v7.6.0"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v7.6.1"
 
   client_name         = var.client_name
   location            = var.location
@@ -111,8 +111,9 @@ module "bastion" {
   identity                      = var.identity
 
   # VM Network
-  subnet_bastion_id  = module.support_subnet.subnet_id
-  private_ip_bastion = var.private_ip_bastion
+  subnet_bastion_id        = module.support_subnet.subnet_id
+  private_ip_bastion       = var.private_ip_bastion
+  custom_facing_ip_address = var.custom_facing_ip_address
 
   # VM Params & identity
   vm_size         = var.vm_size
