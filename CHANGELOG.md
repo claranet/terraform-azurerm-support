@@ -1,4 +1,4 @@
-# Unreleased
+# v7.4.0 - 2023-06-16
 
 Changed
   * AZ-1080: Bump `bastion-vm` module to add `bypassPlatformSafetyChecksOnUserSchedule` when `patch_mode` is `AutomaticByPlatform`.
