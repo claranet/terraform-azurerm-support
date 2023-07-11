@@ -140,7 +140,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.7.0 |
+| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-1115_user_password |
 | support\_nsg | claranet/nsg/azurerm | 7.3.0 |
 | support\_subnet | claranet/subnet/azurerm | 6.1.0 |
 
@@ -156,6 +156,7 @@ module "support" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | additional\_rules | Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference. | <pre>list(object({<br>    priority  = number<br>    name      = string<br>    direction = optional(string)<br>    access    = optional(string)<br>    protocol  = optional(string)<br><br>    source_port_range  = optional(string)<br>    source_port_ranges = optional(list(string))<br><br>    destination_port_range  = optional(string)<br>    destination_port_ranges = optional(list(string))<br><br>    source_address_prefix   = optional(string)<br>    source_address_prefixes = optional(list(string))<br><br>    destination_address_prefix   = optional(string)<br>    destination_address_prefixes = optional(list(string))<br>  }))</pre> | `[]` | no |
+| admin\_password | Password for the administrator account of the virtual machine. | `string` | `null` | no |
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion. | `list(string)` | n/a | yes |
 | admin\_username | Name of the administrator user. | `string` | `"claranet"` | no |
 | ani\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
