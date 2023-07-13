@@ -140,9 +140,9 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| bastion | git@git.fr.clara.net:claranet/projects/cloud/azure/terraform/modules/bastion-vm.git | AZ-1115_user_password |
-| support\_nsg | claranet/nsg/azurerm | 7.3.0 |
-| support\_subnet | claranet/subnet/azurerm | 6.1.0 |
+| bastion | github.com/claranet/terraform-azurerm-bastion-vm.git | v7.8.0 |
+| support\_nsg | claranet/nsg/azurerm | ~> 7.3.0 |
+| support\_subnet | claranet/subnet/azurerm | ~> 6.1.0 |
 
 ## Resources
 
@@ -239,6 +239,7 @@ module "support" {
 
 | Name | Description |
 |------|-------------|
+| bastion\_admin\_password | Password of the admin user. |
 | bastion\_admin\_username | Username of the admin user. |
 | bastion\_hostname | Bastion hostname. |
 | bastion\_maintenance\_configurations\_assignments | Maintenance configurations assignments configurations. |
