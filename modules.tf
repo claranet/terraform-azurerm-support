@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "6.1.0"
+  version = "~> 6.1.0"
 
   environment    = var.environment
   location_short = var.location_short
@@ -31,7 +31,7 @@ resource "azurerm_subnet_network_security_group_association" "subnet_bastion_ass
 
 module "support_nsg" {
   source  = "claranet/nsg/azurerm"
-  version = "7.3.0"
+  version = "~> 7.3.0"
 
   client_name         = var.client_name
   environment         = var.environment
@@ -88,7 +88,7 @@ resource "azurerm_network_security_rule" "ssh_rule" {
 }
 
 module "bastion" {
-  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v7.7.0"
+  source = "github.com/claranet/terraform-azurerm-bastion-vm.git?ref=v7.8.0"
 
   client_name         = var.client_name
   location            = var.location
@@ -119,6 +119,7 @@ module "bastion" {
   vm_size         = var.vm_size
   vm_zone         = var.vm_zone
   admin_username  = var.admin_username
+  admin_password  = var.admin_password
   ssh_public_key  = var.ssh_public_key
   ssh_private_key = var.ssh_private_key
 
