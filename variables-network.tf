@@ -4,7 +4,7 @@ variable "admin_ssh_ips" {
   type        = list(string)
 }
 
-variable "additional_rules" {
+variable "nsg_additional_rules" {
   description = "Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference."
   type = list(object({
     priority  = number

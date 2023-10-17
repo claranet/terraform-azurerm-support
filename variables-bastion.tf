@@ -4,12 +4,6 @@ variable "vm_size" {
   type        = string
 }
 
-variable "vm_zone" {
-  description = "Bastion virtual machine Availability Zone."
-  type        = number
-  default     = 1
-}
-
 # Authentication
 variable "admin_password" {
   description = "Password for the administrator account of the virtual machine."
@@ -26,35 +20,22 @@ variable "admin_username" {
 variable "ssh_public_key" {
   description = "SSH public key, generated if empty."
   type        = string
-  default     = ""
+  default     = null
 }
 
-variable "ssh_private_key" {
-  description = "SSH private key, generated if empty."
-  type        = string
-  default     = ""
+variable "bastion_vm_image" {
+  description = "Bastion Virtual Machine source image information. See https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference. This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image."
+  type = object({
+    publisher = string
+    offer     = string
+    sku       = string
+    version   = string
+  })
+  default = null
 }
 
-variable "storage_image_publisher" {
-  description = "Specifies the publisher of the image used to create the virtual machine."
-  type        = string
-  default     = "Canonical"
-}
-
-variable "storage_image_offer" {
-  description = "Specifies the offer of the image used to create the virtual machine."
-  type        = string
-  default     = "0001-com-ubuntu-server-focal"
-}
-
-variable "storage_image_sku" {
-  description = "Specifies the SKU of the image used to create the virtual machine."
-  type        = string
-  default     = "20_04-LTS"
-}
-
-variable "storage_image_id" {
-  description = "Specifies the image ID used to create the virtual machine."
+variable "bastion_vm_image_id" {
+  description = "The ID of the Image which this Virtual Machine should be created from. This variable supersedes the `vm_image` variable if not null. Defaults to Claranet image."
   type        = string
   default     = null
 }
@@ -77,13 +58,13 @@ variable "storage_os_disk_account_type" {
 }
 
 # Azure Network Interface
-variable "private_ip_bastion" {
+variable "bastion_private_ip" {
   description = "Allows to define the private IP to associate with the bastion."
   type        = string
   default     = null
 }
 
-variable "public_ip_sku" {
+variable "bastion_public_ip_sku" {
   description = <<EOD
 Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
 If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.
@@ -93,20 +74,14 @@ EOD
   default     = "Standard"
 }
 
-variable "custom_facing_ip_address" {
-  description = "Custom IP address to use (for Ansible provisioning, and SSH connection), useful if you have a firewall in front of the VM."
-  type        = string
-  default     = null
-}
-
-variable "public_ip_zones" {
+variable "bastion_public_ip_zones" {
   description = "Zones for public IP attached to the VM. Can be `null` if no zone distpatch."
   type        = list(number)
   default     = [1, 2, 3]
 }
 
 ## Identity variables
-variable "identity" {
+variable "bastion_identity" {
   description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
   type = object({
     type         = string
@@ -119,20 +94,32 @@ variable "identity" {
 }
 
 ## Backup variable
-variable "backup_policy_id" {
+variable "bastion_backup_policy_id" {
   description = "Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup)."
   type        = string
 }
 
 # Update Management
-variable "patch_mode" {
+variable "bastion_patch_mode" {
   description = "Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`"
   type        = string
   default     = "ImageDefault"
 }
 
-variable "maintenance_configuration_ids" {
+variable "bastion_maintenance_configuration_ids" {
   description = "List of maintenance configurations to attach to this VM."
   type        = list(string)
   default     = []
+}
+
+variable "bastion_custom_data" {
+  description = "The Base64-Encoded Custom Data which should be used for the bastion. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
+variable "bastion_user_data" {
+  description = "The Base64-Encoded User Data which should be used for the bastion."
+  type        = string
+  default     = null
 }
