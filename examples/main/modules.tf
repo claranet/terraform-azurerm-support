@@ -65,30 +65,27 @@ module "support" {
 
   virtual_network_name = module.azure_network_vnet.virtual_network_name
 
-  # bastion parameters
+  # Bastion parameters
   vm_size                 = "Standard_B1s"
   storage_os_disk_size_gb = "32"
 
   admin_ssh_ips = var.admin_ssh_ips
 
   # Define your private ip bastion if you want to override it
-  private_ip_bastion = "10.10.10.10"
+  bastion_private_ip = "10.10.10.10"
 
-  # Set to null to deactivate backup
-  backup_policy_id = module.run.vm_backup_policy_id
+  # Set to null to deactivate backup (not recommended)
+  bastion_backup_policy_id = module.run.vm_backup_policy_id
 
   # Optional: Put your SSH key here
-  ssh_public_key  = tls_private_key.bastion.public_key_openssh
-  ssh_private_key = tls_private_key.bastion.private_key_pem
+  ssh_public_key = tls_private_key.bastion.public_key_openssh
 
   # Define your subnets if you want to override it
   subnet_cidr_list = ["10.10.10.0/24"]
   #  support_dns_zone_name = var.support_dns_zone_name
 
-  # Diag/logs
+  # Diagnostics / logs
   diagnostics_storage_account_name      = module.run.logs_storage_account_name
-  diagnostics_storage_account_sas_token = null # used by legacy agent only
   azure_monitor_data_collection_rule_id = module.run.data_collection_rule_id
   log_analytics_workspace_guid          = module.run.log_analytics_workspace_guid
-  log_analytics_workspace_key           = module.run.log_analytics_workspace_primary_key
 }

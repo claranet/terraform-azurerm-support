@@ -18,12 +18,6 @@ variable "custom_bastion_vm_name" {
   default     = ""
 }
 
-variable "custom_availability_set_name" {
-  description = "Custom name for Availability Set."
-  type        = string
-  default     = ""
-}
-
 variable "custom_bastion_vm_hostname" {
   description = "Custom Bastion hostname."
   type        = string

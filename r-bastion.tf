@@ -2,16 +2,9 @@ resource "tls_private_key" "ssh" {
   algorithm = "RSA"
 }
 
-resource "azurerm_availability_set" "avset" {
-  location            = var.location
-  name                = local.avset_name
-  resource_group_name = var.resource_group_name
-}
-
 module "claranet_gallery_images" {
-  #  source  = "claranet/claranet-gallery-images/azapi"
-  #  version = "x.x.x"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/claranet-gallery-images.git?ref=AZ-1185_claranet-gallery-images"
+  source  = "claranet/claranet-gallery-images/azapi"
+  version = "~> 7.0.0"
 
   azure_subscription_id = data.azurerm_client_config.current.subscription_id
   location_cli          = module.azure_region.location_cli
@@ -28,10 +21,12 @@ module "bastion_vm" {
   stack               = var.stack
   resource_group_name = var.resource_group_name
 
+  vm_size     = var.vm_size
+  custom_name = var.custom_bastion_vm_name
+
   # Network
-  subnet_id           = module.support_subnet.subnet_id
-  static_private_ip   = var.bastion_private_ip
-  availability_set_id = azurerm_availability_set.avset.id
+  subnet_id         = module.support_subnet.subnet_id
+  static_private_ip = var.bastion_private_ip
 
   # Naming
   name_prefix = var.name_prefix
@@ -48,9 +43,6 @@ module "bastion_vm" {
   azure_monitor_data_collection_rule_id    = var.azure_monitor_data_collection_rule_id
   azure_monitor_agent_version              = var.azure_monitor_agent_version
   azure_monitor_agent_auto_upgrade_enabled = var.azure_monitor_agent_auto_upgrade_enabled
-
-  vm_size     = var.vm_size
-  custom_name = var.custom_bastion_vm_name
 
   # Boot scripts
   custom_data = var.bastion_custom_data

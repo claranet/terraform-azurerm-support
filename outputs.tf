@@ -65,12 +65,6 @@ output "bastion_admin_password" {
   sensitive   = true
 }
 
-# FIXME not in linux-vm module
-#output "bastion_virtual_machine_size" {
-#  description = "Bastion virtual machine size."
-#  value       = module.bastion_vm.vm_size
-#}
-
 output "bastion_hostname" {
   description = "Bastion hostname."
   value       = module.bastion_vm.vm_hostname

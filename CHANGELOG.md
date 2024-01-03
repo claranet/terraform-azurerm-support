@@ -5,7 +5,6 @@ Breaking
   * AZ-1207: Use directly linux-vm module
   * AZ-1207: Use Claranet golden image by default
   * AZ-1207: Rework variables
-  * AZ-1207: Use availability set
 
 # v7.5.0 - 2023-07-21
 

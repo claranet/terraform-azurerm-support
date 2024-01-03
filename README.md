@@ -101,32 +101,29 @@ module "support" {
 
   virtual_network_name = module.azure_network_vnet.virtual_network_name
 
-  # bastion parameters
+  # Bastion parameters
   vm_size                 = "Standard_B1s"
   storage_os_disk_size_gb = "32"
 
   admin_ssh_ips = var.admin_ssh_ips
 
   # Define your private ip bastion if you want to override it
-  private_ip_bastion = "10.10.10.10"
+  bastion_private_ip = "10.10.10.10"
 
-  # Set to null to deactivate backup
-  backup_policy_id = module.run.vm_backup_policy_id
+  # Set to null to deactivate backup (not recommended)
+  bastion_backup_policy_id = module.run.vm_backup_policy_id
 
   # Optional: Put your SSH key here
-  ssh_public_key  = tls_private_key.bastion.public_key_openssh
-  ssh_private_key = tls_private_key.bastion.private_key_pem
+  ssh_public_key = tls_private_key.bastion.public_key_openssh
 
   # Define your subnets if you want to override it
   subnet_cidr_list = ["10.10.10.0/24"]
   #  support_dns_zone_name = var.support_dns_zone_name
 
-  # Diag/logs
+  # Diagnostics / logs
   diagnostics_storage_account_name      = module.run.logs_storage_account_name
-  diagnostics_storage_account_sas_token = null # used by legacy agent only
   azure_monitor_data_collection_rule_id = module.run.data_collection_rule_id
   log_analytics_workspace_guid          = module.run.log_analytics_workspace_guid
-  log_analytics_workspace_key           = module.run.log_analytics_workspace_primary_key
 }
 ```
 
@@ -134,8 +131,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | ~> 1.2, >= 1.2.22 |
-| azurerm | ~> 3.39 |
+| azurerm | ~> 3.67 |
 | tls | >= 3.0 |
 
 ## Modules
@@ -144,7 +140,7 @@ module "support" {
 |------|--------|---------|
 | azure\_region | claranet/regions/azurerm | ~> 6.1.0 |
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 7.10.0 |
-| claranet\_gallery\_images | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/claranet-gallery-images.git | AZ-1185_claranet-gallery-images |
+| claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 7.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 7.5.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 6.2.0 |
 
@@ -152,10 +148,8 @@ module "support" {
 
 | Name | Type |
 |------|------|
-| [azurerm_availability_set.avset](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/availability_set) | resource |
 | [azurerm_subnet_network_security_group_association.subnet_bastion_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
-| [azurecaf_name.avset](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 
 ## Inputs
@@ -185,7 +179,6 @@ module "support" {
 | bastion\_vm\_image | Bastion Virtual Machine source image information. See https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference. This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image. | <pre>object({<br>    publisher = string<br>    offer     = string<br>    sku       = string<br>    version   = string<br>  })</pre> | `null` | no |
 | bastion\_vm\_image\_id | The ID of the Image which this Virtual Machine should be created from. This variable supersedes the `vm_image` variable if not null. Defaults to Claranet image. | `string` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
-| custom\_availability\_set\_name | Custom name for Availability Set. | `string` | `""` | no |
 | custom\_bastion\_dns\_label | Custom name for DNS label. | `string` | `null` | no |
 | custom\_bastion\_ipconfig\_name | Custom name for IP Configuration. | `string` | `null` | no |
 | custom\_bastion\_nic\_name | Custom name for NIC. | `string` | `null` | no |
