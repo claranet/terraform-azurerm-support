@@ -1,4 +1,4 @@
-# Unreleased
+# v7.6.0 - 2024-01-19
 
 Breaking
   * AZ-1207: Rework module
