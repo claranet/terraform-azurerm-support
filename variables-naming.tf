@@ -11,56 +11,56 @@ variable "name_suffix" {
   default     = ""
 }
 
-variable "use_caf_naming" {
-  description = "Use the Azure CAF naming provider to generate default resource name. `custom_*_name` override this if set. Legacy default name is used if this is set to `false`."
-  type        = bool
-  default     = true
-}
-
 # Custom naming override
-variable "custom_vm_name" {
+variable "custom_bastion_vm_name" {
   description = "VM Name as displayed on the console."
   type        = string
   default     = ""
 }
 
-variable "custom_vm_hostname" {
-  description = "Bastion hostname."
+variable "custom_bastion_vm_hostname" {
+  description = "Custom Bastion hostname."
   type        = string
   default     = ""
 }
 
-variable "custom_bastion_subnet_name" {
-  description = "Custom name for bastion subnet."
+variable "custom_subnet_name" {
+  description = "Custom name for Subnet."
   type        = string
   default     = null
 }
 
 variable "custom_security_group_name" {
-  description = "Custom name for network security group."
+  description = "Custom name for Network Security Group."
   type        = string
   default     = null
 }
 
-variable "storage_os_disk_custom_name" {
-  description = "Bastion OS disk name as displayed in the console."
+variable "custom_bastion_storage_os_disk_name" {
+  description = "Custom name for Bastion OS disk."
   type        = string
   default     = ""
 }
 
-variable "custom_public_ip_name" {
+variable "custom_bastion_public_ip_name" {
   description = "Custom name for public IP."
   type        = string
   default     = null
 }
 
-variable "custom_ipconfig_name" {
+variable "custom_bastion_ipconfig_name" {
   description = "Custom name for IP Configuration."
   type        = string
   default     = null
 }
 
-variable "custom_nic_name" {
+variable "custom_bastion_dns_label" {
+  description = "Custom name for DNS label."
+  type        = string
+  default     = null
+}
+
+variable "custom_bastion_nic_name" {
   description = "Custom name for NIC."
   type        = string
   default     = null

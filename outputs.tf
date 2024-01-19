@@ -10,7 +10,7 @@ output "subnet_cidr_list" {
 
 output "subnet_name" {
   description = "Name of the created subnet."
-  value       = module.support_subnet.subnet_names
+  value       = module.support_subnet.subnet_name
 }
 
 output "network_security_group_id" {
@@ -25,81 +25,78 @@ output "network_security_group_name" {
 
 output "bastion_network_public_ip" {
   description = "Bastion public IP."
-  value       = module.bastion.bastion_network_public_ip
+  value       = module.bastion_vm.vm_public_ip_address
 }
 
 output "bastion_network_public_ip_id" {
   description = "Bastion public IP ID."
-  value       = module.bastion.bastion_network_public_ip_id
+  value       = module.bastion_vm.vm_public_ip_id
 }
 
 output "bastion_network_interface_id" {
   description = "Bastion network interface ID."
-  value       = module.bastion.bastion_network_interface_id
+  value       = module.bastion_vm.vm_nic_id
 }
 
 output "bastion_network_interface_private_ip" {
   description = "Bastion private IP."
-  value       = module.bastion.bastion_network_interface_private_ip
+  value       = module.bastion_vm.vm_private_ip_address
 }
 
 output "bastion_virtual_machine_id" {
   description = "Bastion virtual machine ID."
-  value       = module.bastion.bastion_virtual_machine_id
+  value       = module.bastion_vm.vm_id
 }
 
 output "bastion_virtual_machine_name" {
   description = "Bastion virtual machine name."
-  value       = module.bastion.bastion_virtual_machine_name
+  value       = module.bastion_vm.vm_name
 }
 
 output "bastion_admin_username" {
   description = "Username of the admin user."
-  value       = module.bastion.bastion_admin_username
+  value       = module.bastion_vm.vm_admin_username
+  sensitive   = true
 }
 
 output "bastion_admin_password" {
   description = "Password of the admin user."
-  value       = var.admin_password
-}
-
-output "bastion_virtual_machine_size" {
-  description = "Bastion virtual machine size."
-  value       = module.bastion.bastion_virtual_machine_size
+  value       = module.bastion_vm.vm_admin_password
+  sensitive   = true
 }
 
 output "bastion_hostname" {
   description = "Bastion hostname."
-  value       = module.bastion.bastion_hostname
+  value       = module.bastion_vm.vm_hostname
 }
 
 output "bastion_public_domain_name_label" {
   description = "Bastion public DNS."
-  value       = module.bastion.bastion_public_domain_name_label
+  value       = module.bastion_vm.vm_public_domain_name_label
 }
 
 output "bastion_virtual_machine_identity" {
   description = "System Identity assigned to the bastion virtual machine."
-  value       = module.bastion.bastion_virtual_machine_identity
+  value       = module.bastion_vm.vm_identity
 }
 
 output "bastion_ssh_public_key" {
   description = "Bastion SSH public key."
-  value       = module.bastion.ssh_public_key
+  value       = module.bastion_vm.vm_admin_ssh_public_key
 }
 
 output "bastion_ssh_private_key" {
   description = "Bastion SSH private key."
-  value       = module.bastion.ssh_private_key
+  value       = local.ssh_private_key
   sensitive   = true
 }
 
 output "bastion_virtual_machine_os_disk" {
   description = "Bastion virtual machine OS disk object."
-  value       = module.bastion.bastion_virtual_machine_os_disk
+  value       = module.bastion_vm.vm_os_disk
 }
 
 output "bastion_maintenance_configurations_assignments" {
   description = "Maintenance configurations assignments configurations."
-  value       = module.bastion.bastion_maintenance_configurations_assignments
+  value       = module.bastion_vm.maintenance_configurations_assignments
 }

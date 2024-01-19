@@ -16,13 +16,13 @@ variable "bastion_extra_tags" {
   default     = {}
 }
 
-variable "ani_extra_tags" {
+variable "nic_extra_tags" {
   description = "Additional tags to associate with your network interface."
   type        = map(string)
   default     = {}
 }
 
-variable "pubip_extra_tags" {
+variable "public_ip_extra_tags" {
   description = "Additional tags to associate with your public IP."
   type        = map(string)
   default     = {}
@@ -44,4 +44,10 @@ variable "extensions_extra_tags" {
   description = "Extra tags to set on the VM extensions."
   type        = map(string)
   default     = {}
+}
+
+variable "storage_os_disk_overwrite_tags" {
+  description = "True to overwrite existing OS disk tags instead of merging."
+  type        = bool
+  default     = false
 }
