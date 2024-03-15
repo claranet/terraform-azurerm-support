@@ -139,7 +139,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| azure\_region | claranet/regions/azurerm | ~> 6.1.0 |
+| azure\_region | claranet/regions/azurerm | ~> 7.1.0 |
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 7.10.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 7.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 7.5.0 |
