@@ -1,3 +1,32 @@
+## 7.6.1 (2024-04-30)
+
+
+### Styles
+
+* **output:** remove unused version from outputs-module ddc97e3
+
+
+### Continuous Integration
+
+* **AZ-1391:** enable semantic-release [skip ci] 6f2ca19
+* **AZ-1391:** update semantic-release config [skip ci] 794f671
+
+
+### Miscellaneous Chores
+
+* **deps:** add renovate.json 7668203
+* **deps:** enable automerge on renovate 50b6378
+* **deps:** update dependency opentofu to v1.7.0 67eeb48
+* **deps:** update dependency trivy to v0.50.2 6a69beb
+* **deps:** update renovate.json 23d97e5
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 7.11.0 4b8f360
+* **deps:** update terraform claranet/nsg/azurerm to ~> 7.6.0 799abca
+* **deps:** update terraform claranet/nsg/azurerm to ~> 7.7.0 874d335
+* **deps:** update terraform claranet/regions/azurerm to v7 400d7c4
+* **deps:** update terraform claranet/subnet/azurerm to ~> 6.3.0 32abf7c
+* **pre-commit:** update commitlint hook 3c7b45c
+* **release:** remove legacy `VERSION` file 77417c5
+
 # v7.6.0 - 2024-01-19
 
 Breaking
