@@ -143,7 +143,7 @@ module "support" {
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 7.11.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 7.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 7.7.0 |
-| support\_subnet | claranet/subnet/azurerm | ~> 6.3.0 |
+| support\_subnet | claranet/subnet/azurerm | ~> 7.0.0 |
 
 ## Resources
 
