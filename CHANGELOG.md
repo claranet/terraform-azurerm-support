@@ -1,3 +1,31 @@
+## 7.6.2 (2024-07-01)
+
+
+### Bug Fixes
+
+* **deps:** upgrade `linux-vm` to latest version a0d9509
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.1 db023ed
+* **deps:** update dependency opentofu to v1.7.2 2c5e239
+* **deps:** update dependency pre-commit to v3.7.1 07f37fb
+* **deps:** update dependency terraform-docs to v0.18.0 35aaba6
+* **deps:** update dependency tflint to v0.51.0 a366dc6
+* **deps:** update dependency tflint to v0.51.1 03e4b97
+* **deps:** update dependency tflint to v0.51.2 26fa5c4
+* **deps:** update dependency trivy to v0.50.4 845786d
+* **deps:** update dependency trivy to v0.51.0 24960a3
+* **deps:** update dependency trivy to v0.51.1 4d35925
+* **deps:** update dependency trivy to v0.51.2 3f5ff19
+* **deps:** update dependency trivy to v0.51.4 b5cc416
+* **deps:** update dependency trivy to v0.52.0 d9ad758
+* **deps:** update dependency trivy to v0.52.1 5b974b8
+* **deps:** update dependency trivy to v0.52.2 ba1aebc
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.0 8bfbe41
+* **deps:** update terraform claranet/subnet/azurerm to v7 b69690b
+
 ## 7.6.1 (2024-04-30)
 
 
