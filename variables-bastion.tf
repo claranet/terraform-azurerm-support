@@ -80,6 +80,12 @@ variable "bastion_public_ip_zones" {
   default     = [1, 2, 3]
 }
 
+variable "bastion_nic_accelerated_networking_enabled" {
+  description = "Should Accelerated Networking be enabled? Defaults to false."
+  type        = bool
+  default     = false
+}
+
 ## Identity variables
 variable "bastion_identity" {
   description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
