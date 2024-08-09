@@ -1,3 +1,21 @@
+## 7.7.0 (2024-08-09)
+
+
+### Features
+
+* add `bastion_nic_accelerated_networking_enabled parameter` 38d3076
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.7.3 c159ded
+* **deps:** update dependency opentofu to v1.8.1 16fb33d
+* **deps:** update dependency pre-commit to v3.8.0 91a9e5f
+* **deps:** update dependency tflint to v0.52.0 7bd7b4e
+* **deps:** update dependency trivy to v0.53.0 646c794
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.1 d758d7e
+* **deps:** update tools 79936c2
+
 ## 7.6.2 (2024-07-01)
 
 
