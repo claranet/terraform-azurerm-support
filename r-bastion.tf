@@ -25,8 +25,9 @@ module "bastion_vm" {
   custom_name = var.custom_bastion_vm_name
 
   # Network
-  subnet_id         = module.support_subnet.subnet_id
-  static_private_ip = var.bastion_private_ip
+  subnet_id                          = module.support_subnet.subnet_id
+  static_private_ip                  = var.bastion_private_ip
+  nic_accelerated_networking_enabled = var.bastion_nic_accelerated_networking_enabled
 
   # Naming
   name_prefix = var.name_prefix
