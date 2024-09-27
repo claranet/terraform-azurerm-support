@@ -1,3 +1,30 @@
+## 7.7.1 (2024-09-27)
+
+### Documentation
+
+* update README badge to use OpenTofu registry dedbc59
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/subnet/azurerm to ~> 7.1.0 a2a50bb
+* **deps:** update dependency opentofu to v1.8.2 8450517
+* **deps:** update dependency terraform-docs to v0.19.0 1598313
+* **deps:** update dependency trivy to v0.55.0 577a054
+* **deps:** update dependency trivy to v0.55.1 3834db5
+* **deps:** update dependency trivy to v0.55.2 58b6b33
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.17.0 da883b5
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.18.0 f7bcb72
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.93.0 8d06c10
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.0 257aa54
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.1 06a0fd6
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.2 712b2af
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.3 01f4b2c
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.95.0 f5b569c
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.0 ceba937
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.1 4277a74
+* **deps:** update terraform claranet/regions/azurerm to ~> 7.2.0 450b680
+* **deps:** update tools ddeed8f
+
 ## 7.7.0 (2024-08-09)
 
 
