@@ -1,12 +1,12 @@
 # Azure - Claranet Support stack
-[![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/support/azurerm/)
+[![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-blue.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![OpenTofu Registry](https://img.shields.io/badge/opentofu-registry-yellow.svg)](https://search.opentofu.org/module/claranet/support/azurerm/)
 
 Azure Support module. It creates a subnet, a Network Security Group and a bastion VM instance from a Claranet image by default.
 Included module documentation:
-  * [Subnet](https://registry.terraform.io/modules/claranet/subnet/azurerm/latest)
-  * [NSG](https://registry.terraform.io/modules/claranet/nsg/azurerm/latest)
-  * [claranet-gallery-images](https://registry.terraform.io/modules/claranet/claranet-gallery-images/azapi/latest)
-  * [linux-vm](https://registry.terraform.io/modules/claranet/linux-vm/azurerm/latest)
+  * [Subnet](https://search.opentofu.org/module/claranet/subnet/azurerm/latest)
+  * [NSG](https://search.opentofu.org/module/claranet/nsg/azurerm/latest)
+  * [claranet-gallery-images](https://search.opentofu.org/module/claranet/claranet-gallery-images/azapi/latest)
+  * [linux-vm](https://search.opentofu.org/module/claranet/linux-vm/azurerm/latest)
 
 <!-- BEGIN_TF_DOCS -->
 ## Global versioning rule for Claranet Azure modules
