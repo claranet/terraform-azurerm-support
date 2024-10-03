@@ -1,3 +1,13 @@
+## 7.8.0 (2024-10-03)
+
+### Features
+
+* use Claranet "azurecaf" provider 932f25b
+
+### Documentation
+
+* update README with `terraform-docs` v0.19.0 dab67ac
+
 ## 7.7.1 (2024-09-27)
 
 ### Documentation
