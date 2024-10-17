@@ -29,6 +29,12 @@ variable "nsg_additional_rules" {
 }
 
 # Module Subnet
+variable "default_outbound_access_enabled" {
+  description = "Enable or Disable default_outbound_access. See https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access"
+  type        = bool
+  default     = false
+}
+
 variable "route_table_name" {
   description = "The Route Table name to associate with the subnet."
   type        = string

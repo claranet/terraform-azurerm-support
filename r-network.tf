@@ -22,6 +22,8 @@ module "support_subnet" {
 
   private_link_endpoint_enabled = var.private_link_endpoint_enabled
   private_link_service_enabled  = var.private_link_service_enabled
+
+  default_outbound_access_enabled = var.default_outbound_access_enabled
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
