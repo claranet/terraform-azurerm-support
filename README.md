@@ -194,6 +194,7 @@ module "support" {
 | custom\_bastion\_vm\_name | VM Name as displayed on the console. | `string` | `""` | no |
 | custom\_security\_group\_name | Custom name for Network Security Group. | `string` | `null` | no |
 | custom\_subnet\_name | Custom name for Subnet. | `string` | `null` | no |
+| default\_outbound\_access\_enabled | Enable or disable `default_outbound_access`. See [documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access). | `bool` | `false` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics. | `string` | n/a | yes |
 | environment | Project environment. | `string` | n/a | yes |
