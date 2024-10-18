@@ -1,3 +1,26 @@
+## 7.9.0 (2024-10-18)
+
+### Features
+
+* **AZ-1476:** add subnet variable c236450
+
+### Documentation
+
+* **AZ-1476:** change variable description 29417fb
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/linux-vm/azurerm to ~> 7.12.0 8024390
+* **deps:** update dependency claranet/nsg/azurerm to ~> 7.8.0 35248d9
+* **deps:** update dependency claranet/subnet/azurerm to ~> 7.2.0 d5d9f3c
+* **deps:** update dependency opentofu to v1.8.3 aacdd43
+* **deps:** update dependency pre-commit to v4 b149d7d
+* **deps:** update dependency pre-commit to v4.0.1 836e32b
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 4ea2516
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.1.0 e09c8ea
+* prepare for new examples structure 4da2904
+* update examples structure 1aa9162
+
 ## 7.8.0 (2024-10-03)
 
 ### Features
