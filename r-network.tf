@@ -33,7 +33,7 @@ resource "azurerm_subnet_network_security_group_association" "subnet_bastion_ass
 
 module "support_nsg" {
   source  = "claranet/nsg/azurerm"
-  version = "~> 7.8.0"
+  version = "~> 8.0.0"
 
   client_name         = var.client_name
   environment         = var.environment
