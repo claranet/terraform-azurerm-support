@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "~> 7.2.0"
+  version = "~> 8.0.0"
 
   environment    = var.environment
   location_short = var.location_short
