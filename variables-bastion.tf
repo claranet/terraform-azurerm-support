@@ -5,6 +5,12 @@ variable "vm_size" {
 }
 
 # Authentication
+variable "disable_password_authentication" {
+  description = "Option to disable or enable password authentication if admin password is not set."
+  type        = bool
+  default     = true
+}
+
 variable "admin_password" {
   description = "Password for the administrator account of the virtual machine."
   type        = string

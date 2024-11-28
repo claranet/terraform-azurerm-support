@@ -142,6 +142,7 @@ module "support" {
 | default\_outbound\_access\_enabled | Enable or disable `default_outbound_access`. See [documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access). | `bool` | `false` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics. | `string` | n/a | yes |
+| disable\_password\_authentication | Option to disable or enable password authentication if admin password is not set. | `bool` | `true` | no |
 | entra\_ssh\_login\_admin\_objects\_ids | Entra ID (aka AAD) objects IDs allowed to connect as administrator on the Virtual Machine. | `list(string)` | `[]` | no |
 | entra\_ssh\_login\_enabled | Enable SSH logins with Entra ID (aka AAD). | `bool` | `false` | no |
 | entra\_ssh\_login\_extension\_version | Virtual Machine extension version for Entra ID (aka AAD) SSH Login extension. | `string` | `"1.0"` | no |
