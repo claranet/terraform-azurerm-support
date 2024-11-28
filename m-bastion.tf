@@ -11,8 +11,9 @@ module "claranet_gallery_images" {
 }
 
 module "bastion_vm" {
-  source  = "claranet/linux-vm/azurerm"
-  version = "~> 7.13.0"
+  # source  = "claranet/linux-vm/azurerm"
+  # version = "~> 8.0.0"
+  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=refactor/AZ-1088-rework-module"
 
   location            = var.location
   location_short      = var.location_short
@@ -25,7 +26,9 @@ module "bastion_vm" {
   custom_name = var.custom_bastion_vm_name
 
   # Network
-  subnet_id                          = module.support_subnet.subnet_id
+  subnet = {
+    id = module.support_subnet.id
+  }
   static_private_ip                  = var.bastion_private_ip
   nic_accelerated_networking_enabled = var.bastion_nic_accelerated_networking_enabled
 
@@ -41,9 +44,11 @@ module "bastion_vm" {
 
   # Diag/logs
   diagnostics_storage_account_name         = var.diagnostics_storage_account_name
-  azure_monitor_data_collection_rule_id    = var.azure_monitor_data_collection_rule_id
   azure_monitor_agent_version              = var.azure_monitor_agent_version
   azure_monitor_agent_auto_upgrade_enabled = var.azure_monitor_agent_auto_upgrade_enabled
+  azure_monitor_data_collection_rule = {
+    id = var.azure_monitor_data_collection_rule_id
+  }
 
   # Boot scripts
   custom_data = var.bastion_custom_data
@@ -58,7 +63,9 @@ module "bastion_vm" {
 
   identity = var.bastion_identity
 
-  backup_policy_id              = var.bastion_backup_policy_id
+  backup_policy = {
+    id = var.bastion_backup_policy_id
+  }
   patch_mode                    = var.bastion_patch_mode
   maintenance_configuration_ids = var.bastion_maintenance_configuration_ids
 
@@ -72,11 +79,11 @@ module "bastion_vm" {
   os_disk_overwrite_tags       = var.storage_os_disk_overwrite_tags
   os_disk_storage_account_type = var.storage_os_disk_account_type
 
-  # AAD SSH Login option
-  aad_ssh_login_enabled           = var.aad_ssh_login_enabled
-  aad_ssh_login_extension_version = var.aad_ssh_login_extension_version
-  aad_ssh_login_user_objects_ids  = var.aad_ssh_login_user_objects_ids
-  aad_ssh_login_admin_objects_ids = var.aad_ssh_login_admin_objects_ids
+  # Entra ID (AAD) SSH Login option
+  entra_ssh_login_enabled           = var.entra_ssh_login_enabled
+  entra_ssh_login_extension_version = var.entra_ssh_login_extension_version
+  entra_ssh_login_user_objects_ids  = var.entra_ssh_login_user_objects_ids
+  entra_ssh_login_admin_objects_ids = var.entra_ssh_login_admin_objects_ids
 
   # Tags
   default_tags_enabled    = var.default_tags_enabled

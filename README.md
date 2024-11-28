@@ -39,57 +39,6 @@ More details about variables set by the `terraform-wrapper` available in the [do
 [Hashicorp Terraform](https://github.com/hashicorp/terraform/). Instead, we recommend to use [OpenTofu](https://github.com/opentofu/opentofu/).
 
 ```hcl
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
-
-module "azure_network_vnet" {
-  source  = "claranet/vnet/azurerm"
-  version = "x.x.x"
-
-  environment    = var.environment
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  client_name    = var.client_name
-  stack          = var.stack
-
-  resource_group_name = module.rg.resource_group_name
-  vnet_cidr           = ["10.10.0.0/16"]
-}
-
-module "run" {
-  source  = "claranet/run/azurerm"
-  version = "x.x.x"
-
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  location            = module.azure_region.location
-  location_short      = module.azure_region.location_short
-  resource_group_name = module.rg.resource_group_name
-
-  monitoring_function_enabled = false
-  vm_monitoring_enabled       = true
-  backup_vm_enabled           = true
-  update_center_enabled       = false
-
-  recovery_vault_cross_region_restore_enabled = true
-  vm_backup_daily_policy_retention            = 31
-}
-
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -102,9 +51,9 @@ module "support" {
   location_short      = module.azure_region.location_short
   environment         = var.environment
   stack               = var.stack
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
-  virtual_network_name = module.azure_network_vnet.virtual_network_name
+  virtual_network_name = module.vnet.name
 
   # Bastion parameters
   vm_size                 = "Standard_B1s"
@@ -136,7 +85,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 3.108 |
+| azurerm | ~> 4.9 |
 | tls | >= 3.0 |
 
 ## Modules
@@ -144,7 +93,7 @@ module "support" {
 | Name | Source | Version |
 |------|--------|---------|
 | azure\_region | claranet/regions/azurerm | ~> 7.2.0 |
-| bastion\_vm | claranet/linux-vm/azurerm | ~> 7.13.0 |
+| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | refactor/AZ-1088-rework-module |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 8.0.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 8.0.0 |
@@ -161,10 +110,6 @@ module "support" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aad\_ssh\_login\_admin\_objects\_ids | Azure Active Directory objects IDs allowed to connect as administrator on the VM. | `list(string)` | `[]` | no |
-| aad\_ssh\_login\_enabled | Enable SSH logins with Azure Active Directory. | `bool` | `false` | no |
-| aad\_ssh\_login\_extension\_version | VM Extension version for Azure Active Directory SSH Login extension. | `string` | `"1.0"` | no |
-| aad\_ssh\_login\_user\_objects\_ids | Azure Active Directory objects IDs allowed to connect as standard user on the VM. | `list(string)` | `[]` | no |
 | admin\_password | Password for the administrator account of the virtual machine. | `string` | `null` | no |
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion. | `list(string)` | n/a | yes |
 | admin\_username | Name of the administrator user. | `string` | `"claranet"` | no |
@@ -174,7 +119,7 @@ module "support" {
 | bastion\_backup\_policy\_id | Backup policy ID from the Recovery Vault to attach the Virtual Machine to (value to `null` to disable backup). | `string` | n/a | yes |
 | bastion\_custom\_data | The Base64-Encoded Custom Data which should be used for the bastion. Changing this forces a new resource to be created. | `string` | `null` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
-| bastion\_identity | Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity. | <pre>object({<br/>    type         = string<br/>    identity_ids = list(string)<br/>  })</pre> | <pre>{<br/>  "identity_ids": [],<br/>  "type": "SystemAssigned"<br/>}</pre> | no |
+| bastion\_identity | Map with identity block informations as described in [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity). | <pre>object({<br/>    type         = string<br/>    identity_ids = list(string)<br/>  })</pre> | <pre>{<br/>  "identity_ids": [],<br/>  "type": "SystemAssigned"<br/>}</pre> | no |
 | bastion\_maintenance\_configuration\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
 | bastion\_nic\_accelerated\_networking\_enabled | Should Accelerated Networking be enabled? Defaults to false. | `bool` | `false` | no |
 | bastion\_patch\_mode | Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault` | `string` | `"ImageDefault"` | no |
@@ -182,7 +127,7 @@ module "support" {
 | bastion\_public\_ip\_sku | Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.<br/>If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.<br/>Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory. | `string` | `"Standard"` | no |
 | bastion\_public\_ip\_zones | Zones for public IP attached to the VM. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br/>  1,<br/>  2,<br/>  3<br/>]</pre> | no |
 | bastion\_user\_data | The Base64-Encoded User Data which should be used for the bastion. | `string` | `null` | no |
-| bastion\_vm\_image | Bastion Virtual Machine source image information. See https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference. This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image. | <pre>object({<br/>    publisher = string<br/>    offer     = string<br/>    sku       = string<br/>    version   = string<br/>  })</pre> | `null` | no |
+| bastion\_vm\_image | Bastion Virtual Machine source image information. See [documentation](https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference). This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image. | <pre>object({<br/>    publisher = string<br/>    offer     = string<br/>    sku       = string<br/>    version   = string<br/>  })</pre> | `null` | no |
 | bastion\_vm\_image\_id | The ID of the Image which this Virtual Machine should be created from. This variable supersedes the `vm_image` variable if not null. Defaults to Claranet image. | `string` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | custom\_bastion\_dns\_label | Custom name for DNS label. | `string` | `null` | no |
@@ -197,6 +142,10 @@ module "support" {
 | default\_outbound\_access\_enabled | Enable or disable `default_outbound_access`. See [documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access). | `bool` | `false` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics. | `string` | n/a | yes |
+| entra\_ssh\_login\_admin\_objects\_ids | Entra ID (aka AAD) objects IDs allowed to connect as administrator on the Virtual Machine. | `list(string)` | `[]` | no |
+| entra\_ssh\_login\_enabled | Enable SSH logins with Entra ID (aka AAD). | `bool` | `false` | no |
+| entra\_ssh\_login\_extension\_version | Virtual Machine extension version for Entra ID (aka AAD) SSH Login extension. | `string` | `"1.0"` | no |
+| entra\_ssh\_login\_user\_objects\_ids | Entra ID (aka AAD) objects IDs allowed to connect as standard user on the Virtual Machine. | `list(string)` | `[]` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extensions\_extra\_tags | Extra tags to set on the VM extensions. | `map(string)` | `{}` | no |
 | flow\_log\_enabled | Provision network watcher flow logs. | `bool` | `false` | no |
@@ -217,7 +166,7 @@ module "support" {
 | network\_watcher\_name | The name of the Network Watcher. Changing this forces a new resource to be created. | `string` | `null` | no |
 | network\_watcher\_resource\_group\_name | The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created. | `string` | `null` | no |
 | nic\_extra\_tags | Additional tags to associate with your network interface. | `map(string)` | `{}` | no |
-| nsg\_additional\_rules | Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference. | <pre>list(object({<br/>    priority  = number<br/>    name      = string<br/>    direction = optional(string)<br/>    access    = optional(string)<br/>    protocol  = optional(string)<br/><br/>    source_port_range  = optional(string)<br/>    source_port_ranges = optional(list(string))<br/><br/>    destination_port_range  = optional(string)<br/>    destination_port_ranges = optional(list(string))<br/><br/>    source_address_prefix   = optional(string)<br/>    source_address_prefixes = optional(list(string))<br/><br/>    destination_address_prefix   = optional(string)<br/>    destination_address_prefixes = optional(list(string))<br/>  }))</pre> | `[]` | no |
+| nsg\_additional\_rules | Additional network security group rules to add. For arguments please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference). | <pre>list(object({<br/>    priority  = number<br/>    name      = string<br/>    direction = optional(string)<br/>    access    = optional(string)<br/>    protocol  = optional(string)<br/><br/>    source_port_range  = optional(string)<br/>    source_port_ranges = optional(list(string))<br/><br/>    destination_port_range  = optional(string)<br/>    destination_port_ranges = optional(list(string))<br/><br/>    source_address_prefix   = optional(string)<br/>    source_address_prefixes = optional(list(string))<br/><br/>    destination_address_prefix   = optional(string)<br/>    destination_address_prefixes = optional(list(string))<br/>  }))</pre> | `[]` | no |
 | nsg\_extra\_tags | Additional tags to associate with your Network Security Group. | `map(string)` | `{}` | no |
 | private\_link\_endpoint\_enabled | Enable or disable network policies for the Private Endpoint on the subnet. | `bool` | `null` | no |
 | private\_link\_service\_enabled | Enable or disable network policies for the Private Link Service on the subnet. | `bool` | `null` | no |
@@ -256,12 +205,14 @@ module "support" {
 | bastion\_ssh\_private\_key | Bastion SSH private key. |
 | bastion\_ssh\_public\_key | Bastion SSH public key. |
 | bastion\_virtual\_machine\_id | Bastion virtual machine ID. |
-| bastion\_virtual\_machine\_identity | System Identity assigned to the bastion virtual machine. |
 | bastion\_virtual\_machine\_name | Bastion virtual machine name. |
 | bastion\_virtual\_machine\_os\_disk | Bastion virtual machine OS disk object. |
+| module\_bastion\_vm | Module bastion Virtual Machine object. |
+| module\_network\_security\_group | Module network security group object. |
+| module\_subnet | Module subnet object. |
 | network\_security\_group\_id | Network security group ID. |
 | network\_security\_group\_name | Network security group name. |
-| subnet\_cidr\_list | CIDR list of the created subnet. |
+| subnet\_cidrs | CIDR list of the created subnet. |
 | subnet\_id | ID of the created subnet. |
 | subnet\_name | Name of the created subnet. |
 | terraform\_module | Information about this Terraform module. |

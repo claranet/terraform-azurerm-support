@@ -5,7 +5,7 @@ variable "admin_ssh_ips" {
 }
 
 variable "nsg_additional_rules" {
-  description = "Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference."
+  description = "Additional network security group rules to add. For arguments please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference)."
   type = list(object({
     priority  = number
     name      = string
@@ -25,7 +25,8 @@ variable "nsg_additional_rules" {
     destination_address_prefix   = optional(string)
     destination_address_prefixes = optional(list(string))
   }))
-  default = []
+  default  = []
+  nullable = false
 }
 
 # Module Subnet

@@ -11,8 +11,8 @@ module "support_subnet" {
   resource_group_name  = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   virtual_network_name = var.virtual_network_name
 
-  custom_subnet_name = var.custom_subnet_name
-  subnet_cidr_list   = var.subnet_cidr_list
+  custom_name = var.custom_subnet_name
+  cidrs       = var.subnet_cidr_list
 
   route_table_rg   = var.route_table_rg
   route_table_name = var.route_table_name
@@ -27,8 +27,8 @@ module "support_subnet" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
-  subnet_id                 = module.support_subnet.subnet_id
-  network_security_group_id = module.support_nsg.network_security_group_id
+  subnet_id                 = module.support_subnet.id
+  network_security_group_id = module.support_nsg.id
 }
 
 module "support_nsg" {
@@ -46,10 +46,10 @@ module "support_nsg" {
   name_prefix = local.name_prefix
   name_suffix = local.name_suffix
 
-  custom_network_security_group_name = var.custom_security_group_name
+  custom_name = var.custom_security_group_name
 
   ssh_inbound_allowed = true
-  allowed_ssh_source  = var.admin_ssh_ips
+  ssh_source_allowed  = var.admin_ssh_ips
 
   # Custom
   additional_rules = var.nsg_additional_rules

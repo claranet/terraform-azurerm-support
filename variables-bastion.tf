@@ -24,7 +24,7 @@ variable "ssh_public_key" {
 }
 
 variable "bastion_vm_image" {
-  description = "Bastion Virtual Machine source image information. See https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference. This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image."
+  description = "Bastion Virtual Machine source image information. See [documentation](https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference). This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image."
   type = object({
     publisher = string
     offer     = string
@@ -88,7 +88,7 @@ variable "bastion_nic_accelerated_networking_enabled" {
 
 ## Identity variables
 variable "bastion_identity" {
-  description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
+  description = "Map with identity block informations as described in [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity)."
   type = object({
     type         = string
     identity_ids = list(string)
