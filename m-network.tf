@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "~> 8.0.0"
+  version = "~> 8.0.1"
 
   environment    = var.environment
   location_short = var.location_short
@@ -11,8 +11,8 @@ module "support_subnet" {
   resource_group_name  = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   virtual_network_name = var.virtual_network_name
 
-  custom_name = var.custom_subnet_name
-  cidrs       = var.subnet_cidr_list
+  custom_name = var.subnet_custom_name
+  cidrs       = var.subnet_cidrs
 
   route_table_rg   = var.route_table_rg
   route_table_name = var.route_table_name
@@ -46,7 +46,7 @@ module "support_nsg" {
   name_prefix = local.name_prefix
   name_suffix = local.name_suffix
 
-  custom_name = var.custom_security_group_name
+  custom_name = var.network_security_group_custom_name
 
   ssh_inbound_allowed = true
   ssh_source_allowed  = var.admin_ssh_ips

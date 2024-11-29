@@ -22,8 +22,8 @@ module "bastion_vm" {
   stack               = var.stack
   resource_group_name = var.resource_group_name
 
-  vm_size     = var.vm_size
-  custom_name = var.custom_bastion_vm_name
+  vm_size     = var.bastion_vm_size
+  custom_name = var.bastion_custom_name
 
   # Network
   subnet = {
@@ -36,11 +36,11 @@ module "bastion_vm" {
   name_prefix = var.name_prefix
   name_suffix = var.name_suffix
 
-  custom_public_ip_name = var.custom_bastion_public_ip_name
-  custom_nic_name       = var.custom_bastion_nic_name
-  custom_ipconfig_name  = var.custom_bastion_ipconfig_name
-  custom_dns_label      = var.custom_bastion_dns_label
-  custom_computer_name  = var.custom_bastion_vm_hostname
+  custom_public_ip_name = var.bastion_public_ip_custom_name
+  custom_nic_name       = var.bastion_nic_custom_name
+  custom_ipconfig_name  = var.bastion_ipconfig_custom_name
+  custom_dns_label      = var.bastion_dns_label_custom_name
+  custom_computer_name  = var.bastion_custom_hostname
 
   # Diag/logs
   diagnostics_storage_account_name         = var.diagnostics_storage_account_name
@@ -69,16 +69,22 @@ module "bastion_vm" {
   }
   patch_mode                    = var.bastion_patch_mode
   maintenance_configuration_ids = var.bastion_maintenance_configuration_ids
+  encryption_at_host_enabled    = var.encryption_at_host_enabled
 
-  vm_image    = coalesce(var.bastion_vm_image, {})
+  vm_image = var.bastion_vm_image != null ? var.bastion_vm_image : {
+    publisher = "Claranet"
+    offer     = "Ubuntu"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
   vm_image_id = local.vm_image_id
 
   # OS Disk
-  os_disk_caching              = var.storage_os_disk_caching
-  os_disk_custom_name          = var.custom_bastion_storage_os_disk_name
-  os_disk_size_gb              = var.storage_os_disk_size_gb
-  os_disk_overwrite_tags       = var.storage_os_disk_overwrite_tags
-  os_disk_storage_account_type = var.storage_os_disk_account_type
+  os_disk_caching              = var.bastion_os_disk_caching
+  os_disk_custom_name          = var.bastion_os_disk_custom_name
+  os_disk_size_gb              = var.bastion_os_disk_size_gb
+  os_disk_overwrite_tags       = var.bastion_os_disk_overwrite_tags
+  os_disk_storage_account_type = var.bastion_os_disk_account_type
 
   # Entra ID (AAD) SSH Login option
   entra_ssh_login_enabled           = var.entra_ssh_login_enabled
@@ -88,11 +94,11 @@ module "bastion_vm" {
 
   # Tags
   default_tags_enabled    = var.default_tags_enabled
-  os_disk_tagging_enabled = var.storage_os_disk_tagging_enabled
+  os_disk_tagging_enabled = var.bastion_os_disk_tagging_enabled
 
   extra_tags            = merge(local.bastion_tags, var.bastion_extra_tags)
   public_ip_extra_tags  = merge(local.bastion_tags, var.public_ip_extra_tags)
   nic_extra_tags        = merge(local.bastion_tags, var.nic_extra_tags)
-  os_disk_extra_tags    = merge(local.bastion_tags, var.storage_os_disk_extra_tags)
+  os_disk_extra_tags    = merge(local.bastion_tags, var.bastion_os_disk_extra_tags)
   extensions_extra_tags = merge(local.bastion_tags, var.extensions_extra_tags)
 }

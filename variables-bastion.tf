@@ -1,5 +1,5 @@
 # Module Bastion / VM
-variable "vm_size" {
+variable "bastion_vm_size" {
   description = "Bastion virtual machine size."
   type        = string
 }
@@ -46,18 +46,18 @@ variable "bastion_vm_image_id" {
   default     = null
 }
 
-variable "storage_os_disk_caching" {
+variable "bastion_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk."
   type        = string
   default     = "ReadWrite"
 }
 
-variable "storage_os_disk_size_gb" {
+variable "bastion_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes."
   type        = string
 }
 
-variable "storage_os_disk_account_type" {
+variable "bastion_os_disk_account_type" {
   description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`."
   type        = string
   default     = "Premium_ZRS"
@@ -134,4 +134,10 @@ variable "bastion_user_data" {
   description = "The Base64-Encoded User Data which should be used for the bastion."
   type        = string
   default     = null
+}
+
+variable "encryption_at_host_enabled" {
+  description = "Should all disks (including the temporary disk) attached to the Virtual Machine be encrypted by enabling Encryption at Host? [List of compatible Virtual Machine sizes](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli#finding-supported-vm-sizes)."
+  type        = bool
+  default     = true
 }

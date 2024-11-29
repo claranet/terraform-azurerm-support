@@ -28,13 +28,13 @@ variable "public_ip_extra_tags" {
   default     = {}
 }
 
-variable "storage_os_disk_tagging_enabled" {
+variable "bastion_os_disk_tagging_enabled" {
   description = "Should OS disk tagging be enabled? Defaults to `true`."
   type        = bool
   default     = true
 }
 
-variable "storage_os_disk_extra_tags" {
+variable "bastion_os_disk_extra_tags" {
   description = "Additional tags to set on the OS disk."
   type        = map(string)
   default     = {}
@@ -46,7 +46,7 @@ variable "extensions_extra_tags" {
   default     = {}
 }
 
-variable "storage_os_disk_overwrite_tags" {
+variable "bastion_os_disk_overwrite_tags" {
   description = "True to overwrite existing OS disk tags instead of merging."
   type        = bool
   default     = false

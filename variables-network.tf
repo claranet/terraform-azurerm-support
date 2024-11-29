@@ -63,13 +63,13 @@ variable "service_endpoint_policy_ids" {
 variable "private_link_endpoint_enabled" {
   description = "Enable or disable network policies for the Private Endpoint on the subnet."
   type        = bool
-  default     = null
+  default     = true
 }
 
 variable "private_link_service_enabled" {
   description = "Enable or disable network policies for the Private Link Service on the subnet."
   type        = bool
-  default     = null
+  default     = true
 }
 
 variable "virtual_network_name" {
@@ -83,7 +83,7 @@ variable "virtual_network_resource_group_name" {
   default     = ""
 }
 
-variable "subnet_cidr_list" {
+variable "subnet_cidrs" {
   description = "The address prefixes to use for the subnet."
   type        = list(string)
 }
