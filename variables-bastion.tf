@@ -70,18 +70,22 @@ variable "bastion_private_ip" {
   default     = null
 }
 
+variable "bastion_public_ip_enabled" {
+  description = "Should a Public IP be attached to the Virtual Machine?"
+  type        = bool
+  default     = true
+  nullable    = false
+}
+
 variable "bastion_public_ip_sku" {
-  description = <<EOD
-Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.
-Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
-EOD
+  description = "SKU for the public IP attached to the Virtual Machine."
   type        = string
   default     = "Standard"
+  nullable    = false
 }
 
 variable "bastion_public_ip_zones" {
-  description = "Zones for public IP attached to the VM. Can be `null` if no zone distpatch."
+  description = "Zones for public IP attached to the Virtual Machine. Can be `null` if no zone distpatch."
   type        = list(number)
   default     = [1, 2, 3]
 }
