@@ -45,9 +45,3 @@ variable "extensions_extra_tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "bastion_os_disk_overwrite_tags" {
-  description = "True to overwrite existing OS disk tags instead of merging."
-  type        = bool
-  default     = false
-}

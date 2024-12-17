@@ -84,7 +84,6 @@ module "bastion_vm" {
   os_disk_caching              = var.bastion_os_disk_caching
   os_disk_custom_name          = var.bastion_os_disk_custom_name
   os_disk_size_gb              = var.bastion_os_disk_size_gb
-  os_disk_overwrite_tags       = var.bastion_os_disk_overwrite_tags
   os_disk_storage_account_type = var.bastion_os_disk_account_type
 
   # Entra ID (AAD) SSH Login option
