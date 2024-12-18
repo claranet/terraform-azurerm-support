@@ -120,11 +120,12 @@ module "support" {
 | bastion\_custom\_data | The Base64-Encoded Custom Data which should be used for the bastion. Changing this forces a new resource to be created. | `string` | `null` | no |
 | bastion\_custom\_hostname | Custom Bastion hostname. | `string` | `""` | no |
 | bastion\_custom\_name | VM Name as displayed on the console. | `string` | `""` | no |
+| bastion\_dcr\_custom\_name | Custom name for Data Collection Rule. | `string` | `null` | no |
 | bastion\_dns\_label\_custom\_name | Custom name for DNS label. | `string` | `null` | no |
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | bastion\_identity | Map with identity block informations as described in [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity). | <pre>object({<br/>    type         = string<br/>    identity_ids = list(string)<br/>  })</pre> | <pre>{<br/>  "identity_ids": [],<br/>  "type": "SystemAssigned"<br/>}</pre> | no |
 | bastion\_ipconfig\_custom\_name | Custom name for IP Configuration. | `string` | `null` | no |
-| bastion\_maintenance\_configuration\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
+| bastion\_maintenance\_configurations\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
 | bastion\_nic\_accelerated\_networking\_enabled | Should Accelerated Networking be enabled? Defaults to false. | `bool` | `false` | no |
 | bastion\_nic\_custom\_name | Custom name for NIC. | `string` | `null` | no |
 | bastion\_os\_disk\_account\_type | The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`. | `string` | `"Premium_ZRS"` | no |

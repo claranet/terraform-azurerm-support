@@ -122,7 +122,7 @@ variable "bastion_patch_mode" {
   default     = "ImageDefault"
 }
 
-variable "bastion_maintenance_configuration_ids" {
+variable "bastion_maintenance_configurations_ids" {
   description = "List of maintenance configurations to attach to this VM."
   type        = list(string)
   default     = []

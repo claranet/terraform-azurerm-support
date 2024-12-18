@@ -65,3 +65,9 @@ variable "bastion_nic_custom_name" {
   type        = string
   default     = null
 }
+
+variable "bastion_dcr_custom_name" {
+  description = "Custom name for Data Collection Rule."
+  type        = string
+  default     = null
+}

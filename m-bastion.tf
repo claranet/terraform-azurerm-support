@@ -36,11 +36,13 @@ module "bastion_vm" {
   name_prefix = var.name_prefix
   name_suffix = var.name_suffix
 
-  custom_public_ip_name = var.bastion_public_ip_custom_name
-  custom_nic_name       = var.bastion_nic_custom_name
-  custom_ipconfig_name  = var.bastion_ipconfig_custom_name
-  custom_dns_label      = var.bastion_dns_label_custom_name
-  custom_computer_name  = var.bastion_custom_hostname
+  public_ip_custom_name        = var.bastion_public_ip_custom_name
+  nic_custom_name              = var.bastion_nic_custom_name
+  ip_configuration_custom_name = var.bastion_ipconfig_custom_name
+  custom_dns_label             = var.bastion_dns_label_custom_name
+  computer_name                = var.bastion_custom_hostname
+  os_disk_custom_name          = var.bastion_os_disk_custom_name
+  dcr_custom_name              = var.bastion_dcr_custom_name
 
   # Diag/logs
   diagnostics_storage_account_name         = var.diagnostics_storage_account_name
@@ -68,9 +70,9 @@ module "bastion_vm" {
   backup_policy = {
     id = var.bastion_backup_policy_id
   }
-  patch_mode                    = var.bastion_patch_mode
-  maintenance_configuration_ids = var.bastion_maintenance_configuration_ids
-  encryption_at_host_enabled    = var.encryption_at_host_enabled
+  patch_mode                     = var.bastion_patch_mode
+  maintenance_configurations_ids = var.bastion_maintenance_configurations_ids
+  encryption_at_host_enabled     = var.encryption_at_host_enabled
 
   vm_image = var.bastion_vm_image != null ? var.bastion_vm_image : {
     publisher = "Claranet"
@@ -82,7 +84,6 @@ module "bastion_vm" {
 
   # OS Disk
   os_disk_caching              = var.bastion_os_disk_caching
-  os_disk_custom_name          = var.bastion_os_disk_custom_name
   os_disk_size_gb              = var.bastion_os_disk_size_gb
   os_disk_storage_account_type = var.bastion_os_disk_account_type
 
