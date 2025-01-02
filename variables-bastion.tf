@@ -145,3 +145,9 @@ variable "encryption_at_host_enabled" {
   type        = bool
   default     = true
 }
+
+variable "vtpm_enabled" {
+  description = "Specifies if vTPM (virtual Trusted Platform Module) and Trusted Launch is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created."
+  type        = bool
+  default     = true
+}

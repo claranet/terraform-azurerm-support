@@ -191,6 +191,7 @@ module "support" {
 | subnet\_custom\_name | Custom name for Subnet. | `string` | `null` | no |
 | virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |
 | virtual\_network\_resource\_group\_name | Bastion VM virtual network resource group name, default to `resource_group_name` if empty. | `string` | `""` | no |
+| vtpm\_enabled | Specifies if vTPM (virtual Trusted Platform Module) and Trusted Launch is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created. | `bool` | `true` | no |
 
 ## Outputs
 

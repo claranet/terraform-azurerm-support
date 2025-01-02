@@ -73,6 +73,7 @@ module "bastion_vm" {
   patch_mode                     = var.bastion_patch_mode
   maintenance_configurations_ids = var.bastion_maintenance_configurations_ids
   encryption_at_host_enabled     = var.encryption_at_host_enabled
+  vtpm_enabled                   = var.vtpm_enabled
 
   vm_image = var.bastion_vm_image != null ? var.bastion_vm_image : {
     publisher = "Claranet"
