@@ -57,7 +57,6 @@ module "bastion_vm" {
   user_data   = var.bastion_user_data
 
   public_ip_enabled = var.bastion_public_ip_enabled
-  public_ip_sku     = var.bastion_public_ip_sku
   public_ip_zones   = var.bastion_public_ip_zones
 
   admin_username                  = var.admin_username

@@ -77,13 +77,6 @@ variable "bastion_public_ip_enabled" {
   nullable    = false
 }
 
-variable "bastion_public_ip_sku" {
-  description = "SKU for the public IP attached to the Virtual Machine."
-  type        = string
-  default     = "Standard"
-  nullable    = false
-}
-
 variable "bastion_public_ip_zones" {
   description = "Zones for public IP attached to the Virtual Machine. Can be `null` if no zone distpatch."
   type        = list(number)

@@ -138,7 +138,6 @@ module "support" {
 | bastion\_private\_ip | Allows to define the private IP to associate with the bastion. | `string` | `null` | no |
 | bastion\_public\_ip\_custom\_name | Custom name for public IP. | `string` | `null` | no |
 | bastion\_public\_ip\_enabled | Should a Public IP be attached to the Virtual Machine? | `bool` | `true` | no |
-| bastion\_public\_ip\_sku | SKU for the public IP attached to the Virtual Machine. | `string` | `"Standard"` | no |
 | bastion\_public\_ip\_zones | Zones for public IP attached to the Virtual Machine. Can be `null` if no zone distpatch. | `list(number)` | <pre>[<br/>  1,<br/>  2,<br/>  3<br/>]</pre> | no |
 | bastion\_user\_data | The Base64-Encoded User Data which should be used for the bastion. | `string` | `null` | no |
 | bastion\_vm\_image | Bastion Virtual Machine source image information. See [documentation](https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference). This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image. | <pre>object({<br/>    publisher = string<br/>    offer     = string<br/>    sku       = string<br/>    version   = string<br/>  })</pre> | `null` | no |
