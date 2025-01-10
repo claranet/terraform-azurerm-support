@@ -145,7 +145,7 @@ module "support" {
 |------|--------|---------|
 | azure\_region | claranet/regions/azurerm | ~> 7.2.0 |
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 7.13.0 |
-| claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 7.0.0 |
+| claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 7.8.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 7.2.0 |
 
