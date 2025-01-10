@@ -5,7 +5,7 @@ variable "admin_ssh_ips" {
 }
 
 variable "nsg_additional_rules" {
-  description = "Additional network security group rules to add. For arguments please refer to https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference."
+  description = "Additional network security group rules to add. For arguments please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#argument-reference)."
   type = list(object({
     priority  = number
     name      = string
@@ -25,7 +25,8 @@ variable "nsg_additional_rules" {
     destination_address_prefix   = optional(string)
     destination_address_prefixes = optional(list(string))
   }))
-  default = []
+  default  = []
+  nullable = false
 }
 
 # Module Subnet
@@ -62,13 +63,13 @@ variable "service_endpoint_policy_ids" {
 variable "private_link_endpoint_enabled" {
   description = "Enable or disable network policies for the Private Endpoint on the subnet."
   type        = bool
-  default     = null
+  default     = true
 }
 
 variable "private_link_service_enabled" {
   description = "Enable or disable network policies for the Private Link Service on the subnet."
   type        = bool
-  default     = null
+  default     = true
 }
 
 variable "virtual_network_name" {
@@ -82,7 +83,11 @@ variable "virtual_network_resource_group_name" {
   default     = ""
 }
 
-variable "subnet_cidr_list" {
-  description = "The address prefixes to use for the subnet."
-  type        = list(string)
+variable "subnet" {
+  description = "The ID of the existing subnet or the address prefixes to use for the new subnet."
+  type = object({
+    id    = optional(string)
+    cidrs = optional(list(string), [])
+  })
+  nullable = false
 }

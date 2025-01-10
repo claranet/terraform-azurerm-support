@@ -12,56 +12,62 @@ variable "name_suffix" {
 }
 
 # Custom naming override
-variable "custom_bastion_vm_name" {
+variable "bastion_custom_name" {
   description = "VM Name as displayed on the console."
   type        = string
   default     = ""
 }
 
-variable "custom_bastion_vm_hostname" {
+variable "bastion_custom_hostname" {
   description = "Custom Bastion hostname."
   type        = string
   default     = ""
 }
 
-variable "custom_subnet_name" {
+variable "subnet_custom_name" {
   description = "Custom name for Subnet."
   type        = string
   default     = null
 }
 
-variable "custom_security_group_name" {
+variable "network_security_group_custom_name" {
   description = "Custom name for Network Security Group."
   type        = string
   default     = null
 }
 
-variable "custom_bastion_storage_os_disk_name" {
+variable "bastion_os_disk_custom_name" {
   description = "Custom name for Bastion OS disk."
   type        = string
   default     = ""
 }
 
-variable "custom_bastion_public_ip_name" {
+variable "bastion_public_ip_custom_name" {
   description = "Custom name for public IP."
   type        = string
   default     = null
 }
 
-variable "custom_bastion_ipconfig_name" {
+variable "bastion_ipconfig_custom_name" {
   description = "Custom name for IP Configuration."
   type        = string
   default     = null
 }
 
-variable "custom_bastion_dns_label" {
+variable "bastion_dns_label_custom_name" {
   description = "Custom name for DNS label."
   type        = string
   default     = null
 }
 
-variable "custom_bastion_nic_name" {
+variable "bastion_nic_custom_name" {
   description = "Custom name for NIC."
+  type        = string
+  default     = null
+}
+
+variable "bastion_dcr_custom_name" {
+  description = "Custom name for Data Collection Rule."
   type        = string
   default     = null
 }

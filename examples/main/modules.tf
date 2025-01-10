@@ -1,54 +1,3 @@
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
-
-module "azure_network_vnet" {
-  source  = "claranet/vnet/azurerm"
-  version = "x.x.x"
-
-  environment    = var.environment
-  location       = module.azure_region.location
-  location_short = module.azure_region.location_short
-  client_name    = var.client_name
-  stack          = var.stack
-
-  resource_group_name = module.rg.resource_group_name
-  vnet_cidr           = ["10.10.0.0/16"]
-}
-
-module "run" {
-  source  = "claranet/run/azurerm"
-  version = "x.x.x"
-
-  client_name         = var.client_name
-  environment         = var.environment
-  stack               = var.stack
-  location            = module.azure_region.location
-  location_short      = module.azure_region.location_short
-  resource_group_name = module.rg.resource_group_name
-
-  monitoring_function_enabled = false
-  vm_monitoring_enabled       = true
-  backup_vm_enabled           = true
-  update_center_enabled       = false
-
-  recovery_vault_cross_region_restore_enabled = true
-  vm_backup_daily_policy_retention            = 31
-}
-
 resource "tls_private_key" "bastion" {
   algorithm = "RSA"
 }
@@ -61,13 +10,13 @@ module "support" {
   location_short      = module.azure_region.location_short
   environment         = var.environment
   stack               = var.stack
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
-  virtual_network_name = module.azure_network_vnet.virtual_network_name
+  virtual_network_name = module.vnet.name
 
   # Bastion parameters
-  vm_size                 = "Standard_B1s"
-  storage_os_disk_size_gb = "32"
+  bastion_vm_size         = "Standard_B1s"
+  bastion_os_disk_size_gb = "32"
 
   admin_ssh_ips = var.admin_ssh_ips
 
@@ -81,7 +30,9 @@ module "support" {
   ssh_public_key = tls_private_key.bastion.public_key_openssh
 
   # Define your subnets if you want to override it
-  subnet_cidr_list = ["10.10.10.0/24"]
+  subnet = {
+    cidrs = ["10.10.10.0/24"]
+  }
   #  support_dns_zone_name = var.support_dns_zone_name
 
   # Diagnostics / logs

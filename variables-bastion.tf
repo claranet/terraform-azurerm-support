@@ -1,10 +1,16 @@
 # Module Bastion / VM
-variable "vm_size" {
+variable "bastion_vm_size" {
   description = "Bastion virtual machine size."
   type        = string
 }
 
 # Authentication
+variable "disable_password_authentication" {
+  description = "Option to disable or enable password authentication if admin password is not set."
+  type        = bool
+  default     = true
+}
+
 variable "admin_password" {
   description = "Password for the administrator account of the virtual machine."
   type        = string
@@ -24,7 +30,7 @@ variable "ssh_public_key" {
 }
 
 variable "bastion_vm_image" {
-  description = "Bastion Virtual Machine source image information. See https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference. This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image."
+  description = "Bastion Virtual Machine source image information. See [documentation](https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference). This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image."
   type = object({
     publisher = string
     offer     = string
@@ -40,18 +46,18 @@ variable "bastion_vm_image_id" {
   default     = null
 }
 
-variable "storage_os_disk_caching" {
+variable "bastion_os_disk_caching" {
   description = "Specifies the caching requirements for the OS Disk."
   type        = string
   default     = "ReadWrite"
 }
 
-variable "storage_os_disk_size_gb" {
+variable "bastion_os_disk_size_gb" {
   description = "Specifies the size of the OS Disk in gigabytes."
   type        = string
 }
 
-variable "storage_os_disk_account_type" {
+variable "bastion_os_disk_account_type" {
   description = "The Type of Storage Account which should back this the Internal OS Disk. Possible values are `Standard_LRS`, `StandardSSD_LRS`, `Premium_LRS`, `StandardSSD_ZRS` and `Premium_ZRS`."
   type        = string
   default     = "Premium_ZRS"
@@ -64,18 +70,15 @@ variable "bastion_private_ip" {
   default     = null
 }
 
-variable "bastion_public_ip_sku" {
-  description = <<EOD
-Public IP SKU attached to the bastion VM. Can be `null` if no public IP is needed.
-If set to `null`, the Terraform module must be executed from a host having connectivity to the bastion private IP.
-Thus, the bootstrap's ansible playbook will use the bastion private IP for inventory.
-EOD
-  type        = string
-  default     = "Standard"
+variable "bastion_public_ip_enabled" {
+  description = "Should a Public IP be attached to the Virtual Machine?"
+  type        = bool
+  default     = true
+  nullable    = false
 }
 
 variable "bastion_public_ip_zones" {
-  description = "Zones for public IP attached to the VM. Can be `null` if no zone distpatch."
+  description = "Zones for public IP attached to the Virtual Machine. Can be `null` if no zone distpatch."
   type        = list(number)
   default     = [1, 2, 3]
 }
@@ -88,7 +91,7 @@ variable "bastion_nic_accelerated_networking_enabled" {
 
 ## Identity variables
 variable "bastion_identity" {
-  description = "Map with identity block informations as described here https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity."
+  description = "Map with identity block informations as described in [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity)."
   type = object({
     type         = string
     identity_ids = list(string)
@@ -112,7 +115,7 @@ variable "bastion_patch_mode" {
   default     = "ImageDefault"
 }
 
-variable "bastion_maintenance_configuration_ids" {
+variable "bastion_maintenance_configurations_ids" {
   description = "List of maintenance configurations to attach to this VM."
   type        = list(string)
   default     = []
@@ -128,4 +131,16 @@ variable "bastion_user_data" {
   description = "The Base64-Encoded User Data which should be used for the bastion."
   type        = string
   default     = null
+}
+
+variable "encryption_at_host_enabled" {
+  description = "Should all disks (including the temporary disk) attached to the Virtual Machine be encrypted by enabling Encryption at Host? [List of compatible Virtual Machine sizes](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli#finding-supported-vm-sizes)."
+  type        = bool
+  default     = true
+}
+
+variable "vtpm_enabled" {
+  description = "Specifies if vTPM (virtual Trusted Platform Module) and Trusted Launch is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created."
+  type        = bool
+  default     = true
 }
