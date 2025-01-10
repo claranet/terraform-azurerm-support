@@ -1,3 +1,38 @@
+## 8.0.0 (2025-01-10)
+
+### ⚠ BREAKING CHANGES
+
+* **AZ-1088:** AzureRM Provider v4+ and OpenTofu 1.8+
+
+### Features
+
+* **AZ-1088:** add `bastion_public_ip_enabled` variable bbd5e6a
+* **AZ-1088:** add `vtpm_enabled` variable 3f54f69
+* **AZ-1088:** module v8 structure and updates 417fa70
+* **AZ-1088:** optional subnet creation 5cfd395
+* **AZ-1088:** remove `bastion_public_ip_sku` variable cf89e01
+
+### Code Refactoring
+
+* **AZ-1088:** apply suggestions improvements 23be73a
+* **AZ-1088:** apply variable naming suggestions 1b79c2c
+
+### Miscellaneous Chores
+
+* **AZ-1088:** update variables for module `linux-vm` v8 98d912e
+* **deps:** update dependency claranet/nsg/azurerm to v8 dede002
+* **deps:** update dependency claranet/subnet/azurerm to v8 bf4bafd
+* **deps:** update dependency opentofu to v1.8.7 1cd2b7f
+* **deps:** update dependency opentofu to v1.8.8 a06669c
+* **deps:** update dependency opentofu to v1.9.0 1a014e7
+* **deps:** update dependency trivy to v0.58.1 89cd266
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 2b44482
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 cd3645b
+* **deps:** update terraform claranet/claranet-gallery-images/azapi to v8 171462e
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 7.13.0 0a410c5
+* **deps:** update tools 8f78f9b
+* **trivy:** add ignore file f81aeff
+
 ## 7.9.0 (2024-10-18)
 
 ### Features
