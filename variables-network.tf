@@ -83,7 +83,11 @@ variable "virtual_network_resource_group_name" {
   default     = ""
 }
 
-variable "subnet_cidrs" {
-  description = "The address prefixes to use for the subnet."
-  type        = list(string)
+variable "subnet" {
+  description = "The ID of the existing subnet or the address prefixes to use for the new subnet."
+  type = object({
+    id    = optional(string)
+    cidrs = optional(list(string), [])
+  })
+  nullable = false
 }

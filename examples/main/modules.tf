@@ -30,7 +30,9 @@ module "support" {
   ssh_public_key = tls_private_key.bastion.public_key_openssh
 
   # Define your subnets if you want to override it
-  subnet_cidrs = ["10.10.10.0/24"]
+  subnet = {
+    cidrs = ["10.10.10.0/24"]
+  }
   #  support_dns_zone_name = var.support_dns_zone_name
 
   # Diagnostics / logs

@@ -1,21 +1,16 @@
 output "module_subnet" {
   description = "Module subnet object."
-  value       = module.support_subnet
+  value       = one(module.support_subnet[*])
 }
 
 output "subnet_id" {
   description = "ID of the created subnet."
-  value       = module.support_subnet.id
+  value       = try(module.support_subnet[0].id, var.subnet.id)
 }
 
 output "subnet_cidrs" {
   description = "CIDR list of the created subnet."
-  value       = module.support_subnet.cidrs
-}
-
-output "subnet_name" {
-  description = "Name of the created subnet."
-  value       = module.support_subnet.name
+  value       = try(module.support_subnet[0].cidrs, var.subnet.cidrs)
 }
 
 output "module_network_security_group" {

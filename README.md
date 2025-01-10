@@ -71,7 +71,9 @@ module "support" {
   ssh_public_key = tls_private_key.bastion.public_key_openssh
 
   # Define your subnets if you want to override it
-  subnet_cidrs = ["10.10.10.0/24"]
+  subnet = {
+    cidrs = ["10.10.10.0/24"]
+  }
   #  support_dns_zone_name = var.support_dns_zone_name
 
   # Diagnostics / logs
@@ -93,7 +95,7 @@ module "support" {
 | Name | Source | Version |
 |------|--------|---------|
 | azure\_region | claranet/regions/azurerm | ~> 7.2.0 |
-| bastion\_vm | git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git | refactor/AZ-1088-rework-module |
+| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.0.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 8.0.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 8.0.1 |
@@ -186,7 +188,7 @@ module "support" {
 | service\_endpoints | The list of Service endpoints to associate with the subnet. | `list(string)` | `[]` | no |
 | ssh\_public\_key | SSH public key, generated if empty. | `string` | `null` | no |
 | stack | Project stack name. | `string` | n/a | yes |
-| subnet\_cidrs | The address prefixes to use for the subnet. | `list(string)` | n/a | yes |
+| subnet | The ID of the existing subnet or the address prefixes to use for the new subnet. | <pre>object({<br/>    id    = optional(string)<br/>    cidrs = optional(list(string), [])<br/>  })</pre> | n/a | yes |
 | subnet\_custom\_name | Custom name for Subnet. | `string` | `null` | no |
 | virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |
 | virtual\_network\_resource\_group\_name | Bastion VM virtual network resource group name, default to `resource_group_name` if empty. | `string` | `""` | no |
@@ -217,6 +219,5 @@ module "support" {
 | network\_security\_group\_name | Network security group name. |
 | subnet\_cidrs | CIDR list of the created subnet. |
 | subnet\_id | ID of the created subnet. |
-| subnet\_name | Name of the created subnet. |
 | terraform\_module | Information about this Terraform module. |
 <!-- END_TF_DOCS -->

@@ -11,9 +11,8 @@ module "claranet_gallery_images" {
 }
 
 module "bastion_vm" {
-  # source  = "claranet/linux-vm/azurerm"
-  # version = "~> 8.0.0"
-  source = "git::ssh://git@git.fr.clara.net/claranet/projects/cloud/azure/terraform/modules/linux-vm.git?ref=refactor/AZ-1088-rework-module"
+  source  = "claranet/linux-vm/azurerm"
+  version = "~> 8.0.0"
 
   location            = var.location
   location_short      = var.location_short
@@ -27,7 +26,7 @@ module "bastion_vm" {
 
   # Network
   subnet = {
-    id = module.support_subnet.id
+    id = try(module.support_subnet[0].id, var.subnet.id)
   }
   static_private_ip                  = var.bastion_private_ip
   nic_accelerated_networking_enabled = var.bastion_nic_accelerated_networking_enabled

@@ -2,6 +2,8 @@ module "support_subnet" {
   source  = "claranet/subnet/azurerm"
   version = "~> 8.0.1"
 
+  count = var.subnet.id == null ? 1 : 0
+
   environment    = var.environment
   location_short = var.location_short
   client_name    = var.client_name
@@ -12,7 +14,7 @@ module "support_subnet" {
   virtual_network_name = var.virtual_network_name
 
   custom_name = var.subnet_custom_name
-  cidrs       = var.subnet_cidrs
+  cidrs       = try(var.subnet.cidrs, [])
 
   route_table_rg   = var.route_table_rg
   route_table_name = var.route_table_name
@@ -27,7 +29,7 @@ module "support_subnet" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
-  subnet_id                 = module.support_subnet.id
+  subnet_id                 = try(module.support_subnet[0].id, var.subnet.id)
   network_security_group_id = module.support_nsg.id
 }
 
