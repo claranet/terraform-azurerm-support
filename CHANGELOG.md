@@ -1,3 +1,13 @@
+## 8.0.1 (2025-01-13)
+
+### Bug Fixes
+
+* **AZ-1088:** add `moved` block e298b99
+
+### Miscellaneous Chores
+
+* **deps:** update dependency tflint to v0.55.0 676e579
+
 ## 8.0.0 (2025-01-10)
 
 ### ⚠ BREAKING CHANGES
