@@ -28,6 +28,11 @@ module "support_subnet" {
   default_outbound_access_enabled = var.default_outbound_access_enabled
 }
 
+moved {
+  from = module.support_subnet
+  to   = module.support_subnet[0]
+}
+
 resource "azurerm_subnet_network_security_group_association" "subnet_bastion_association" {
   subnet_id                 = try(module.support_subnet[0].id, var.subnet.id)
   network_security_group_id = module.support_nsg.id
