@@ -94,7 +94,7 @@ module "support" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| azure\_region | claranet/regions/azurerm | ~> 7.2.0 |
+| azure\_region | claranet/regions/azurerm | ~> 7.3.0 |
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 8.0.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.0.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 8.0.0 |
