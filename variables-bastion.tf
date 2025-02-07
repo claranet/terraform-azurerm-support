@@ -110,9 +110,9 @@ variable "bastion_backup_policy_id" {
 
 # Update Management
 variable "bastion_patch_mode" {
-  description = "Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`"
+  description = "Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`."
   type        = string
-  default     = "ImageDefault"
+  default     = "AutomaticByPlatform"
 }
 
 variable "bastion_maintenance_configurations_ids" {

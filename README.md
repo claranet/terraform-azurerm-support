@@ -136,7 +136,7 @@ module "support" {
 | bastion\_os\_disk\_extra\_tags | Additional tags to set on the OS disk. | `map(string)` | `{}` | no |
 | bastion\_os\_disk\_size\_gb | Specifies the size of the OS Disk in gigabytes. | `string` | n/a | yes |
 | bastion\_os\_disk\_tagging\_enabled | Should OS disk tagging be enabled? Defaults to `true`. | `bool` | `true` | no |
-| bastion\_patch\_mode | Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault` | `string` | `"ImageDefault"` | no |
+| bastion\_patch\_mode | Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are `AutomaticByPlatform` and `ImageDefault`. | `string` | `"AutomaticByPlatform"` | no |
 | bastion\_private\_ip | Allows to define the private IP to associate with the bastion. | `string` | `null` | no |
 | bastion\_public\_ip\_custom\_name | Custom name for public IP. | `string` | `null` | no |
 | bastion\_public\_ip\_enabled | Should a Public IP be attached to the Virtual Machine? | `bool` | `true` | no |
