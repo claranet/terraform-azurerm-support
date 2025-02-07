@@ -1,3 +1,20 @@
+## 8.0.2 (2025-02-07)
+
+### Bug Fixes
+
+* **AZ-1514:** fixed default maintenance mode 0357450
+
+### Miscellaneous Chores
+
+* **deps:** update dependency pre-commit to v4.1.0 aa113d8
+* **deps:** update dependency tflint to v0.55.1 877b5fd
+* **deps:** update dependency trivy to v0.58.2 c52c365
+* **deps:** update dependency trivy to v0.59.0 91902c1
+* **deps:** update dependency trivy to v0.59.1 70ed32a
+* **deps:** update terraform claranet/regions/azurerm to ~> 7.3.0 1267a26
+* update Github templates 9fff6c1
+* update tflint config for v0.55.0 5814a68
+
 ## 8.0.1 (2025-01-13)
 
 ### Bug Fixes
