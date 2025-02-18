@@ -1,3 +1,14 @@
+## 8.0.3 (2025-02-18)
+
+### Bug Fixes
+
+* bump `regions` module 8ca46b4
+
+### Miscellaneous Chores
+
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.21.0 27ed9df
+* **deps:** update terraform claranet/claranet-gallery-images/azapi to ~> 8.1.0 68a5c8f
+
 ## 8.0.2 (2025-02-07)
 
 ### Bug Fixes
