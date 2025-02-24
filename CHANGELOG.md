@@ -1,3 +1,13 @@
+## 8.1.0 (2025-02-24)
+
+### Features
+
+* **AZ-1518:** add security boot option 704eb78
+
+### Miscellaneous Chores
+
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 8.1.0 dcc118b
+
 ## 8.0.3 (2025-02-18)
 
 ### Bug Fixes
