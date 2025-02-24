@@ -95,7 +95,7 @@ module "support" {
 | Name | Source | Version |
 |------|--------|---------|
 | azure\_region | claranet/regions/azurerm | ~> 7.3.1 |
-| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.0.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.1.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.1.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 8.0.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 8.0.1 |
@@ -184,6 +184,7 @@ module "support" {
 | resource\_group\_name | Resource group name. | `string` | n/a | yes |
 | route\_table\_name | The Route Table name to associate with the subnet. | `string` | `null` | no |
 | route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
+| secure\_boot\_enabled | Specifies if Secure Boot is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created. | `bool` | `true` | no |
 | service\_endpoint\_policy\_ids | The list of IDs of Service Endpoint Policies to associate with the subnet. | `list(string)` | `null` | no |
 | service\_endpoints | The list of Service endpoints to associate with the subnet. | `list(string)` | `[]` | no |
 | ssh\_public\_key | SSH public key, generated if empty. | `string` | `null` | no |
