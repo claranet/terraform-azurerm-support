@@ -144,3 +144,9 @@ variable "vtpm_enabled" {
   type        = bool
   default     = true
 }
+
+variable "secure_boot_enabled" {
+  description = "Specifies if Secure Boot is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created."
+  type        = bool
+  default     = true
+}
