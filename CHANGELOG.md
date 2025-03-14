@@ -1,3 +1,17 @@
+## 8.2.0 (2025-03-14)
+
+### Features
+
+* add module vm v8.2 variables 6289a49
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/linux-vm/azurerm to ~> 8.2.0 3e9a051
+* **deps:** update dependency claranet/regions/azurerm to v8 5972d0a
+* **deps:** update dependency trivy to v0.60.0 0e5024a
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.22.0 d1861f7
+* **deps:** update terraform claranet/regions/azurerm to ~> 7.4.0 179145c
+
 ## 8.1.0 (2025-02-24)
 
 ### Features
