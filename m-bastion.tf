@@ -47,9 +47,9 @@ module "bastion_vm" {
   diagnostics_storage_account_name         = var.diagnostics_storage_account_name
   azure_monitor_agent_version              = var.azure_monitor_agent_version
   azure_monitor_agent_auto_upgrade_enabled = var.azure_monitor_agent_auto_upgrade_enabled
-  azure_monitor_data_collection_rule = {
+  azure_monitor_data_collection_rule = var.azure_monitor_data_collection_rule_id != null ? {
     id = var.azure_monitor_data_collection_rule_id
-  }
+  } : null
 
   # Boot scripts
   custom_data = var.bastion_custom_data
@@ -65,9 +65,10 @@ module "bastion_vm" {
 
   identity = var.bastion_identity
 
-  backup_policy = {
+  backup_policy = var.bastion_backup_policy_id != null ? {
     id = var.bastion_backup_policy_id
-  }
+  } : null
+
   patch_mode                     = var.bastion_patch_mode
   maintenance_configurations_ids = var.bastion_maintenance_configurations_ids
   encryption_at_host_enabled     = var.encryption_at_host_enabled
@@ -86,6 +87,10 @@ module "bastion_vm" {
   os_disk_caching              = var.bastion_os_disk_caching
   os_disk_size_gb              = var.bastion_os_disk_size_gb
   os_disk_storage_account_type = var.bastion_os_disk_account_type
+
+  ultra_ssd_enabled      = var.ultra_ssd_enabled
+  disk_controller_type   = var.disk_controller_type
+  disk_encryption_set_id = var.disk_encryption_set_id
 
   # Entra ID (AAD) SSH Login option
   entra_ssh_login_enabled           = var.entra_ssh_login_enabled

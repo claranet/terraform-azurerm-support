@@ -150,3 +150,21 @@ variable "secure_boot_enabled" {
   type        = bool
   default     = true
 }
+
+variable "ultra_ssd_enabled" {
+  description = "Specifies whether Ultra Disks is enabled (`UltraSSD_LRS` storage type for data disks)."
+  type        = bool
+  default     = null
+}
+
+variable "disk_controller_type" {
+  description = "Specifies the Disk Controller Type used for this Virtual Machine. Possible values are `SCSI` and `NVMe`."
+  type        = string
+  default     = null
+}
+
+variable "disk_encryption_set_id" {
+  description = "ID of the disk encryption set to use to encrypt VM disks."
+  type        = string
+  default     = null
+}

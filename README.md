@@ -150,6 +150,8 @@ module "support" {
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | diagnostics\_storage\_account\_name | Name of the Storage Account in which store VM diagnostics. | `string` | n/a | yes |
 | disable\_password\_authentication | Option to disable or enable password authentication if admin password is not set. | `bool` | `true` | no |
+| disk\_controller\_type | Specifies the Disk Controller Type used for this Virtual Machine. Possible values are `SCSI` and `NVMe`. | `string` | `null` | no |
+| disk\_encryption\_set\_id | ID of the disk encryption set to use to encrypt VM disks. | `string` | `null` | no |
 | encryption\_at\_host\_enabled | Should all disks (including the temporary disk) attached to the Virtual Machine be encrypted by enabling Encryption at Host? [List of compatible Virtual Machine sizes](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli#finding-supported-vm-sizes). | `bool` | `true` | no |
 | entra\_ssh\_login\_admin\_objects\_ids | Entra ID (aka AAD) objects IDs allowed to connect as administrator on the Virtual Machine. | `list(string)` | `[]` | no |
 | entra\_ssh\_login\_enabled | Enable SSH logins with Entra ID (aka AAD). | `bool` | `false` | no |
@@ -191,6 +193,7 @@ module "support" {
 | stack | Project stack name. | `string` | n/a | yes |
 | subnet | The ID of the existing subnet or the address prefixes to use for the new subnet. | <pre>object({<br/>    id    = optional(string)<br/>    cidrs = optional(list(string), [])<br/>  })</pre> | n/a | yes |
 | subnet\_custom\_name | Custom name for Subnet. | `string` | `null` | no |
+| ultra\_ssd\_enabled | Specifies whether Ultra Disks is enabled (`UltraSSD_LRS` storage type for data disks). | `bool` | `null` | no |
 | virtual\_network\_name | Bastion VM virtual network name. | `string` | n/a | yes |
 | virtual\_network\_resource\_group\_name | Bastion VM virtual network resource group name, default to `resource_group_name` if empty. | `string` | `""` | no |
 | vtpm\_enabled | Specifies if vTPM (virtual Trusted Platform Module) and Trusted Launch is enabled for the Virtual Machine. Defaults to `true`. Changing this forces a new resource to be created. | `bool` | `true` | no |
