@@ -4,6 +4,12 @@ variable "bastion_vm_size" {
   type        = string
 }
 
+variable "bastion_zone_id" {
+  description = "Index of the Availability Zone which the Bastion should be allocated in."
+  type        = number
+  default     = null
+}
+
 # Authentication
 variable "disable_password_authentication" {
   description = "Option to disable or enable password authentication if admin password is not set."

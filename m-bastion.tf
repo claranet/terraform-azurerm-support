@@ -23,6 +23,7 @@ module "bastion_vm" {
 
   vm_size     = var.bastion_vm_size
   custom_name = var.bastion_custom_name
+  zone_id     = var.bastion_zone_id
 
   # Network
   subnet = {

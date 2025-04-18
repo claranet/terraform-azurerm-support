@@ -145,6 +145,7 @@ module "support" {
 | bastion\_vm\_image | Bastion Virtual Machine source image information. See [documentation](https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html#storage_image_reference). This variable cannot be used if `vm_image_id` is already defined. Defaults to Claranet image. | <pre>object({<br/>    publisher = string<br/>    offer     = string<br/>    sku       = string<br/>    version   = string<br/>  })</pre> | `null` | no |
 | bastion\_vm\_image\_id | The ID of the Image which this Virtual Machine should be created from. This variable supersedes the `vm_image` variable if not null. Defaults to Claranet image. | `string` | `null` | no |
 | bastion\_vm\_size | Bastion virtual machine size. | `string` | n/a | yes |
+| bastion\_zone\_id | Index of the Availability Zone which the Bastion should be allocated in. | `number` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | default\_outbound\_access\_enabled | Enable or disable `default_outbound_access`. See [documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/default-outbound-access). | `bool` | `false` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
