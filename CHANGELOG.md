@@ -1,3 +1,18 @@
+## 8.2.1 (2025-04-22)
+
+### Bug Fixes
+
+* **AZ-1548:** add zone_id variable f030dcb
+
+### Miscellaneous Chores
+
+* **deps:** update dependency pre-commit to v4.2.0 dd40db2
+* **deps:** update dependency terraform-docs to v0.20.0 046dee3
+* **deps:** update dependency trivy to v0.61.1 96a5dda
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.0 2dbd894
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 8.3.0 848eb3f
+* **deps:** update tools 01546cf
+
 ## 8.2.0 (2025-03-14)
 
 ### Features
