@@ -1,3 +1,17 @@
+## 8.2.2 (2025-05-26)
+
+### Bug Fixes
+
+* **deps:** 🔧 update provider versions to 4.11 and module versions to 8.0.2 895235f
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.9.1 435f2ab
+* **deps:** update dependency tflint to v0.57.0 57924c0
+* **deps:** update dependency tflint to v0.58.0 8969630
+* **deps:** update dependency trivy to v0.62.0 a62691f
+* **deps:** update dependency trivy to v0.62.1 a5a2554
+
 ## 8.2.1 (2025-04-22)
 
 ### Bug Fixes
