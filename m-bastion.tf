@@ -12,7 +12,7 @@ module "claranet_gallery_images" {
 
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "~> 8.3.0"
+  version = "~> 8.4.0"
 
   location            = var.location
   location_short      = var.location_short
