@@ -87,7 +87,7 @@ module "support" {
 
 | Name | Version |
 |------|---------|
-| azurerm | ~> 4.11 |
+| azurerm | ~> 4.26 |
 | tls | >= 3.0 |
 
 ## Modules
