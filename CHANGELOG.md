@@ -1,3 +1,15 @@
+## 8.2.3 (2025-06-11)
+
+### Bug Fixes
+
+* **deps:** 🔧 update `azurerm` provider version to `~> 4.26` aea1360
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/linux-vm/azurerm to ~> 8.4.0 f7ab066
+* **deps:** update dependency trivy to v0.63.0 8295896
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.1 875464d
+
 ## 8.2.2 (2025-05-26)
 
 ### Bug Fixes
