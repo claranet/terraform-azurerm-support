@@ -1,6 +1,6 @@
 module "support_subnet" {
   source  = "claranet/subnet/azurerm"
-  version = "~> 8.0.1"
+  version = "~> 8.1.0"
 
   count = var.subnet.id == null ? 1 : 0
 
