@@ -8,13 +8,17 @@ module "support_subnet" {
   location_short = var.location_short
   client_name    = var.client_name
   stack          = var.stack
-  name_prefix    = var.name_prefix
 
   resource_group_name  = coalesce(var.virtual_network_resource_group_name, var.resource_group_name)
   virtual_network_name = var.virtual_network_name
 
+  # Naming
+  name_prefix = local.name_prefix
+  name_suffix = local.name_suffix
+
   custom_name = var.subnet_custom_name
-  cidrs       = try(var.subnet.cidrs, [])
+
+  cidrs = try(var.subnet.cidrs, [])
 
   route_table_rg   = var.route_table_rg
   route_table_name = var.route_table_name
