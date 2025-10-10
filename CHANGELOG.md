@@ -1,3 +1,13 @@
+## 8.3.0 (2025-10-10)
+
+### Features
+
+* ✨ add name_suffix to subnet 67590c5
+
+### Miscellaneous Chores
+
+* **deps:** update dependency trivy to v0.67.1 71eef24
+
 ## 8.2.4 (2025-10-01)
 
 ### Code Refactoring
