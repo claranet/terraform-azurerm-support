@@ -1,3 +1,20 @@
+## 8.3.1 (2025-12-02)
+
+### Bug Fixes
+
+* 🐛 update output 22e30ae
+
+### Miscellaneous Chores
+
+* **deps:** update dependency claranet/linux-vm/azurerm to ~> 8.6.0 e277578
+* **deps:** update dependency opentofu to v1.10.7 88879f8
+* **deps:** update dependency pre-commit to v4.4.0 fc4bb5f
+* **deps:** update dependency pre-commit to v4.5.0 bb8305b
+* **deps:** update dependency tflint to v0.60.0 663f1d9
+* **deps:** update dependency trivy to v0.67.2 7bb45a9
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.8 4d4baf6
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.2 ef4acbf
+
 ## 8.3.0 (2025-10-10)
 
 ### Features
