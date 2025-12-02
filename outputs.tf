@@ -40,7 +40,7 @@ output "bastion_network_public_ip" {
 
 output "bastion_network_public_ip_id" {
   description = "Bastion public IP ID."
-  value       = module.bastion_vm.public_ip_id
+  value       = module.bastion_vm.ip_address_id
 }
 
 output "bastion_network_interface_id" {
