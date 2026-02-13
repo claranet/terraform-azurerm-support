@@ -1,3 +1,26 @@
+## 8.3.2 (2026-02-13)
+
+### Code Refactoring
+
+* **gitlab MR template:** ♻️ update default reviewers group with Azure Factory 🔧 28aef52
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.11.2 a3ed31f
+* **deps:** update dependency opentofu to v1.11.3 a8dd70d
+* **deps:** update dependency opentofu to v1.11.4 0b2395e
+* **deps:** update dependency opentofu to v1.11.5 3717749
+* **deps:** update dependency pre-commit to v4.5.1 899155a
+* **deps:** update dependency tflint to v0.61.0 e86331b
+* **deps:** update dependency trivy to v0.68.1 eb42fe4
+* **deps:** update dependency trivy to v0.68.2 ee5823e
+* **deps:** update dependency trivy to v0.69.0 062182a
+* **deps:** update dependency trivy to v0.69.1 9f18c8d
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.10 f798618
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.9 bbe2bf8
+* **deps:** update terraform claranet/linux-vm/azurerm to ~> 8.7.0 f06a173
+* **deps:** update tools a923865
+
 ## 8.3.1 (2025-12-02)
 
 ### Bug Fixes
