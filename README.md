@@ -86,14 +86,14 @@ module "support" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurerm | ~> 4.31 |
 | tls | >= 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | azure\_region | claranet/regions/azurerm | ~> 8.0.2 |
 | bastion\_vm | claranet/linux-vm/azurerm | ~> 8.7.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.1.0 |
@@ -103,7 +103,7 @@ module "support" {
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_subnet_network_security_group_association.subnet_bastion_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [tls_private_key.ssh](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
@@ -111,7 +111,7 @@ module "support" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | admin\_password | Password for the administrator account of the virtual machine. | `string` | `null` | no |
 | admin\_ssh\_ips | Claranet IPs allowed to use SSH on bastion. | `list(string)` | n/a | yes |
 | admin\_username | Name of the administrator user. | `string` | `"claranet"` | no |
@@ -202,7 +202,7 @@ module "support" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | bastion\_admin\_password | Password of the admin user. |
 | bastion\_admin\_username | Username of the admin user. |
 | bastion\_hostname | Bastion hostname. |
