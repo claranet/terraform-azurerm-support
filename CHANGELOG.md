@@ -1,3 +1,31 @@
+## 8.3.4 (2026-07-20)
+
+### Bug Fixes
+
+* **tflint:** 🐛 bump Azure rules version, fix signature bug f65094f
+
+### Code Refactoring
+
+* ♻️ add `bastion_key_vault` variable 2f6ec9d
+
+### Miscellaneous Chores
+
+* **deps:** 🔗 update mise conf for OpenTofu a899084
+* **deps:** update dependency opentofu to v1.12.0 413629d
+* **deps:** update dependency opentofu to v1.12.1 632b7e1
+* **deps:** update dependency opentofu to v1.12.2 3fbb105
+* **deps:** update dependency opentofu to v1.12.3 02488ce
+* **deps:** update dependency terraform-docs to v0.23.0 1487032
+* **deps:** update dependency terraform-docs to v0.24.0 d2437f9
+* **deps:** update dependency tflint to v0.63.1 1e1feca
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.3.0 c3282a7
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.4.0 00d0f02
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.4.1 4129f6f
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.4.2 69e2ac2
+* **deps:** update tools 98f1342
+* **pre-commit:** 🔧 move to prek f4503d4
+* **tfdocs:** bump tfdocs to v0.22 🔧 ee800d1
+
 ## 8.3.3 (2026-03-27)
 
 ### Bug Fixes
