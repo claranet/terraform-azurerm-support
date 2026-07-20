@@ -95,7 +95,7 @@ module "support" {
 | Name | Source | Version |
 | ---- | ------ | ------- |
 | azure\_region | claranet/regions/azurerm | ~> 8.0.2 |
-| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.7.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.8.0 |
 | claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.1.0 |
 | support\_nsg | claranet/nsg/azurerm | ~> 8.1.0 |
 | support\_subnet | claranet/subnet/azurerm | ~> 8.1.0 |
@@ -127,6 +127,7 @@ module "support" {
 | bastion\_extra\_tags | Additional tags to associate with your bastion instance. | `map(string)` | `{}` | no |
 | bastion\_identity | Map with identity block informations as described in [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#identity). | <pre>object({<br/>    type         = string<br/>    identity_ids = list(string)<br/>  })</pre> | <pre>{<br/>  "identity_ids": [],<br/>  "type": "SystemAssigned"<br/>}</pre> | no |
 | bastion\_ipconfig\_custom\_name | Custom name for IP Configuration. | `string` | `null` | no |
+| bastion\_key\_vault | Key Vault object to use for Virtual Machine identity access (set to `null` to disable Key Vault integration). | <pre>object({<br/>    id                         = string<br/>    rbac_authorization_enabled = optional(bool, true)<br/>  })</pre> | `null` | no |
 | bastion\_maintenance\_configurations\_ids | List of maintenance configurations to attach to this VM. | `list(string)` | `[]` | no |
 | bastion\_nic\_accelerated\_networking\_enabled | Should Accelerated Networking be enabled? Defaults to false. | `bool` | `false` | no |
 | bastion\_nic\_custom\_name | Custom name for NIC. | `string` | `null` | no |

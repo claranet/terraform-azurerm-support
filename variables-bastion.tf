@@ -174,3 +174,12 @@ variable "disk_encryption_set_id" {
   type        = string
   default     = null
 }
+
+variable "bastion_key_vault" {
+  description = "Key Vault object to use for Virtual Machine identity access (set to `null` to disable Key Vault integration)."
+  type = object({
+    id                         = string
+    rbac_authorization_enabled = optional(bool, true)
+  })
+  default = null
+}
