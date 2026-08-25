@@ -88,18 +88,18 @@ module "support" {
 
 | Name | Version |
 | ---- | ------- |
-| azurerm | ~> 4.31 |
+| azurerm | ~> 5.0 |
 | tls | >= 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| azure\_region | claranet/regions/azurerm | ~> 8.0.2 |
-| bastion\_vm | claranet/linux-vm/azurerm | ~> 8.8.0 |
-| claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 8.1.0 |
-| support\_nsg | claranet/nsg/azurerm | ~> 8.1.0 |
-| support\_subnet | claranet/subnet/azurerm | ~> 8.1.0 |
+| azure\_region | claranet/regions/azurerm | ~> 9.0 |
+| bastion\_vm | claranet/linux-vm/azurerm | ~> 9.0 |
+| claranet\_gallery\_images | claranet/claranet-gallery-images/azapi | ~> 9.0 |
+| support\_nsg | claranet/nsg/azurerm | ~> 9.0 |
+| support\_subnet | claranet/subnet/azurerm | ~> 9.0 |
 
 ## Resources
 

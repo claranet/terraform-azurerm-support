@@ -4,7 +4,7 @@ resource "tls_private_key" "ssh" {
 
 module "claranet_gallery_images" {
   source  = "claranet/claranet-gallery-images/azapi"
-  version = "~> 8.1.0"
+  version = "~> 9.0"
 
   azure_subscription_id = data.azurerm_client_config.current.subscription_id
   location_cli          = module.azure_region.location_cli
@@ -12,7 +12,7 @@ module "claranet_gallery_images" {
 
 module "bastion_vm" {
   source  = "claranet/linux-vm/azurerm"
-  version = "~> 8.8.0"
+  version = "~> 9.0"
 
   location            = var.location
   location_short      = var.location_short
